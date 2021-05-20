@@ -46,7 +46,7 @@ class Main extends Component {
       usersISs.map((vacation, i) => {
         finalISs.push(vacation);
       });
-      console.log("finalISs 2 git test: ", finalISs);
+      console.log("finalISs 2 test3: ", finalISs);
 
       // לא עובד
       let endAgain = finalISs.map((vacation, i) => {
