@@ -1,2 +1,0 @@
-# vacations
-first varsion
