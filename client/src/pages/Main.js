@@ -24,46 +24,28 @@ class Main extends Component {
     console.log("new Input To inputsObj :", e.target.id, "value: ", e.target.value);
   };
 
+  // TODO: פור לופ על המערך כדי להוציא יוזר איי די
   getVacationsFromDB = async () => {
     try {
       let vacations = await Api.postRequest(`/vacations/getVacationsFromDb`);
-
       this.props.updateVacations(vacations.data);
       console.log("all vacations: ", this.props.vacations);
 
-      let vacationsTest = vacations.data[3].follows;
-      console.log("values tests!!!!: ", Object.values(vacationsTest[0]));
-      const testResult = vacationsTest.findIndex(({ userID }) => userID === 2);
-      console.log("testResult: ", testResult);
-
-      let arrJoin = this.props.vacations;
-
-      console.log("arrJoin: ", arrJoin);
       // עובד
 
+      let followsArr = this.props.vacations[0].follows;
       let usersIDs = [];
-      let vacationsStar = vacationsTest.map((vacation, i) => {
-        let testing = Object.values(vacationsTest[i]);
+      let vacationsStar = followsArr.map((vacation, i) => {
+        let testing = Object.values(followsArr[i]);
         usersIDs.push(...testing);
       });
       console.log("usersISs : ", usersIDs);
 
-      // עובד
-      // let finalISs = [];
-      // usersISs.map((vacation, i) => {
-      //   finalISs.push(vacation);
-      // });
-      // console.log("finalISs 2 test3: ", finalISs);
+      const theIndex = usersIDs.findIndex((id) => id === this.props.userID);
+      console.log("the index: ", theIndex);
 
-      // let usersISs = [];
-      // for (let i = 0; i < this.props.vacations.length; i++) {
-      //   usersISs.push(this.props.vacations[i][userID]);
-      // }
-      // var output = [];
-      // for (var i = 0; i < input.length; ++i) output.push(input[i][field]);
-
-      // console.log("usersISs: ", usersISs);
-      // TODO: פור לופ על המערך כדי להוציא יוזר איי די
+      let isUserExists = usersIDs.includes(this.props.userID);
+      console.log("isUserExists: ", isUserExists);
     } catch (err) {
       console.log("Error ", err);
       alert("Something went wrong, please try again");
