@@ -28,24 +28,21 @@ class Main extends Component {
   getVacationsFromDB = async () => {
     try {
       let vacations = await Api.postRequest(`/vacations/getVacationsFromDb`);
-      this.props.updateVacations(vacations.data);
-      console.log("all vacations: ", this.props.vacations);
+      let allVacations = vacations.data;
 
-      // עובד
-
-      let followsArr = this.props.vacations[0].follows;
-      let usersIDs = [];
-      let vacationsStar = followsArr.map((vacation, i) => {
-        let testing = Object.values(followsArr[i]);
-        usersIDs.push(...testing);
+      allVacations.map((item, i) => {
+        let followsArr = item.follows;
+        let usersIDs = [];
+        followsArr.map((id, i) => {
+          let testing = Object.values(followsArr[i]);
+          usersIDs.push(...testing);
+        });
+        item.follows = usersIDs;
+        // console.log("usersIDs : ", usersIDs);
       });
-      console.log("usersISs : ", usersIDs);
 
-      const theIndex = usersIDs.findIndex((id) => id === this.props.userID);
-      console.log("the index: ", theIndex);
-
-      let isUserExists = usersIDs.includes(this.props.userID);
-      console.log("isUserExists: ", isUserExists);
+      this.props.updateVacations(allVacations);
+      console.log("all vacations: ", allVacations);
     } catch (err) {
       console.log("Error ", err);
       alert("Something went wrong, please try again");
