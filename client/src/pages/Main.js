@@ -54,8 +54,6 @@ class Main extends Component {
       });
       console.log("endAgain 3: ", endAgain);
 
-      // console.log("all follows: ", this.props.vacations == undefined ? "" : this.props.vacations[0].follows[0].userID);
-      // console.log("all follows: ", this.props.vacations == undefined ? "" : this.props.vacations[0].follows[0].userID);
       // let usersISs = [];
       // for (let i = 0; i < this.props.vacations.length; i++) {
       //   usersISs.push(this.props.vacations[i][userID]);
