@@ -24,7 +24,6 @@ class Main extends Component {
     console.log("new Input To inputsObj :", e.target.id, "value: ", e.target.value);
   };
 
-  // TODO: פור לופ על המערך כדי להוציא יוזר איי די
   getVacationsFromDB = async () => {
     try {
       let vacations = await Api.postRequest(`/vacations/getVacationsFromDb`);
@@ -48,7 +47,6 @@ class Main extends Component {
     }
   };
 
-  //FIXME: לרוקן אובייקט מתוכן הטפסים
   insertVacationToDB = async () => {
     let currentObj = {
       Destination: this.inputsObj.Destination,
@@ -153,7 +151,8 @@ class Main extends Component {
       Password: this.inputsObj.Password,
       Role: 0,
     };
-    // TODO: unique
+
+    // TODO: unique email -הוספתי בדאטה בייס יוניק אבל בגלל שהוא לא מקבל מייל שקיים הוא זורק שגיאה- אם השגיאה היא כזו אז לכתוב מייל קיים
     if (currentObj.FirstName === undefined || currentObj.LastName === undefined || currentObj.Email == undefined || currentObj.Password === undefined) {
       alert("All fields must be filled out");
 

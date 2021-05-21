@@ -3,7 +3,6 @@ import "../css/style.css";
 const Registration = (props) => {
   return (
     <div>
-      {" "}
       {/* <form action="get"> */}
       <div className="RegistrationForm p-5">
         <div className="row">
