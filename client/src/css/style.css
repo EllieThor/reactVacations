@@ -29,3 +29,7 @@
 .addVacationROW {
   width: 100%;
 }
+
+.isStar {
+  color: gold;
+}

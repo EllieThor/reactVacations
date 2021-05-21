@@ -29,7 +29,6 @@ class Main extends Component {
     try {
       let vacations = await Api.postRequest(`/vacations/getVacationsFromDb`);
       let allVacations = vacations.data;
-
       allVacations.map((item, i) => {
         let followsArr = item.follows;
         let usersIDs = [];
@@ -356,7 +355,7 @@ class Main extends Component {
             ""
           )}
         </div>
-        <div className="row">{this.props.userID === 0 ? "" : <SingleVacationCard userRole={this.props.userRole} vacations={this.props.vacations} insertNewFallowToDB={this.insertNewFallowToDB} deleteUserFallowFromDB={this.deleteUserFallowFromDB} deleteVacationFromDB={this.deleteVacationFromDB} editVacationClicked={this.editVacationClicked} />}</div>
+        <div className="row">{this.props.userID === 0 ? "" : <SingleVacationCard userRole={this.props.userRole} userID={this.props.userID} vacations={this.props.vacations} insertNewFallowToDB={this.insertNewFallowToDB} deleteUserFallowFromDB={this.deleteUserFallowFromDB} deleteVacationFromDB={this.deleteVacationFromDB} editVacationClicked={this.editVacationClicked} />}</div>
       </div>
     );
   }
