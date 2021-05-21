@@ -12,7 +12,7 @@ import SingleVacationCard from "../components/singleVacationCard";
 
 class Main extends Component {
   componentDidMount() {
-    this.getVacationsFromDB();
+    // this.getVacationsFromDB();
   }
   // patterns OBJ
   inputsObj = {
@@ -27,32 +27,33 @@ class Main extends Component {
   getVacationsFromDB = async () => {
     try {
       let vacations = await Api.postRequest(`/vacations/getVacationsFromDb`);
+
       this.props.updateVacations(vacations.data);
       console.log("all vacations: ", this.props.vacations);
 
-      let vacationsTest = this.props.vacations;
-      console.log("vacations test: ", vacationsTest);
+      let vacationsTest = vacations.data[3].follows;
+      console.log("values tests!!!!: ", Object.values(vacationsTest[0]));
+      const testResult = vacationsTest.findIndex(({ userID }) => userID === 2);
+      console.log("testResult: ", testResult);
 
+      let arrJoin = this.props.vacations;
+
+      console.log("arrJoin: ", arrJoin);
       // עובד
 
-      let usersISs = [];
+      let usersIDs = [];
       let vacationsStar = vacationsTest.map((vacation, i) => {
-        usersISs.push(vacation.follows);
+        let testing = Object.values(vacationsTest[i]);
+        usersIDs.push(...testing);
       });
-      console.log("usersISs 1: ", usersISs);
+      console.log("usersISs : ", usersIDs);
 
       // עובד
-      let finalISs = [];
-      usersISs.map((vacation, i) => {
-        finalISs.push(vacation);
-      });
-      console.log("finalISs 2 test3: ", finalISs);
-
-      // לא עובד
-      let endAgain = finalISs.map((vacation, i) => {
-        usersISs.push(vacation[i]);
-      });
-      console.log("endAgain 3: ", endAgain);
+      // let finalISs = [];
+      // usersISs.map((vacation, i) => {
+      //   finalISs.push(vacation);
+      // });
+      // console.log("finalISs 2 test3: ", finalISs);
 
       // let usersISs = [];
       // for (let i = 0; i < this.props.vacations.length; i++) {
@@ -158,6 +159,7 @@ class Main extends Component {
       this.props.updateLogInStatus(false);
       console.log("updateLogInStatus: ", this.props.logInFormStatus);
       console.log("userID again: ", this.props.userID);
+      this.getVacationsFromDB();
     } catch (err) {
       console.log("Error ", err);
       alert("Something went wrong, please try again");
@@ -285,6 +287,7 @@ class Main extends Component {
     this.props.updateLogInStatus(true);
     console.log("add user status close : ", this.props.userFormStatus);
   };
+
   // TODO:
   // vacation form buttons
   editVacationClicked = (vacationObj) => {
