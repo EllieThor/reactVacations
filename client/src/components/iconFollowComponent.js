@@ -11,8 +11,11 @@ const FollowIcon = (props) => {
     return <i className="fas fa-star isStar" onClick={() => props.deleteUserFallowFromDB(props.vacationID)}></i>;
   };
   return (
-    <div>
-      <abbr title={isStar ? "Remove Star" : "Add Star"}>{isStar ? removeFollow() : addNewFollow()}</abbr>
+    <div className="row">
+      <div className="col-6">
+        <abbr title={isStar ? "Remove Star" : "Add Star"}>{isStar ? removeFollow() : addNewFollow()}</abbr>
+      </div>
+      <div className="col-6">{props.vacationFollows.length}</div>
     </div>
   );
 };
