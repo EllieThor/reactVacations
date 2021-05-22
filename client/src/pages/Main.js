@@ -3,12 +3,15 @@ import "../css/style.css";
 import axios from "axios";
 import { connect } from "react-redux";
 import * as Api from "../Api/apiCalls";
+import Chart from "chart.js/auto";
 
 import AddVacationForm from "../components/addVacationFormComponent";
 import LogInForm from "../components/logInFormComponent";
 import RegistrationForm from "../components/registrationFormComponent";
 
 import SingleVacationCard from "../components/singleVacationCard";
+
+import Reports from "../components/reportsComponent";
 
 class Main extends Component {
   componentDidMount() {
@@ -18,7 +21,35 @@ class Main extends Component {
   inputsObj = {
     imageName: "",
   };
-
+  getGraph = () => {
+    console.log("this.props.vacationsNames: ", this.props.vacationsNames);
+    let ctx = document.getElementById("myChart").getContext("2d");
+    let myChart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        // labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        labels: this.props.vacationsNames,
+        datasets: [
+          {
+            // TODO: מה זה הלייבל
+            label: "# of Votes",
+            // data: [12, 19, 3, 5, 2, 3],
+            data: this.props.numberOfStars,
+            backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)", "rgba(255, 206, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(255, 159, 64, 0.2)"],
+            borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)", "rgba(255, 206, 86, 1)", "rgba(75, 192, 192, 1)", "rgba(153, 102, 255, 1)", "rgba(255, 159, 64, 1)"],
+            borderWidth: 1,
+          },
+        ],
+      },
+      // options: {
+      //   scales: {
+      //     y: {
+      //       beginAtZero: true,
+      //     },
+      //   },
+      // },
+    });
+  };
   onChangeFN = (e) => {
     this.inputsObj[e.target.id] = e.target.value;
     console.log("new Input To inputsObj :", e.target.id, "value: ", e.target.value);
@@ -28,9 +59,13 @@ class Main extends Component {
     try {
       let vacations = await Api.postRequest(`/vacations/getVacationsFromDb`);
       let allVacations = vacations.data;
+
+      // map on vacations array in order to edit follows array In each of the items
       allVacations.map((item, i) => {
         let followsArr = item.follows;
         let usersIDs = [];
+
+        // map on followsArr array in order to convert followsArr from array of objects to arr of usersId's numbers
         followsArr.map((id, i) => {
           let testing = Object.values(followsArr[i]);
           usersIDs.push(...testing);
@@ -38,9 +73,25 @@ class Main extends Component {
         item.follows = usersIDs;
         // console.log("usersIDs : ", usersIDs);
       });
-
       this.props.updateVacations(allVacations);
       console.log("all vacations: ", allVacations);
+
+      // graph;
+      let vacationsForGraph = this.props.vacations;
+      let vacationsNames = [];
+      let numberOfStars = [];
+
+      vacationsForGraph.map((vacation, i) => {
+        vacationsNames.push(vacation.Destination);
+        numberOfStars.push(vacation.follows.length);
+      });
+
+      this.props.updateVacationsNames(vacationsNames);
+      console.log("vacationsNames: ", this.props.vacationsNames);
+
+      this.props.updateNumberOfStars(numberOfStars);
+      console.log("numberOfStars: ", this.props.numberOfStars);
+      this.getGraph();
     } catch (err) {
       console.log("Error ", err);
       alert("Something went wrong, please try again");
@@ -355,6 +406,7 @@ class Main extends Component {
           )}
         </div>
         <div className="row">{this.props.userID === 0 ? "" : <SingleVacationCard userRole={this.props.userRole} userID={this.props.userID} vacations={this.props.vacations} insertNewFallowToDB={this.insertNewFallowToDB} deleteUserFallowFromDB={this.deleteUserFallowFromDB} deleteVacationFromDB={this.deleteVacationFromDB} editVacationClicked={this.editVacationClicked} />}</div>
+        <div>{this.props.userRole === 1 ? <Reports /> : ""}</div>
       </div>
     );
   }
@@ -371,6 +423,9 @@ const mapStateToProps = (state) => {
     showVacationForm: state.showVacationForm,
     vacationFormButtonsStatus: state.vacationFormButtonsStatus,
     vacationToEdit: state.vacationToEdit,
+    // graph
+    vacationsNames: state.vacationsNames,
+    numberOfStars: state.numberOfStars,
   };
 };
 
@@ -428,6 +483,19 @@ const mapDispatchToProps = (dispatch) => {
     updateVacationToForm(value) {
       dispatch({
         type: "updateVacationToForm",
+        payload: value,
+      });
+    },
+    // graph
+    updateVacationsNames(value) {
+      dispatch({
+        type: "updateVacationsNames",
+        payload: value,
+      });
+    },
+    updateNumberOfStars(value) {
+      dispatch({
+        type: "updateNumberOfStars",
         payload: value,
       });
     },
