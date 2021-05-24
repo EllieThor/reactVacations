@@ -24,16 +24,11 @@ class Main extends Component {
     imageName: "",
   };
   // logOut
-  logOutIconClicked = (value) => {
+  logOutIconClicked = () => {
     this.props.updateUserID(0);
     this.props.updateUser([]);
     this.props.updateUserRole(0);
     this.props.updateLogInStatus(true);
-    console.log("userID: ", this.props.userID);
-
-    //   user: [],
-    // userID: 0,
-    // userRole: 0,
   };
 
   getGraph = () => {
@@ -105,7 +100,7 @@ class Main extends Component {
       });
       this.props.updateVacations(allVacations);
       console.log("all vacations: ", allVacations);
-      // TODO: delete graph before updating ????
+
       // graph names
       this.props.updateVacationsNames(vacationsNames);
       console.log("vacationsNames: ", this.props.vacationsNames);
@@ -113,7 +108,8 @@ class Main extends Component {
       this.props.updateNumberOfStars(numberOfStars);
       console.log("numberOfStars: ", this.props.numberOfStars);
 
-      this.getGraph();
+      // TODO: delete graph before updating ???? אם הפונקציה של הגרף כבויה אין בעיות אבל העדכון של נתונים חדשים דופק אותה
+      // this.getGraph();
     } catch (err) {
       console.log("Error ", err);
       alert("Something went wrong, please try again: ", err);
@@ -169,7 +165,7 @@ class Main extends Component {
       console.log("all vacations: ", this.props.vacations);
     } catch (err) {
       console.log("Error ", err);
-      alert("Something went wrong, please try again@");
+      alert("Something went wrong, please try again");
     }
   };
 
@@ -270,11 +266,15 @@ class Main extends Component {
       try {
         let user = await Api.postRequest("/users/insertUserToDb", currentObj);
         if (user.statusText === "OK") {
-          console.log("insert user answer: ", user.data);
-          this.inputsObj.userEmail = user.data.Email;
-          this.inputsObj.userPassword = user.data.Password;
-          this.props.updateUserFormStatus(false);
-          this.getUserFromDB();
+          if (user.data.name === "SequelizeUniqueConstraintError") {
+            alert("user is already exists, Please try another email");
+          } else {
+            console.log("insert user answer: ", user.data);
+            this.inputsObj.userEmail = user.data.Email;
+            this.inputsObj.userPassword = user.data.Password;
+            this.props.updateUserFormStatus(false);
+            this.getUserFromDB();
+          }
         } else {
           alert("something went wrong, please try again");
         }
@@ -338,7 +338,7 @@ class Main extends Component {
     console.log("add user status close : ", this.props.userFormStatus);
   };
 
-  // TODO:
+  // TODO: Modal
   // vacation form buttons
   editVacationClicked = (vacationObj) => {
     // witch button
@@ -411,7 +411,7 @@ class Main extends Component {
         >
           {this.props.userFormStatus ? <RegistrationForm onChangeFN={this.onChangeFN} closeRegistrationForm={this.closeRegistrationForm} insertUserToDB={this.insertUserToDB} /> : ""}
         </div>
-        <div className="row">{this.props.logInFormStatus ? "" : <UserIconCPT logOutIconClicked={this.logOutIconClicked} userID={this.props.userID} />}</div>
+        <div className="row">{this.props.logInFormStatus ? "" : <UserIconCPT logOutIconClicked={this.logOutIconClicked} />}</div>
         <div className="row">
           {this.props.userRole === 1 ? (
             <abbr title="Add New Vacation">
