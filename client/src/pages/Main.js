@@ -75,6 +75,12 @@ class Main extends Component {
       let vacations = await Api.postRequest(`/vacations/getVacationsFromDb`);
       let allVacations = vacations.data;
 
+      // graph
+      let vacationsNames = [];
+      let numberOfStars = [];
+      let numberOf = 0;
+      // let test = 0; else : ניסיון
+
       // map on vacations array in order to edit follows array In each of the items
       allVacations.map((item, i) => {
         let followsArr = item.follows;
@@ -87,30 +93,30 @@ class Main extends Component {
         });
         item.follows = usersIDs;
         // console.log("usersIDs : ", usersIDs);
+
+        //graph
+        // vacationsNames.push(item.Destination);
+        numberOf = item.follows.length;
+        // numberOf > 0 ? numberOfStars.push(item.follows.length) : (test = 0);
+        if (numberOf > 0) {
+          numberOfStars.push(item.follows.length);
+          vacationsNames.push(item.Destination);
+        }
       });
       this.props.updateVacations(allVacations);
       console.log("all vacations: ", allVacations);
-
-      // graph;
-      let vacationsForGraph = this.props.vacations;
-      let vacationsNames = [];
-      let numberOfStars = [];
-
-      vacationsForGraph.map((vacation, i) => {
-        vacationsNames.push(vacation.Destination);
-        numberOfStars.push(vacation.follows.length);
-      });
-
+      // TODO: delete graph before updating ????
+      // graph names
       this.props.updateVacationsNames(vacationsNames);
       console.log("vacationsNames: ", this.props.vacationsNames);
-
+      // graph stars
       this.props.updateNumberOfStars(numberOfStars);
       console.log("numberOfStars: ", this.props.numberOfStars);
-      // TODO: delete graph before updating ????
+
       this.getGraph();
     } catch (err) {
       console.log("Error ", err);
-      alert("Something went wrong, please try again");
+      alert("Something went wrong, please try again: ", err);
     }
   };
 
