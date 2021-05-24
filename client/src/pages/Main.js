@@ -9,6 +9,8 @@ import AddVacationForm from "../components/addVacationFormComponent";
 import LogInForm from "../components/logInFormComponent";
 import RegistrationForm from "../components/registrationFormComponent";
 
+import UserIconCPT from "../components/userIconComponent";
+
 import SingleVacationCard from "../components/singleVacationCard";
 
 import Reports from "../components/reportsComponent";
@@ -21,6 +23,19 @@ class Main extends Component {
   inputsObj = {
     imageName: "",
   };
+  // logOut
+  logOutIconClicked = (value) => {
+    this.props.updateUserID(0);
+    this.props.updateUser([]);
+    this.props.updateUserRole(0);
+    this.props.updateLogInStatus(true);
+    console.log("userID: ", this.props.userID);
+
+    //   user: [],
+    // userID: 0,
+    // userRole: 0,
+  };
+
   getGraph = () => {
     console.log("this.props.vacationsNames: ", this.props.vacationsNames);
     let ctx = document.getElementById("myChart").getContext("2d");
@@ -91,6 +106,7 @@ class Main extends Component {
 
       this.props.updateNumberOfStars(numberOfStars);
       console.log("numberOfStars: ", this.props.numberOfStars);
+      // TODO: delete graph before updating ????
       this.getGraph();
     } catch (err) {
       console.log("Error ", err);
@@ -389,6 +405,7 @@ class Main extends Component {
         >
           {this.props.userFormStatus ? <RegistrationForm onChangeFN={this.onChangeFN} closeRegistrationForm={this.closeRegistrationForm} insertUserToDB={this.insertUserToDB} /> : ""}
         </div>
+        <div className="row">{this.props.logInFormStatus ? "" : <UserIconCPT logOutIconClicked={this.logOutIconClicked} userID={this.props.userID} />}</div>
         <div className="row">
           {this.props.userRole === 1 ? (
             <abbr title="Add New Vacation">
