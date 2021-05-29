@@ -3,7 +3,7 @@ import "../css/style.css";
 import axios from "axios";
 import { connect } from "react-redux";
 import * as Api from "../Api/apiCalls";
-import Chart from "chart.js/auto";
+import { Route, Link } from "react-router-dom";
 
 import AddVacationForm from "../components/addVacationFormComponent";
 import LogInForm from "../components/logInFormComponent";
@@ -13,6 +13,7 @@ import UserIconCPT from "../components/userIconComponent";
 
 import SingleVacationCard from "../components/singleVacationCard";
 
+import Chart from "chart.js/auto";
 import Reports from "../components/reportsComponent";
 
 class Main extends Component {

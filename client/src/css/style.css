@@ -38,3 +38,7 @@
   height: 75%;
   margin: 0 auto;
 }
+
+.logout {
+  color: rgba(0, 0, 0, 0.699);
+}
