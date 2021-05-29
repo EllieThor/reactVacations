@@ -9,9 +9,8 @@ import AddVacationForm from "../components/addVacationFormComponent";
 import SingleVacationCard from "../components/singleVacationCard";
 import UserIconCPT from "../components/userIconComponent";
 class Vacations extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
+  componentDidMount() {
+    //    this.props.userID>0
   }
   // patterns OBJ
   inputsObj = {

@@ -18,7 +18,6 @@ function App() {
     <Provider store={store}>
       <BrowserRouter>
         <div>
-          {/* <HeaderCOMP /> */}
           {/* <Route path="/" exact component={Main} /> */}
 
           <Route path="/" exact component={LogInForm} />

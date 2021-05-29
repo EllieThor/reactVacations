@@ -255,16 +255,16 @@ class RegistrationForm extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    vacations: state.vacations,
+    // vacations: state.vacations,
     user: state.user,
     userID: state.userID,
     userRole: state.userRole,
     logInFormStatus: state.logInFormStatus,
     userFormStatus: state.userFormStatus,
     // vacationForm
-    showVacationForm: state.showVacationForm,
-    vacationFormButtonsStatus: state.vacationFormButtonsStatus,
-    vacationToEdit: state.vacationToEdit,
+    // showVacationForm: state.showVacationForm,
+    // vacationFormButtonsStatus: state.vacationFormButtonsStatus,
+    // vacationToEdit: state.vacationToEdit,
     // graph
     vacationsNames: state.vacationsNames,
     numberOfStars: state.numberOfStars,
@@ -310,24 +310,24 @@ const mapDispatchToProps = (dispatch) => {
       });
     },
     // vacation form
-    UpdateShowVacationForm(value) {
-      dispatch({
-        type: "UpdateShowVacationForm",
-        payload: value,
-      });
-    },
-    updateVacationButtonsForm(value) {
-      dispatch({
-        type: "updateVacationButtonsForm",
-        payload: value,
-      });
-    },
-    updateVacationToForm(value) {
-      dispatch({
-        type: "updateVacationToForm",
-        payload: value,
-      });
-    },
+    // UpdateShowVacationForm(value) {
+    //   dispatch({
+    //     type: "UpdateShowVacationForm",
+    //     payload: value,
+    //   });
+    // },
+    // updateVacationButtonsForm(value) {
+    //   dispatch({
+    //     type: "updateVacationButtonsForm",
+    //     payload: value,
+    //   });
+    // },
+    // updateVacationToForm(value) {
+    //   dispatch({
+    //     type: "updateVacationToForm",
+    //     payload: value,
+    //   });
+    // },
     // graph
     updateVacationsNames(value) {
       dispatch({
