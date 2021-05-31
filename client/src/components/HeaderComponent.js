@@ -56,15 +56,30 @@ const HeaderComponent = (props) => {
     //   welcomeTime = "Good Night, ";
     //   break;
   }
-  console.log(".time: aaa ", time, " welcome: ", welcomeTime);
+  console.log(".time: ", time, " welcome: ", welcomeTime);
   return (
-    <div>
-      <Link to="/">
-        <abbr title="Log Out">
-          <i className="fas fa-sign-out-alt fa-2x logout" onClick={props.logOutIconClicked}></i>
-        </abbr>
-      </Link>
-      <h4> {props.user[0] === undefined ? "" : welcomeTime + props.user[0].FirstName + " " + props.user[0].LastName}</h4>
+    <div className="row">
+      <div className="col-6">
+        <h4> {props.user[0] === undefined ? "" : welcomeTime + props.user[0].FirstName + " " + props.user[0].LastName}</h4>
+      </div>
+      <div className="col-6 text-end">
+        <div className="row">
+          <div className="col-4 offset-8">
+            {props.userRole === 1 ? (
+              <abbr title="Add New Vacation">
+                <i className="fas fa-plus fa-2x px-2" onClick={() => props.addVacationClicked()}></i>
+              </abbr>
+            ) : (
+              ""
+            )}
+            <Link to="/">
+              <abbr title="Log Out">
+                <i className="fas fa-sign-out-alt fa-2x  px-2 logout" onClick={props.logOutIconClicked}></i>
+              </abbr>
+            </Link>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
