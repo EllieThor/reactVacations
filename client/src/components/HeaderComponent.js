@@ -66,15 +66,24 @@ const HeaderComponent = (props) => {
         <div className="row">
           <div className="col-4 offset-8">
             {props.userRole === 1 ? (
+              <Link to="/Reports">
+                <abbr title="Reports">
+                  <i className="far fa-chart-bar fa-2x px-3 iconsColor"></i>
+                </abbr>
+              </Link>
+            ) : (
+              ""
+            )}
+            {props.userRole === 1 ? (
               <abbr title="Add New Vacation">
-                <i className="fas fa-plus fa-2x px-2" onClick={() => props.addVacationClicked()}></i>
+                <i className="fas fa-plus fa-2x px-3 iconsColor" onClick={() => props.addVacationClicked()}></i>
               </abbr>
             ) : (
               ""
             )}
             <Link to="/">
               <abbr title="Log Out">
-                <i className="fas fa-sign-out-alt fa-2x  px-2 logout" onClick={props.logOutIconClicked}></i>
+                <i className="fas fa-sign-out-alt fa-2x  px-3 iconsColor" onClick={props.logOutIconClicked}></i>
               </abbr>
             </Link>
           </div>

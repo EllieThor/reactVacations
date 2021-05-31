@@ -21,9 +21,6 @@
   /* background-repeat: repeat; */
   /* background-image: url("assets/images/images/tapetTest.png"); */
 }
-/* .logInPage {
- 
-} */
 
 .addVacationForm {
   width: 500px;
@@ -42,6 +39,6 @@
   margin: 0 auto;
 }
 
-.logout {
+.iconsColor {
   color: rgba(0, 0, 0, 0.699);
 }
