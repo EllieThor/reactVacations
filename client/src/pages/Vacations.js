@@ -7,7 +7,7 @@ import { Route, Link } from "react-router-dom";
 
 import AddVacationForm from "../components/addVacationFormComponent";
 import SingleVacationCard from "../components/singleVacationCard";
-import UserIconCPT from "../components/userIconComponent";
+import HeaderComponent from "../components/HeaderComponent";
 class Vacations extends Component {
   componentDidMount() {
     //    this.props.userID>0
@@ -236,7 +236,8 @@ class Vacations extends Component {
   render() {
     return (
       <div className="container">
-        <div className="row">{this.props.logInFormStatus ? "" : <UserIconCPT logOutIconClicked={this.logOutIconClicked} />}</div>
+        {/* FIXME: user  */}
+        <div className="row">{this.props.user[0] === undefined ? "" : <HeaderComponent logOutIconClicked={this.logOutIconClicked} userRole={this.props.userRole} user={this.props.user} />}</div>
         <div className="row">
           {this.props.userRole === 1 ? (
             <abbr title="Add New Vacation">

@@ -9,7 +9,7 @@ import AddVacationForm from "../components/addVacationFormComponent";
 import LogInForm from "../components/logInFormComponent";
 import RegistrationForm from "../components/registrationFormComponent";
 
-import UserIconCPT from "../components/userIconComponent";
+import UserIconCPT from "../components/HeaderComponent";
 
 import SingleVacationCard from "../components/singleVacationCard";
 
