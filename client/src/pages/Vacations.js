@@ -5,9 +5,10 @@ import { connect } from "react-redux";
 import * as Api from "../Api/apiCalls";
 import { Route, Link } from "react-router-dom";
 
-import AddVacationForm from "../components/addVacationFormComponent";
-import SingleVacationCard from "../components/singleVacationCard";
 import HeaderComponent from "../components/HeaderComponent";
+import AddVacationForm from "../components/addVacationFormComponent";
+import ModalTest from "../components/modalComponent";
+import SingleVacationCard from "../components/singleVacationCard";
 class Vacations extends Component {
   componentDidMount() {
     //    this.props.userID>0
@@ -242,6 +243,13 @@ class Vacations extends Component {
         <div className="row addVacationROW">
           {this.props.userRole === 1 && this.props.showVacationForm ? (
             <AddVacationForm onChangeFN={this.onChangeFN} closeVacationForm={this.closeVacationForm} fileChangeEvent={this.fileChangeEvent} upload={this.upload} insertVacationToDB={this.insertVacationToDB} updateVacationDetailsInDB={this.updateVacationDetailsInDB} vacationFormButtonsStatus={this.props.vacationFormButtonsStatus} vacationToEdit={this.props.vacationToEdit} />
+          ) : (
+            ""
+          )}
+        </div>
+        <div className="row">
+          {this.props.userRole === 1 && this.props.showVacationForm ? (
+            <ModalTest onChangeFN={this.onChangeFN} closeVacationForm={this.closeVacationForm} fileChangeEvent={this.fileChangeEvent} upload={this.upload} insertVacationToDB={this.insertVacationToDB} updateVacationDetailsInDB={this.updateVacationDetailsInDB} vacationFormButtonsStatus={this.props.vacationFormButtonsStatus} vacationToEdit={this.props.vacationToEdit} />
           ) : (
             ""
           )}
