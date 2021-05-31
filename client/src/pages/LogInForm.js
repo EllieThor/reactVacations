@@ -136,33 +136,31 @@ class LogIn extends Component {
 
   render() {
     return (
-      <div className="container">
-        <div
-          className="logInROW my-2"
-          style={{
-            backgroundImage: `url(${"assets/images/tapetTest.png"})`,
-            backgroundRepeat: "no-repeat",
-          }}
-        >
-          <div className="logInForm p-5">
-            {/* <form> */}
-            <h1 className="h3 mb-3 fw-normal">Please Log In</h1>
-            <input type="email" id="userEmail" className="form-control m-2" placeholder="Email address" required="" autoFocus="" onChange={(e) => this.onChangeFN(e)} />
-            <input type="password" id="userPassword" className="form-control  m-2" placeholder="Password" required="" autoComplete="" onChange={(e) => this.onChangeFN(e)} />
-            <Link to="/Vacations">
-              <button className="w-100 btn btn-lg m-2 btn-dark" type="submit" onClick={() => this.getUserFromDB()}>
-                Log in
-              </button>
-            </Link>
+      <div
+        className="container p-3 mt-3 logInPage"
+        style={{
+          backgroundImage: `url(${"assets/images/tapetTest.png"})`,
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        <div className="logInForm p-5">
+          {/* <form> */}
+          <h1 className="h3 mb-3 fw-normal">Please Log In</h1>
+          <input type="email" id="userEmail" className="form-control m-2" placeholder="Email address" required="" autoFocus="" onChange={(e) => this.onChangeFN(e)} />
+          <input type="password" id="userPassword" className="form-control  m-2" placeholder="Password" required="" autoComplete="" onChange={(e) => this.onChangeFN(e)} />
+          <Link to="/Vacations">
+            <button className="w-100 btn btn-lg m-2 btn-dark" type="submit" onClick={() => this.getUserFromDB()}>
+              Log in
+            </button>
+          </Link>
 
-            <Link to="/RegistrationForm">
-              <button className="w-100 btn btn-lg m-2 btn-dark">Registration</button>
-            </Link>
-            {/* <button className="w-100 btn btn-lg m-2 btn-dark" onClick={() => this.openRegistrationForm()}>
+          <Link to="/RegistrationForm">
+            <button className="w-100 btn btn-lg m-2 btn-dark">Registration</button>
+          </Link>
+          {/* <button className="w-100 btn btn-lg m-2 btn-dark" onClick={() => this.openRegistrationForm()}>
             Registration
           </button> */}
-            {/* </form> */}
-          </div>
+          {/* </form> */}
         </div>
       </div>
     );

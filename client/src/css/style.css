@@ -14,13 +14,16 @@
 }
 
 .logInROW {
-  width: 100%;
+  /* width: 100%; */
   /* height: 200%; */
 
   /* background-image: url("https://www.impel.eu/wp-content/uploads/2019/08/mediterranean-sea.jpg"); */
   /* background-repeat: repeat; */
   /* background-image: url("assets/images/images/tapetTest.png"); */
 }
+/* .logInPage {
+ 
+} */
 
 .addVacationForm {
   width: 500px;

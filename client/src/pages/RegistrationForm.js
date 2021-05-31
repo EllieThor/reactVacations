@@ -206,48 +206,46 @@ class RegistrationForm extends Component {
   };
   render() {
     return (
-      <div className="container">
-        <div
-          className="logInROW my-2"
-          style={{
-            backgroundImage: `url(${"assets/images/tapetTest.png"})`,
-            backgroundRepeat: "no-repeat",
-          }}
-        >
-          {/* <form action="get"> */}
-          <div className="RegistrationForm p-5">
-            <div className="row">
-              <div className="col-12">
-                <Link to="/">
-                  <abbr title="Close">
-                    <i className="fas fa-times float-end" onClick={() => this.closeRegistrationForm()}></i>
-                  </abbr>
-                </Link>
-              </div>
-            </div>
-            <div className="row">
-              <h1 className="h3 mb-3 fw-normal">Please register</h1>
-              <div className="col">
-                <label htmlFor="FirstName">First Name:</label>
-                <input type="text" id="FirstName" className="form-control" onChange={(e) => this.onChangeFN(e)} />
-                <label htmlFor="Email">Email:</label>
-                <input type="email" id="Email" className="form-control" onChange={(e) => this.onChangeFN(e)} />
-              </div>
-              <div className="col">
-                <label htmlFor="LastName">Last Name:</label>
-                <input type="text" id="LastName" className="form-control" onChange={(e) => this.onChangeFN(e)} />
-                <label htmlFor="Password">Password:</label>
-                <input type="password" id="Password" className="form-control" onChange={(e) => this.onChangeFN(e)} />
-              </div>
-              <Link to="/Vacations">
-                <button className="btn btn-dark mt-3" onClick={() => this.insertUserToDB()}>
-                  add user
-                </button>
+      <div
+        className="container  p-3 mt-3"
+        style={{
+          backgroundImage: `url(${"assets/images/tapetTest.png"})`,
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        {/* <form action="get"> */}
+        <div className="RegistrationForm p-5">
+          <div className="row">
+            <div className="col-12">
+              <Link to="/">
+                <abbr title="Close">
+                  <i className="fas fa-times float-end" onClick={() => this.closeRegistrationForm()}></i>
+                </abbr>
               </Link>
             </div>
           </div>
-          {/* </form> */}
+          <div className="row">
+            <h1 className="h3 mb-3 fw-normal">Please register</h1>
+            <div className="col">
+              <label htmlFor="FirstName">First Name:</label>
+              <input type="text" id="FirstName" className="form-control" onChange={(e) => this.onChangeFN(e)} />
+              <label htmlFor="Email">Email:</label>
+              <input type="email" id="Email" className="form-control" onChange={(e) => this.onChangeFN(e)} />
+            </div>
+            <div className="col">
+              <label htmlFor="LastName">Last Name:</label>
+              <input type="text" id="LastName" className="form-control" onChange={(e) => this.onChangeFN(e)} />
+              <label htmlFor="Password">Password:</label>
+              <input type="password" id="Password" className="form-control" onChange={(e) => this.onChangeFN(e)} />
+            </div>
+            <Link to="/Vacations">
+              <button className="btn btn-dark mt-3" onClick={() => this.insertUserToDB()}>
+                add user
+              </button>
+            </Link>
+          </div>
         </div>
+        {/* </form> */}
       </div>
     );
   }
