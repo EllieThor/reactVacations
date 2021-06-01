@@ -5,7 +5,9 @@ import { connect } from "react-redux";
 import * as Api from "../Api/apiCalls";
 import { Route, Link } from "react-router-dom";
 import Chart from "chart.js/auto";
+
 import ReportsCOMP from "../components/reportsComponent";
+import HeaderComponent from "../components/HeaderComponent";
 
 class Reports extends Component {
   componentDidMount() {
@@ -51,10 +53,12 @@ class Reports extends Component {
   render() {
     return (
       <div className="container">
-        {/* <div id="graphDIV" className="graph">
-          <canvas id="myChart" className="graph"></canvas>
-        </div> */}
-        <ReportsCOMP />
+        <div className="row mt-3">
+          <HeaderComponent logOutIconClicked={this.logOutIconClicked} userRole={this.props.userRole} user={this.props.user} userRole={this.props.userRole} addVacationClicked={this.addVacationClicked} />
+        </div>
+        <div className="row mt-3">
+          <ReportsCOMP />
+        </div>
       </div>
     );
   }
