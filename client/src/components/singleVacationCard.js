@@ -12,12 +12,12 @@ const SingleVacationCard = (props) => {
           <img className="card-img-top productImg" src={img} alt={vacation.Destination} />
           <div className="card-body productCard d-grid gap-2">
             <div className="row">
-              <div className="col-8">
+              <div className="col-7">
                 <h5 className="card-title">{vacation.Destination}</h5>
               </div>
-              <div className="col-4">
+              <div className="col-5">
                 {props.userRole === 1 ? (
-                  <EditIcons vacationToEdit={vacation} vacationID={vacation.ID} deleteVacationFromDB={props.deleteVacationFromDB} editVacationClicked={props.editVacationClicked} updateVacationDetailsInDB={props.updateVacationDetailsInDB} />
+                  <EditIcons vacationToEdit={vacation} vacationID={vacation.ID} vacationFollows={vacation.follows} deleteVacationFromDB={props.deleteVacationFromDB} editVacationClicked={props.editVacationClicked} updateVacationDetailsInDB={props.updateVacationDetailsInDB} />
                 ) : (
                   <FollowIcon vacationID={vacation.ID} userID={props.userID} vacationFollows={vacation.follows} insertNewFallowToDB={props.insertNewFallowToDB} deleteUserFallowFromDB={props.deleteUserFallowFromDB} />
                 )}
