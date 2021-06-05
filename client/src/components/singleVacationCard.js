@@ -15,6 +15,7 @@ const SingleVacationCard = (props) => {
               <div className="col-7">
                 <h5 className="card-title">{vacation.Destination}</h5>
               </div>
+              {/* TODO: fix style number of start */}
               <div className="col-2">
                 <div>{vacation.follows.length}</div>
               </div>

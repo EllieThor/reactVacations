@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Link } from "react-router-dom";
+import "../css/style.css";
 
 const HeaderComponent = (props) => {
   let time = new Date().getHours();
@@ -59,10 +60,13 @@ const HeaderComponent = (props) => {
   console.log(".time: ", time, " welcome: ", welcomeTime);
   return (
     <div className="row">
-      <div className="col-6">
-        <h4> {props.user[0] === undefined ? "" : welcomeTime + props.user[0].FirstName + " " + props.user[0].LastName}</h4>
+      <div className="col-3">
+        <h2 className="logo">Vacation Stars</h2>
       </div>
-      <div className="col-6 text-end">
+      <div className="col-5 align-bottom">
+        <h5 className="welcome"> {props.user[0] === undefined ? "" : welcomeTime + props.user[0].FirstName + " " + props.user[0].LastName}</h5>
+      </div>
+      <div className="col-4 text-end">
         <div className="row">
           <div className="col-4 offset-8">
             {props.userRole === 1 ? (

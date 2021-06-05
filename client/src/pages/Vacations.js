@@ -11,7 +11,7 @@ import ModalTest from "../components/modalComponent";
 import SingleVacationCard from "../components/singleVacationCard";
 class Vacations extends Component {
   componentDidMount() {
-    //    this.props.userID>0
+    //   if( this.props.userID>0)
   }
   // patterns OBJ
   inputsObj = {

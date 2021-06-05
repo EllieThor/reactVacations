@@ -1,3 +1,8 @@
+/* font-family: 'Cinzel Decorative', cursive;
+font-family: 'Merienda', cursive;
+font-family: 'Noto Sans KR', sans-serif;
+font-family: 'Open Sans', sans-serif; */
+
 .logInForm {
   width: 400px;
   background-color: rgba(255, 255, 255, 0.5);
@@ -11,6 +16,12 @@
   margin-left: 54%;
   margin-top: 19%;
   margin-bottom: 5%;
+}
+.logo {
+  font-family: "Cinzel Decorative", cursive;
+}
+.welcome {
+  font-family: "Merienda", cursive;
 }
 
 /* .logInROW { */
