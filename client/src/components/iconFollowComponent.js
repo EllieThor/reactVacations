@@ -15,7 +15,6 @@ const FollowIcon = (props) => {
       <div className="col-6">
         <abbr title={isStar ? "Remove Star" : "Add Star"}>{isStar ? removeFollow() : addNewFollow()}</abbr>
       </div>
-      <div className="col-6">{props.vacationFollows.length}</div>
     </div>
   );
 };

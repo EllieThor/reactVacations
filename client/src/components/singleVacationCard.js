@@ -15,9 +15,12 @@ const SingleVacationCard = (props) => {
               <div className="col-7">
                 <h5 className="card-title">{vacation.Destination}</h5>
               </div>
-              <div className="col-5">
+              <div className="col-2">
+                <div>{vacation.follows.length}</div>
+              </div>
+              <div className="col-3">
                 {props.userRole === 1 ? (
-                  <EditIcons vacationToEdit={vacation} vacationID={vacation.ID} vacationFollows={vacation.follows} deleteVacationFromDB={props.deleteVacationFromDB} editVacationClicked={props.editVacationClicked} updateVacationDetailsInDB={props.updateVacationDetailsInDB} />
+                  <EditIcons vacationToEdit={vacation} vacationID={vacation.ID} deleteVacationFromDB={props.deleteVacationFromDB} editVacationClicked={props.editVacationClicked} updateVacationDetailsInDB={props.updateVacationDetailsInDB} />
                 ) : (
                   <FollowIcon vacationID={vacation.ID} userID={props.userID} vacationFollows={vacation.follows} insertNewFallowToDB={props.insertNewFallowToDB} deleteUserFallowFromDB={props.deleteUserFallowFromDB} />
                 )}
