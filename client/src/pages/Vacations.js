@@ -3,16 +3,17 @@ import "../css/style.css";
 import axios from "axios";
 import { connect } from "react-redux";
 import * as Api from "../Api/apiCalls";
-import { Route, Link } from "react-router-dom";
 
 import HeaderComponent from "../components/HeaderComponent";
 import AddVacationForm from "../components/addVacationFormComponent";
 import ModalTest from "../components/modalComponent";
 import SingleVacationCard from "../components/singleVacationCard";
+
 class Vacations extends Component {
   componentDidMount() {
-    //   if( this.props.userID>0)
+    // if (!this.props.userID)
   }
+
   // patterns OBJ
   inputsObj = {
     imageName: "",

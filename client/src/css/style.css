@@ -20,8 +20,13 @@ font-family: 'Open Sans', sans-serif; */
 .logo {
   font-family: "Cinzel Decorative", cursive;
 }
+.vacationLogo {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.699);
+}
 .welcome {
   font-family: "Merienda", cursive;
+  /* display: inline-block; */
 }
 
 /* .logInROW { */
