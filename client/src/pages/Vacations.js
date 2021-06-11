@@ -3,14 +3,20 @@ import "../css/style.css";
 import axios from "axios";
 import { connect } from "react-redux";
 import * as Api from "../Api/apiCalls";
+import { Route, Link } from "react-router-dom";
 
 import HeaderComponent from "../components/HeaderComponent";
 import AddVacationForm from "../components/addVacationFormComponent";
 import ModalTest from "../components/modalComponent";
 import SingleVacationCard from "../components/singleVacationCard";
+import LogInForm from "./LogInForm";
+import RegistrationForm from "./RegistrationForm";
 
 class Vacations extends Component {
   componentDidMount() {
+    // if (this.props.userID <= -1) {
+    //   // <Route path="/RegistrationForm" component={RegistrationForm} />;
+    // }
     // if (!this.props.userID)
   }
 
