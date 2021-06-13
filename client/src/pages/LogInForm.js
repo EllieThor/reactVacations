@@ -72,7 +72,16 @@ class LogIn extends Component {
         // vacationsNames.push(item.Destination);
         numberOf = item.follows.length;
         // numberOf > 0 ? numberOfStars.push(item.follows.length) : (test = 0);
-        if (numberOf > 0) {
+        // if (numberOf > 0) {
+        //   numberOfStars.push(item.follows.length);
+        //   vacationsNames.push(item.Destination);
+        // }
+
+        // let isUserExist = item.follows.find(checkIt);
+        let isUserExist = usersIDs.includes(this.props.userID);
+        console.log("this.props.userID: ", this.props.userID, " test sorting: ", isUserExist);
+
+        if (isUserExist) {
           numberOfStars.push(item.follows.length);
           vacationsNames.push(item.Destination);
         }
