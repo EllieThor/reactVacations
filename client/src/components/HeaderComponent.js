@@ -3,10 +3,6 @@ import { Route, Link } from "react-router-dom";
 import "../css/style.css";
 
 const HeaderComponent = (props) => {
-  let time = new Date().getHours();
-  const pathname = window.location.pathname;
-  console.log("pathname: ", pathname);
-  // props.userRole === 1 && pathname === "/Reports";
   let welcomeTime;
   switch (new Date().getHours()) {
     case 22:
@@ -31,8 +27,8 @@ const HeaderComponent = (props) => {
     case 13:
     case 14:
     case 15:
-      welcomeTime = "Good Noon, ";
-      break;
+    // welcomeTime = "Good Noon, ";
+    // break;
     case 16:
     case 17:
     case 18:
@@ -59,6 +55,7 @@ const HeaderComponent = (props) => {
     //   welcomeTime = "Good Night, ";
     //   break;
   }
+  // let time = new Date().getHours();
   // console.log(".time: ", time, " welcome: ", welcomeTime);
   return (
     <div className="row">
@@ -73,10 +70,16 @@ const HeaderComponent = (props) => {
           <div className="col-4 offset-8">
             <div className="row">
               <div className="col-4">
-                {props.userRole === 1 && pathname === "/Vacations" ? (
+                {props.userRole === 1 && window.location.pathname === "/Vacations" ? (
                   <Link to="/Reports">
                     <abbr title="Reports">
                       <i className="far fa-chart-bar fa-2x px-3 iconsColor"></i>
+                    </abbr>
+                  </Link>
+                ) : props.userRole === 1 && window.location.pathname === "/Reports" ? (
+                  <Link to="/Vacations">
+                    <abbr title="Back to Vacation">
+                      <i className="fas fa-map-marked-alt fa-2x px-3 iconsColor"></i>
                     </abbr>
                   </Link>
                 ) : (
