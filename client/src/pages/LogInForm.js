@@ -69,7 +69,6 @@ class LogIn extends Component {
         // console.log("usersIDs : ", usersIDs);
 
         //graph
-        // vacationsNames.push(item.Destination);
         numberOf = item.follows.length;
         if (numberOf > 0) {
           numberOfStars.push(item.follows.length);
@@ -78,7 +77,7 @@ class LogIn extends Component {
         // FIXME: sorting
         // let isUserExist = item.follows.find(checkIt);
         let isUserExist = usersIDs.includes(2);
-        console.log("this.props.userID: ", this.props.userID, " test sorting: ", isUserExist);
+        console.log("this.props.userID: ", this.props.userID, "usersIDs: ", usersIDs, " test sorting: ", isUserExist);
       });
       this.props.updateVacations(allVacations);
       console.log("all vacations: ", allVacations);
