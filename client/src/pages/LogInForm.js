@@ -8,7 +8,7 @@ import Chart from "chart.js/auto";
 
 class LogIn extends Component {
   componentDidMount() {
-    this.getVacationsFromDB();
+    // this.getVacationsFromDB();
   }
   // patterns OBJ
   inputsObj = {
@@ -37,7 +37,7 @@ class LogIn extends Component {
       this.props.updateLogInStatus(false);
       console.log("updateLogInStatus: ", this.props.logInFormStatus);
       console.log("userID again: ", this.props.userID);
-      this.getVacationsFromDB();
+      // this.getVacationsFromDB();
     } catch (err) {
       console.log("Error ", err);
       alert("Something went wrong, please try again");
@@ -76,8 +76,8 @@ class LogIn extends Component {
         }
         // FIXME: sorting
         // let isUserExist = item.follows.find(checkIt);
-        let isUserExist = usersIDs.includes(2);
-        console.log("this.props.userID: ", this.props.userID, "usersIDs: ", usersIDs, " test sorting: ", isUserExist);
+        // let isUserExist = usersIDs.includes(this.props.userID);
+        // console.log("this.props.userID: ", this.props.userID, "usersIDs: ", usersIDs, " test sorting: ", isUserExist);
       });
       this.props.updateVacations(allVacations);
       console.log("all vacations: ", allVacations);
@@ -95,36 +95,6 @@ class LogIn extends Component {
       console.log("Error ", err);
       alert("Something went wrong, please try again: ", err);
     }
-  };
-
-  getGraph = () => {
-    console.log("this.props.vacationsNames: ", this.props.vacationsNames);
-    let ctx = document.getElementById("myChart").getContext("2d");
-    let myChart = new Chart(ctx, {
-      type: "bar",
-      data: {
-        // labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-        labels: this.props.vacationsNames,
-        datasets: [
-          {
-            // TODO: מה זה הלייבל
-            label: "# of Votes",
-            // data: [12, 19, 3, 5, 2, 3],
-            data: this.props.numberOfStars,
-            backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)", "rgba(255, 206, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(255, 159, 64, 0.2)"],
-            borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)", "rgba(255, 206, 86, 1)", "rgba(75, 192, 192, 1)", "rgba(153, 102, 255, 1)", "rgba(255, 159, 64, 1)"],
-            borderWidth: 1,
-          },
-        ],
-      },
-      // options: {
-      //   scales: {
-      //     y: {
-      //       beginAtZero: true,
-      //     },
-      //   },
-      // },
-    });
   };
 
   openRegistrationForm = () => {

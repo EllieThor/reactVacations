@@ -38,7 +38,7 @@ const AddVacationForm = (props) => {
         <abbr title="Close">
           <i className="fas fa-times float-end" onClick={() => props.closeVacationForm()}></i>
         </abbr>
-        <h1 className="h3 mb-3 fw-normal text-center">Add New Vacation</h1>
+        <h1 className="h3 mb-3 fw-normal text-center">{ButtonsStatus === 0 ? "Add New Vacation" : "Edit Vacation"}</h1>
         <label htmlFor="Destination">Destination:</label>
         <input type="text" id="Destination" className="form-control m-2" defaultValue={ButtonsStatus === 0 ? "" : vacationToEdit.Destination} placeholder="Destination" autoFocus="" onChange={(e) => props.onChangeFN(e)} />
         <label htmlFor="Description">Description:</label>

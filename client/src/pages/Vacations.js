@@ -18,6 +18,7 @@ class Vacations extends Component {
     //   // <Route path="/RegistrationForm" component={RegistrationForm} />;
     // }
     // if (!this.props.userID)
+    this.getVacationsFromDB();
   }
 
   // patterns OBJ
@@ -70,6 +71,11 @@ class Vacations extends Component {
           numberOfStars.push(item.follows.length);
           vacationsNames.push(item.Destination);
         }
+
+        // FIXME: sorting
+        // let isUserExist = item.follows.find(checkIt);
+        let isUserExist = usersIDs.includes(this.props.userID);
+        console.log("this.props.userID####: ", this.props.userID, "usersIDs: ", usersIDs, " test sorting: ", isUserExist);
       });
       this.props.updateVacations(allVacations);
       console.log("all vacations: ", allVacations);
