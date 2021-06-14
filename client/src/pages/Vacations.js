@@ -40,6 +40,7 @@ class Vacations extends Component {
   };
 
   getVacationsFromDB = async () => {
+    console.log("this in vacation route: ", this.props.user[0]);
     try {
       let vacations = await Api.postRequest(`/vacations/getVacationsFromDb`);
       let allVacations = vacations.data;
@@ -72,10 +73,13 @@ class Vacations extends Component {
           vacationsNames.push(item.Destination);
         }
 
-        // FIXME: sorting
-        // let isUserExist = item.follows.find(checkIt);
+        // sorting
         let isUserExist = usersIDs.includes(this.props.userID);
-        console.log("this.props.userID####: ", this.props.userID, "usersIDs: ", usersIDs, " test sorting: ", isUserExist);
+        if (isUserExist) {
+          allVacations.splice(i, 1);
+          allVacations.unshift(item);
+        }
+        console.log("this.props.userID: ", this.props.userID, "usersIDs: ", usersIDs, " test sorting: ", isUserExist);
       });
       this.props.updateVacations(allVacations);
       console.log("all vacations: ", allVacations);
@@ -93,6 +97,7 @@ class Vacations extends Component {
       console.log("Error ", err);
       alert("Something went wrong, please try again: ", err);
     }
+    console.log("this in vacation route 22: ", this.props.user[0]);
   };
   // follow or not on vacations
   insertNewFallowToDB = async (vacationID) => {
