@@ -40,7 +40,7 @@ class Vacations extends Component {
   };
 
   getVacationsFromDB = async () => {
-    console.log("this in vacation route: ", this.props.user[0]);
+    // console.log("this in vacation route: ", this.props.user[0]);
     try {
       let vacations = await Api.postRequest(`/vacations/getVacationsFromDb`);
       let allVacations = vacations.data;
@@ -65,9 +65,7 @@ class Vacations extends Component {
         // console.log("usersIDs : ", usersIDs);
 
         //graph
-        // vacationsNames.push(item.Destination);
         numberOf = item.follows.length;
-        // numberOf > 0 ? numberOfStars.push(item.follows.length) : (test = 0);
         if (numberOf > 0) {
           numberOfStars.push(item.follows.length);
           vacationsNames.push(item.Destination);
@@ -79,7 +77,7 @@ class Vacations extends Component {
           allVacations.splice(i, 1);
           allVacations.unshift(item);
         }
-        console.log("this.props.userID: ", this.props.userID, "usersIDs: ", usersIDs, " test sorting: ", isUserExist);
+        // console.log("this.props.userID: ", this.props.userID, "usersIDs: ", usersIDs, " test sorting: ", isUserExist);
       });
       this.props.updateVacations(allVacations);
       console.log("all vacations: ", allVacations);

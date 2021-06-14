@@ -7,9 +7,7 @@ import { Route, Link } from "react-router-dom";
 import Chart from "chart.js/auto";
 
 class LogIn extends Component {
-  componentDidMount() {
-    // this.getVacationsFromDB();
-  }
+  componentDidMount() {}
   // patterns OBJ
   inputsObj = {
     imageName: "",
@@ -37,63 +35,9 @@ class LogIn extends Component {
       this.props.updateLogInStatus(false);
       console.log("updateLogInStatus: ", this.props.logInFormStatus);
       console.log("userID again: ", this.props.userID);
-      // this.getVacationsFromDB();
     } catch (err) {
       console.log("Error ", err);
       alert("Something went wrong, please try again");
-    }
-  };
-
-  getVacationsFromDB = async () => {
-    try {
-      let vacations = await Api.postRequest(`/vacations/getVacationsFromDb`);
-      let allVacations = vacations.data;
-
-      // graph
-      let vacationsNames = [];
-      let numberOfStars = [];
-      let numberOf = 0;
-      // let test = 0; else : ניסיון
-
-      // map on vacations array in order to edit follows array In each of the items
-      allVacations.map((item, i) => {
-        let followsArr = item.follows;
-        let usersIDs = [];
-
-        // map on followsArr array in order to convert followsArr from array of objects to arr of usersId's numbers
-        followsArr.map((id, i) => {
-          let testing = Object.values(followsArr[i]);
-          usersIDs.push(...testing);
-        });
-        item.follows = usersIDs;
-        // console.log("usersIDs : ", usersIDs);
-
-        //graph
-        numberOf = item.follows.length;
-        if (numberOf > 0) {
-          numberOfStars.push(item.follows.length);
-          vacationsNames.push(item.Destination);
-        }
-        // FIXME: sorting
-        // let isUserExist = item.follows.find(checkIt);
-        // let isUserExist = usersIDs.includes(this.props.userID);
-        // console.log("this.props.userID: ", this.props.userID, "usersIDs: ", usersIDs, " test sorting: ", isUserExist);
-      });
-      this.props.updateVacations(allVacations);
-      console.log("all vacations: ", allVacations);
-
-      // graph names
-      this.props.updateVacationsNames(vacationsNames);
-      console.log("vacationsNames: ", this.props.vacationsNames);
-      // graph stars
-      this.props.updateNumberOfStars(numberOfStars);
-      console.log("numberOfStars: ", this.props.numberOfStars);
-
-      // TODO: delete graph before updating ???? אם הפונקציה של הגרף כבויה אין בעיות אבל העדכון של נתונים חדשים דופק אותה
-      // this.getGraph();
-    } catch (err) {
-      console.log("Error ", err);
-      alert("Something went wrong, please try again: ", err);
     }
   };
 
