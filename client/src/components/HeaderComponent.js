@@ -4,7 +4,9 @@ import "../css/style.css";
 
 const HeaderComponent = (props) => {
   let time = new Date().getHours();
-
+  const pathname = window.location.pathname;
+  console.log("pathname: ", pathname);
+  // props.userRole === 1 && pathname === "/Reports";
   let welcomeTime;
   switch (new Date().getHours()) {
     case 22:
@@ -71,7 +73,7 @@ const HeaderComponent = (props) => {
           <div className="col-4 offset-8">
             <div className="row">
               <div className="col-4">
-                {props.userRole === 1 ? (
+                {props.userRole === 1 && pathname === "/Vacations" ? (
                   <Link to="/Reports">
                     <abbr title="Reports">
                       <i className="far fa-chart-bar fa-2x px-3 iconsColor"></i>
@@ -84,7 +86,8 @@ const HeaderComponent = (props) => {
               <div className="col-4">
                 {props.userRole === 1 ? (
                   <abbr title="Add New Vacation">
-                    <i className="fas fa-plus fa-2x px-3 iconsColor" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => props.addVacationClicked()}></i>
+                    {/* <i className="fas fa-plus fa-2x px-3 iconsColor" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => props.addVacationClicked()}></i> */}
+                    <i className="fas fa-plus fa-2x px-3 iconsColor" onClick={() => props.addVacationClicked()}></i>
                   </abbr>
                 ) : (
                   ""

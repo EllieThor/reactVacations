@@ -33,7 +33,7 @@ const AddVacationForm = (props) => {
   return (
     // ID`, `Destination`, `Description`, `Price`, `ImageName`, `StartDate`, `EndDate`, `createdAt`, `updatedAt`
     <div>
-      <div className="addVacationForm p-5">
+      <div className="addVacationForm mx-auto p-5">
         {/* <form> */}
         <abbr title="Close">
           <i className="fas fa-times float-end" onClick={() => props.closeVacationForm()}></i>
@@ -56,7 +56,7 @@ const AddVacationForm = (props) => {
         </button>
         <div className="row">
           {ButtonsStatus === 0 ? addVacationButton() : saveEditedVacationButton()}
-          {ButtonsStatus === 0 ? addVacationResetButton() : dontSaveChangesButton()}
+          {/* {ButtonsStatus === 0 ? addVacationResetButton() : dontSaveChangesButton()} */}
         </div>
         {/*  FIXME: בפורם עושה ריפש לעמוד ומבקש כניסה מחדש ובלי פורם אין ריסט */}
         {/* <button className="w-100 btn btn-lg m-2 btn-dark" type="submit" onClick={() => props.insertVacationToDB()}>

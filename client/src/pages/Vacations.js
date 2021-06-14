@@ -244,8 +244,7 @@ class Vacations extends Component {
   render() {
     return (
       <div className="container">
-        {/* FIXME: user  */}
-        <div className="row mt-3">{this.props.user[0] === undefined ? "" : <HeaderComponent logOutIconClicked={this.logOutIconClicked} userRole={this.props.userRole} user={this.props.user} userRole={this.props.userRole} addVacationClicked={this.addVacationClicked} />}</div>
+        <div className="row mt-3">{this.props.user[0] === undefined ? "" : <HeaderComponent logOutIconClicked={this.logOutIconClicked} user={this.props.user} userRole={this.props.userRole} addVacationClicked={this.addVacationClicked} />}</div>
 
         <div className="row addVacationROW">
           {this.props.userRole === 1 && this.props.showVacationForm ? (
@@ -254,6 +253,7 @@ class Vacations extends Component {
             ""
           )}
         </div>
+        {/* TODO: fix or delete modal */}
         <div className="row">
           {this.props.userRole === 1 && this.props.showVacationForm ? (
             <ModalTest onChangeFN={this.onChangeFN} closeVacationForm={this.closeVacationForm} fileChangeEvent={this.fileChangeEvent} upload={this.upload} insertVacationToDB={this.insertVacationToDB} updateVacationDetailsInDB={this.updateVacationDetailsInDB} vacationFormButtonsStatus={this.props.vacationFormButtonsStatus} vacationToEdit={this.props.vacationToEdit} />
