@@ -12,13 +12,7 @@ const ModalTest = (props) => {
       </button>
     );
   };
-  let addVacationResetButton = () => {
-    return (
-      <button type="reset" className="btn btn-dark mt-3">
-        Reset
-      </button>
-    );
-  };
+
   // edit form
   let saveEditedVacationButton = () => {
     return (
@@ -27,13 +21,7 @@ const ModalTest = (props) => {
       </button>
     );
   };
-  let dontSaveChangesButton = () => {
-    return (
-      <button className="btn btn-dark mt-3" data-bs-dismiss="modal">
-        Cancel Edit
-      </button>
-    );
-  };
+
   return (
     <div>
       {/* <!-- Button trigger modal -->
@@ -46,14 +34,14 @@ const ModalTest = (props) => {
         <div className="modal-dialog">
           <div className="modal-content">
             <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">
-                Modal title
+              <h5 className="modal-title mb-3 fw-normal text-center" id="exampleModalLabel">
+                {ButtonsStatus === 0 ? "Add New Vacation" : `${vacationToEdit.Destination}`}
               </h5>
               <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div className="modal-body">
               {/* <div className="addVacationForm p-5"> */}
-              <h1 className="h3 mb-3 fw-normal text-center">{ButtonsStatus === 0 ? "Add New Vacation" : `${vacationToEdit.Destination}`}</h1>
+
               <label htmlFor="Destination">Destination:</label>
               <input type="text" id="Destination" className="form-control m-2" defaultValue={ButtonsStatus === 0 ? "" : vacationToEdit.Destination} placeholder="Destination" autoFocus="" onChange={(e) => props.onChangeFN(e)} />
               <label htmlFor="Description">Description:</label>

@@ -18,6 +18,8 @@ class Vacations extends Component {
     //   // <Route path="/RegistrationForm" component={RegistrationForm} />;
     // }
     // if (!this.props.userID)
+    if (!this.props.userID) {
+    }
     this.getVacationsFromDB();
   }
 
@@ -79,9 +81,10 @@ class Vacations extends Component {
         }
         // console.log("this.props.userID: ", this.props.userID, "usersIDs: ", usersIDs, " test sorting: ", isUserExist);
       });
+
+      // vacations array
       this.props.updateVacations(allVacations);
       console.log("all vacations: ", allVacations);
-
       // graph names
       this.props.updateVacationsNames(vacationsNames);
       console.log("vacationsNames: ", this.props.vacationsNames);
@@ -135,7 +138,7 @@ class Vacations extends Component {
     // witch button
     this.props.updateVacationButtonsForm(1);
     // open vacation form
-    this.props.UpdateShowVacationForm(true);
+    // this.props.UpdateShowVacationForm(true);
     //witch vacation edit
     this.props.updateVacationToForm(vacationObj);
   };
@@ -145,7 +148,7 @@ class Vacations extends Component {
     this.props.updateVacationButtonsForm(0);
 
     // open vacation form
-    this.props.UpdateShowVacationForm(true);
+    // this.props.UpdateShowVacationForm(true);
   };
 
   closeVacationForm = () => {
@@ -256,20 +259,12 @@ class Vacations extends Component {
         <div className="row mt-3">{this.props.user[0] === undefined ? "" : <HeaderComponent logOutIconClicked={this.logOutIconClicked} user={this.props.user} userRole={this.props.userRole} addVacationClicked={this.addVacationClicked} />}</div>
 
         <div className="row addVacationROW">
-          {this.props.userRole === 1 && this.props.showVacationForm ? (
-            <AddVacationForm onChangeFN={this.onChangeFN} closeVacationForm={this.closeVacationForm} fileChangeEvent={this.fileChangeEvent} upload={this.upload} insertVacationToDB={this.insertVacationToDB} updateVacationDetailsInDB={this.updateVacationDetailsInDB} vacationFormButtonsStatus={this.props.vacationFormButtonsStatus} vacationToEdit={this.props.vacationToEdit} />
-          ) : (
-            ""
-          )}
+          <AddVacationForm onChangeFN={this.onChangeFN} closeVacationForm={this.closeVacationForm} fileChangeEvent={this.fileChangeEvent} upload={this.upload} insertVacationToDB={this.insertVacationToDB} updateVacationDetailsInDB={this.updateVacationDetailsInDB} vacationFormButtonsStatus={this.props.vacationFormButtonsStatus} vacationToEdit={this.props.vacationToEdit} />
         </div>
         {/* TODO: fix or delete modal */}
-        <div className="row">
-          {this.props.userRole === 1 && this.props.showVacationForm ? (
-            <ModalTest onChangeFN={this.onChangeFN} closeVacationForm={this.closeVacationForm} fileChangeEvent={this.fileChangeEvent} upload={this.upload} insertVacationToDB={this.insertVacationToDB} updateVacationDetailsInDB={this.updateVacationDetailsInDB} vacationFormButtonsStatus={this.props.vacationFormButtonsStatus} vacationToEdit={this.props.vacationToEdit} />
-          ) : (
-            ""
-          )}
-        </div>
+        {/* <div className="row">
+          <ModalTest onChangeFN={this.onChangeFN} closeVacationForm={this.closeVacationForm} fileChangeEvent={this.fileChangeEvent} upload={this.upload} insertVacationToDB={this.insertVacationToDB} updateVacationDetailsInDB={this.updateVacationDetailsInDB} vacationFormButtonsStatus={this.props.vacationFormButtonsStatus} vacationToEdit={this.props.vacationToEdit} />
+        </div> */}
         <div className="row">{this.props.userID === 0 ? "" : <SingleVacationCard userRole={this.props.userRole} userID={this.props.userID} vacations={this.props.vacations} insertNewFallowToDB={this.insertNewFallowToDB} deleteUserFallowFromDB={this.deleteUserFallowFromDB} deleteVacationFromDB={this.deleteVacationFromDB} editVacationClicked={this.editVacationClicked} />}</div>
       </div>
     );
