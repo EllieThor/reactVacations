@@ -7,9 +7,7 @@ import { Route, Link } from "react-router-dom";
 import Chart from "chart.js/auto";
 
 class LogIn extends Component {
-  componentDidMount() {
-    
-  }
+  componentDidMount() {}
   // patterns OBJ
   inputsObj = {
     imageName: "",

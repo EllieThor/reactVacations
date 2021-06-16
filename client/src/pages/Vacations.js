@@ -14,12 +14,13 @@ import RegistrationForm from "./RegistrationForm";
 
 class Vacations extends Component {
   componentDidMount() {
-    // if (this.props.userID <= -1) {
-    //   // <Route path="/RegistrationForm" component={RegistrationForm} />;
+    // if (this.props.userID <= 0) {
+    //   window.location.replace("/");
+    //   console.log("the user route is not exists if : ", this.props.userID);
+    // } else {
+    //   this.getVacationsFromDB();
+    //   console.log("the user route is exists &&& else : ", this.props.userID);
     // }
-    // if (!this.props.userID)
-    if (!this.props.userID) {
-    }
     this.getVacationsFromDB();
   }
 
@@ -98,7 +99,6 @@ class Vacations extends Component {
       console.log("Error ", err);
       alert("Something went wrong, please try again: ", err);
     }
-    console.log("this in vacation route 22: ", this.props.user[0]);
   };
   // follow or not on vacations
   insertNewFallowToDB = async (vacationID) => {
