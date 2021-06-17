@@ -3,7 +3,7 @@ import "../css/style.css";
 import axios from "axios";
 import { connect } from "react-redux";
 import * as Api from "../Api/apiCalls";
-import { Route, Link } from "react-router-dom";
+import { Route, Link, Redirect } from "react-router-dom";
 import Chart from "chart.js/auto";
 
 import ReportsCOMP from "../components/reportsComponent";
@@ -11,7 +11,9 @@ import HeaderComponent from "../components/HeaderComponent";
 
 class Reports extends Component {
   componentDidMount() {
-    this.getGraph();
+    if (this.props.userID === 0) {
+      return <Redirect from="/Reports" to="/" />;
+    } else this.getGraph();
   }
   // patterns OBJ
   inputsObj = {
@@ -50,17 +52,28 @@ class Reports extends Component {
       // },
     });
   };
+  // logOut
+  logOutIconClicked = () => {
+    this.props.updateUserID(0);
+    this.props.updateUser([]);
+    this.props.updateUserRole(0);
+    this.props.updateLogInStatus(true);
+  };
   render() {
-    return (
-      <div className="container">
-        <div className="row mt-3">
-          <HeaderComponent logOutIconClicked={this.logOutIconClicked} userRole={this.props.userRole} user={this.props.user} userRole={this.props.userRole} addVacationClicked={this.addVacationClicked} />
+    if (this.props.userID === 0) {
+      return <Redirect from="/Reports" to="/" />;
+    } else {
+      return (
+        <div className="container">
+          <div className="row mt-3">
+            <HeaderComponent logOutIconClicked={this.logOutIconClicked} userRole={this.props.userRole} user={this.props.user} userRole={this.props.userRole} addVacationClicked={this.addVacationClicked} />
+          </div>
+          <div className="row mt-3">
+            <ReportsCOMP />
+          </div>
         </div>
-        <div className="row mt-3">
-          <ReportsCOMP />
-        </div>
-      </div>
-    );
+      );
+    }
   }
 }
 const mapStateToProps = (state) => {

@@ -3,7 +3,7 @@ import "../css/style.css";
 import axios from "axios";
 import { connect } from "react-redux";
 import * as Api from "../Api/apiCalls";
-import { Route, Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Chart from "chart.js/auto";
 
 class LogIn extends Component {
@@ -51,35 +51,39 @@ class LogIn extends Component {
   };
 
   render() {
-    return (
-      <div
-        className="container p-3 mt-3 logInPage"
-        style={{
-          backgroundImage: `url(${"assets/images/tapetTest.png"})`,
-          backgroundRepeat: "no-repeat",
-        }}
-      >
-        <div className="logInForm p-5">
-          {/* <form> */}
-          <h1 className="h3 mb-3 fw-normal">Please Log In</h1>
-          <input type="email" id="userEmail" className="form-control m-2" placeholder="Email address" required="" autoFocus="" onChange={(e) => this.onChangeFN(e)} />
-          <input type="password" id="userPassword" className="form-control  m-2" placeholder="Password" required="" autoComplete="" onChange={(e) => this.onChangeFN(e)} />
-          <Link to="/Vacations">
-            <button className="w-100 btn btn-lg m-2 btn-dark" type="submit" onClick={() => this.getUserFromDB()}>
+    if (this.props.userID != 0) {
+      return <Redirect from="/" to="/Vacations" />;
+    } else {
+      return (
+        <div
+          className="container p-3 mt-3 logInPage"
+          style={{
+            backgroundImage: `url(${"assets/images/tapetTest.png"})`,
+            backgroundRepeat: "no-repeat",
+          }}
+        >
+          <div className="logInForm p-5">
+            <h1 className="h3 mb-3 fw-normal">Please Log In</h1>
+            <input type="email" id="userEmail" className="form-control m-2" placeholder="Email address" required="" autoFocus="" onChange={(e) => this.onChangeFN(e)} />
+            <input type="password" id="userPassword" className="form-control  m-2" placeholder="Password" required="" autoComplete="" onChange={(e) => this.onChangeFN(e)} />
+            {/* not need it because the is statement in the start render  */}
+            {/* <Link to="/Vacations"> */}
+            <button className="w-100 btn btn-lg m-2 btn-dark" onClick={() => this.getUserFromDB()}>
               Log in
             </button>
-          </Link>
+            {/* </Link> */}
 
-          <Link to="/RegistrationForm">
-            <button className="w-100 btn btn-lg m-2 btn-dark">Registration</button>
-          </Link>
-          {/* <button className="w-100 btn btn-lg m-2 btn-dark" onClick={() => this.openRegistrationForm()}>
+            <Link to="/RegistrationForm">
+              <button className="w-100 btn btn-lg m-2 btn-dark">Registration</button>
+            </Link>
+            {/* <button className="w-100 btn btn-lg m-2 btn-dark" onClick={() => this.openRegistrationForm()}>
             Registration
           </button> */}
-          {/* </form> */}
+            {/* </form> */}
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
 const mapStateToProps = (state) => {

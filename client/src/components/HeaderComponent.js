@@ -90,7 +90,6 @@ const HeaderComponent = (props) => {
                 {props.userRole === 1 ? (
                   <abbr title="Add New Vacation">
                     <i className="fas fa-plus fa-2x px-3 iconsColor" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => props.addVacationClicked()}></i>
-                    {/* <i className="fas fa-plus fa-2x px-3 iconsColor" onClick={() => props.addVacationClicked()}></i> */}
                   </abbr>
                 ) : (
                   ""

@@ -3,7 +3,7 @@ import "../css/style.css";
 import axios from "axios";
 import { connect } from "react-redux";
 import * as Api from "../Api/apiCalls";
-import { Route, Link } from "react-router-dom";
+import { Route, Link, Redirect } from "react-router-dom";
 
 import HeaderComponent from "../components/HeaderComponent";
 import AddVacationForm from "../components/addVacationFormComponent";
@@ -14,6 +14,10 @@ import RegistrationForm from "./RegistrationForm";
 
 class Vacations extends Component {
   componentDidMount() {
+    // if (this.props.userID === 0) {
+    //   <Redirect from="/Vacations" to="/RegistrationForm " />;
+    // }
+
     // if (this.props.userID <= 0) {
     //   window.location.replace("/");
     //   console.log("the user route is not exists if : ", this.props.userID);
@@ -21,7 +25,9 @@ class Vacations extends Component {
     //   this.getVacationsFromDB();
     //   console.log("the user route is exists &&& else : ", this.props.userID);
     // }
-    this.getVacationsFromDB();
+    if (this.props.userID === 0) {
+      return <Redirect from="/Vacations" to="/" />;
+    } else this.getVacationsFromDB();
   }
 
   // patterns OBJ
@@ -254,20 +260,24 @@ class Vacations extends Component {
   };
   // end img
   render() {
-    return (
-      <div className="container">
-        <div className="row mt-3">{this.props.user[0] === undefined ? "" : <HeaderComponent logOutIconClicked={this.logOutIconClicked} user={this.props.user} userRole={this.props.userRole} addVacationClicked={this.addVacationClicked} />}</div>
+    if (this.props.userID === 0) {
+      return <Redirect from="/Vacations" to="/" />;
+    } else {
+      return (
+        <div className="container">
+          <div className="row mt-3">{this.props.user[0] === undefined ? "" : <HeaderComponent logOutIconClicked={this.logOutIconClicked} user={this.props.user} userRole={this.props.userRole} addVacationClicked={this.addVacationClicked} />}</div>
 
-        <div className="row addVacationROW">
-          <AddVacationForm onChangeFN={this.onChangeFN} closeVacationForm={this.closeVacationForm} fileChangeEvent={this.fileChangeEvent} upload={this.upload} insertVacationToDB={this.insertVacationToDB} updateVacationDetailsInDB={this.updateVacationDetailsInDB} vacationFormButtonsStatus={this.props.vacationFormButtonsStatus} vacationToEdit={this.props.vacationToEdit} />
-        </div>
-        {/* TODO: fix or delete modal */}
-        {/* <div className="row">
+          <div className="row addVacationROW">
+            <AddVacationForm onChangeFN={this.onChangeFN} closeVacationForm={this.closeVacationForm} fileChangeEvent={this.fileChangeEvent} upload={this.upload} insertVacationToDB={this.insertVacationToDB} updateVacationDetailsInDB={this.updateVacationDetailsInDB} vacationFormButtonsStatus={this.props.vacationFormButtonsStatus} vacationToEdit={this.props.vacationToEdit} />
+          </div>
+          {/* TODO: fix or delete modal */}
+          {/* <div className="row">
           <ModalTest onChangeFN={this.onChangeFN} closeVacationForm={this.closeVacationForm} fileChangeEvent={this.fileChangeEvent} upload={this.upload} insertVacationToDB={this.insertVacationToDB} updateVacationDetailsInDB={this.updateVacationDetailsInDB} vacationFormButtonsStatus={this.props.vacationFormButtonsStatus} vacationToEdit={this.props.vacationToEdit} />
         </div> */}
-        <div className="row">{this.props.userID === 0 ? "" : <SingleVacationCard userRole={this.props.userRole} userID={this.props.userID} vacations={this.props.vacations} insertNewFallowToDB={this.insertNewFallowToDB} deleteUserFallowFromDB={this.deleteUserFallowFromDB} deleteVacationFromDB={this.deleteVacationFromDB} editVacationClicked={this.editVacationClicked} />}</div>
-      </div>
-    );
+          <div className="row">{this.props.userID === 0 ? "" : <SingleVacationCard userRole={this.props.userRole} userID={this.props.userID} vacations={this.props.vacations} insertNewFallowToDB={this.insertNewFallowToDB} deleteUserFallowFromDB={this.deleteUserFallowFromDB} deleteVacationFromDB={this.deleteVacationFromDB} editVacationClicked={this.editVacationClicked} />}</div>
+        </div>
+      );
+    }
   }
 }
 const mapStateToProps = (state) => {
