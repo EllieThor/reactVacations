@@ -36,15 +36,15 @@ const AddVacationForm = (props) => {
             <div className="modal-body">
               {/* FIXME: input stay like the last one end not updated after change  */}
               <label htmlFor="Destination">Destination:</label>
-              <input type="text" id="Destination" className="form-control m-2" defaultValue={ButtonsStatus === 0 ? "" : vacationToEdit.Destination} placeholder="Destination" autoFocus="" onChange={(e) => props.onChangeFN(e)} />
+              <input type="text" id="Destination" className="form-control m-2" defaultValue={ButtonsStatus === 0 ? "" : vacationToEdit.Destination} placeholder="Destination" onChange={(e) => props.onChangeFN(e)} />
               <label htmlFor="Description">Description:</label>
-              <input type="text" id="Description" className="form-control  m-2" defaultValue={ButtonsStatus === 0 ? "" : vacationToEdit.Description} placeholder="Description" autoComplete="" onChange={(e) => props.onChangeFN(e)} />
+              <input type="text" id="Description" className="form-control  m-2" defaultValue={ButtonsStatus === 0 ? "" : vacationToEdit.Description} placeholder="Description" onChange={(e) => props.onChangeFN(e)} />
               <label htmlFor="Price">Price:</label>
-              <input type="number" id="Price" min="0" className="form-control  m-2" defaultValue={ButtonsStatus === 0 ? "" : vacationToEdit.Price} placeholder="Price" autoComplete="" onChange={(e) => props.onChangeFN(e)} />
+              <input type="number" id="Price" min="0" className="form-control  m-2" defaultValue={ButtonsStatus === 0 ? "" : vacationToEdit.Price} placeholder="Price" onChange={(e) => props.onChangeFN(e)} />
               <label htmlFor="StartDate">StartDate:</label>
-              <input type="date" id="StartDate" className="form-control  m-2" defaultValue={ButtonsStatus === 0 ? "" : vacationToEdit.StartDate} placeholder="StartDate" autoComplete="" onChange={(e) => props.onChangeFN(e)} />
+              <input type="date" id="StartDate" className="form-control  m-2" defaultValue={ButtonsStatus === 0 ? "" : vacationToEdit.StartDate} placeholder="StartDate" onChange={(e) => props.onChangeFN(e)} />
               <label htmlFor="EndDate">EndDate:</label>
-              <input type="date" id="EndDate" className="form-control  m-2" defaultValue={ButtonsStatus === 0 ? "" : vacationToEdit.EndDate} placeholder="EndDate" autoComplete="" onChange={(e) => props.onChangeFN(e)} />
+              <input type="date" id="EndDate" className="form-control  m-2" defaultValue={ButtonsStatus === 0 ? "" : vacationToEdit.EndDate} placeholder="EndDate" onChange={(e) => props.onChangeFN(e)} />
               <input id="filesToUpload" name="filesToUpload" type="file" onChange={(e) => props.fileChangeEvent(e)} />
               <button type="button" className="btn btn-dark btn-s" onClick={() => props.upload()}>
                 <i className="fas fa-file-upload"></i>&nbsp;Upload

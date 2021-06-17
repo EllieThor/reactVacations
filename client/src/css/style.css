@@ -58,3 +58,30 @@ font-family: 'Open Sans', sans-serif; */
 .iconsColor {
   color: rgba(0, 0, 0, 0.699);
 }
+
+.footer {
+  background-color: crimson;
+  color: white;
+  height: 80px;
+}
+
+.a {
+  background-color: #024873;
+  border-color: rgba(2, 71, 114, 1);
+}
+.b {
+  background-color: #0396a6;
+  border-color: rgba(3, 149, 165, 1);
+}
+.c {
+  background-color: #04bfad;
+  border-color: rgba(3, 191, 172, 1);
+}
+.d {
+  background-color: #f28963;
+  border-color: rgba(242, 137, 99, 1);
+}
+.e {
+  background-color: #f25e5e;
+  border-color: rgba(242, 94, 94, 1);
+}

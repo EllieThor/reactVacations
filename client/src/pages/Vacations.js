@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import * as Api from "../Api/apiCalls";
 import { Route, Link, Redirect } from "react-router-dom";
 
+import Nav from "../components/nav";
+import Footer from "../components/footerComponent";
 import HeaderComponent from "../components/HeaderComponent";
 import AddVacationForm from "../components/addVacationFormComponent";
 import SingleVacationCard from "../components/singleVacationCard";
@@ -120,7 +122,7 @@ class Vacations extends Component {
     }
   };
 
-  // TODO: inputs stay after default
+  // TODO: inputs stay after default- לא קשור לריקון האובייקט הגלובלי כי זה דיפולט! ברגע שכבר יש ערך הוא שם אותו
   // vacation form buttons
   editVacationClicked = (vacationObj) => {
     // witch button
@@ -238,11 +240,13 @@ class Vacations extends Component {
       return (
         <div className="container">
           <div className="row mt-3">{this.props.user[0] === undefined ? "" : <HeaderComponent logOutIconClicked={this.logOutIconClicked} user={this.props.user} userRole={this.props.userRole} addVacationClicked={this.addVacationClicked} />}</div>
+          {/* <div className="row mt-3">{this.props.user[0] === undefined ? "" : <Nav logOutIconClicked={this.logOutIconClicked} user={this.props.user} userRole={this.props.userRole} addVacationClicked={this.addVacationClicked} />}</div> */}
 
           <div className="row addVacationROW">
             <AddVacationForm onChangeFN={this.onChangeFN} fileChangeEvent={this.fileChangeEvent} upload={this.upload} insertVacationToDB={this.insertVacationToDB} updateVacationDetailsInDB={this.updateVacationDetailsInDB} vacationFormButtonsStatus={this.props.vacationFormButtonsStatus} vacationToEdit={this.props.vacationToEdit} />
           </div>
           <div className="row">{this.props.userID === 0 ? "" : <SingleVacationCard userRole={this.props.userRole} userID={this.props.userID} vacations={this.props.vacations} insertNewFallowToDB={this.insertNewFallowToDB} deleteUserFallowFromDB={this.deleteUserFallowFromDB} deleteVacationFromDB={this.deleteVacationFromDB} editVacationClicked={this.editVacationClicked} />}</div>
+          {/* <div className="row">{this.props.userID === 0 ? "" : <Footer />}</div> */}
         </div>
       );
     }
