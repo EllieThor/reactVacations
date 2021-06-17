@@ -3,7 +3,7 @@ import "../css/style.css";
 import axios from "axios";
 import { connect } from "react-redux";
 import * as Api from "../Api/apiCalls";
-import { Route, Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import Chart from "chart.js/auto";
 
 import ReportsCOMP from "../components/reportsComponent";
@@ -57,7 +57,6 @@ class Reports extends Component {
     this.props.updateUserID(0);
     this.props.updateUser([]);
     this.props.updateUserRole(0);
-    this.props.updateLogInStatus(true);
   };
   render() {
     if (this.props.userID === 0) {
@@ -107,18 +106,7 @@ const mapDispatchToProps = (dispatch) => {
         payload: value,
       });
     },
-    updateLogInStatus(value) {
-      dispatch({
-        type: "updateLogInStatus",
-        payload: value,
-      });
-    },
-    updateUserFormStatus(value) {
-      dispatch({
-        type: "updateUserFormStatus",
-        payload: value,
-      });
-    },
+
     updateUserID(value) {
       dispatch({
         type: "updateUserID",
@@ -131,13 +119,7 @@ const mapDispatchToProps = (dispatch) => {
         payload: value,
       });
     },
-    // vacation form
-    UpdateShowVacationForm(value) {
-      dispatch({
-        type: "UpdateShowVacationForm",
-        payload: value,
-      });
-    },
+
     updateVacationButtonsForm(value) {
       dispatch({
         type: "updateVacationButtonsForm",

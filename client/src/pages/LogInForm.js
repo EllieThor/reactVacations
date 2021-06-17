@@ -32,22 +32,10 @@ class LogIn extends Component {
       console.log("userRole: ", this.props.userRole);
       this.props.updateUserID(user.data[0].ID);
       console.log("userID: ", this.props.userID);
-      this.props.updateLogInStatus(false);
-      console.log("updateLogInStatus: ", this.props.logInFormStatus);
-      console.log("userID again: ", this.props.userID);
     } catch (err) {
       console.log("Error ", err);
       alert("Something went wrong, please try again");
     }
-  };
-
-  openRegistrationForm = () => {
-    // close log in if he is open
-    this.props.updateLogInStatus(false);
-
-    // open addUser form
-    this.props.updateUserFormStatus(true);
-    console.log("userFormStatus : ", this.props.userFormStatus);
   };
 
   render() {
@@ -76,10 +64,6 @@ class LogIn extends Component {
             <Link to="/RegistrationForm">
               <button className="w-100 btn btn-lg m-2 btn-dark">Registration</button>
             </Link>
-            {/* <button className="w-100 btn btn-lg m-2 btn-dark" onClick={() => this.openRegistrationForm()}>
-            Registration
-          </button> */}
-            {/* </form> */}
           </div>
         </div>
       );
@@ -118,18 +102,7 @@ const mapDispatchToProps = (dispatch) => {
         payload: value,
       });
     },
-    updateLogInStatus(value) {
-      dispatch({
-        type: "updateLogInStatus",
-        payload: value,
-      });
-    },
-    updateUserFormStatus(value) {
-      dispatch({
-        type: "updateUserFormStatus",
-        payload: value,
-      });
-    },
+
     updateUserID(value) {
       dispatch({
         type: "updateUserID",
@@ -142,13 +115,7 @@ const mapDispatchToProps = (dispatch) => {
         payload: value,
       });
     },
-    // vacation form
-    UpdateShowVacationForm(value) {
-      dispatch({
-        type: "UpdateShowVacationForm",
-        payload: value,
-      });
-    },
+
     updateVacationButtonsForm(value) {
       dispatch({
         type: "updateVacationButtonsForm",

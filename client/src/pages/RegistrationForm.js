@@ -8,10 +8,7 @@ import Chart from "chart.js/auto";
 import { Route, Link } from "react-router-dom";
 
 class RegistrationForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+  componentDidMount() {}
   // patterns OBJ
   inputsObj = {
     imageName: "",
@@ -20,12 +17,6 @@ class RegistrationForm extends Component {
   onChangeFN = (e) => {
     this.inputsObj[e.target.id] = e.target.value;
     console.log("new Input To inputsObj :", e.target.id, "value: ", e.target.value);
-  };
-
-  closeRegistrationForm = () => {
-    this.props.updateUserFormStatus(false);
-    this.props.updateLogInStatus(true);
-    console.log("add user status close : ", this.props.userFormStatus);
   };
 
   insertUserToDB = async () => {
@@ -88,7 +79,6 @@ class RegistrationForm extends Component {
             console.log("insert user answer: ", user.data);
             this.inputsObj.userEmail = user.data.Email;
             this.inputsObj.userPassword = user.data.Password;
-            this.props.updateUserFormStatus(false);
             this.getUserFromDB();
           }
         } else {
@@ -115,95 +105,12 @@ class RegistrationForm extends Component {
       console.log("userRole: ", this.props.userRole);
       this.props.updateUserID(user.data[0].ID);
       console.log("userID: ", this.props.userID);
-      this.props.updateLogInStatus(false);
-      console.log("updateLogInStatus: ", this.props.logInFormStatus);
-      console.log("userID again: ", this.props.userID);
-      this.getVacationsFromDB();
     } catch (err) {
       console.log("Error ", err);
       alert("Something went wrong, please try again");
     }
   };
-  getVacationsFromDB = async () => {
-    try {
-      let vacations = await Api.postRequest(`/vacations/getVacationsFromDb`);
-      let allVacations = vacations.data;
 
-      // graph
-      let vacationsNames = [];
-      let numberOfStars = [];
-      let numberOf = 0;
-      // let test = 0; else : ניסיון
-
-      // map on vacations array in order to edit follows array In each of the items
-      allVacations.map((item, i) => {
-        let followsArr = item.follows;
-        let usersIDs = [];
-
-        // map on followsArr array in order to convert followsArr from array of objects to arr of usersId's numbers
-        followsArr.map((id, i) => {
-          let testing = Object.values(followsArr[i]);
-          usersIDs.push(...testing);
-        });
-        item.follows = usersIDs;
-        // console.log("usersIDs : ", usersIDs);
-
-        //graph
-        // vacationsNames.push(item.Destination);
-        numberOf = item.follows.length;
-        // numberOf > 0 ? numberOfStars.push(item.follows.length) : (test = 0);
-        if (numberOf > 0) {
-          numberOfStars.push(item.follows.length);
-          vacationsNames.push(item.Destination);
-        }
-      });
-      this.props.updateVacations(allVacations);
-      console.log("all vacations: ", allVacations);
-
-      // graph names
-      this.props.updateVacationsNames(vacationsNames);
-      console.log("vacationsNames: ", this.props.vacationsNames);
-      // graph stars
-      this.props.updateNumberOfStars(numberOfStars);
-      console.log("numberOfStars: ", this.props.numberOfStars);
-
-      // TODO: delete graph before updating ???? אם הפונקציה של הגרף כבויה אין בעיות אבל העדכון של נתונים חדשים דופק אותה
-      // this.getGraph();
-    } catch (err) {
-      console.log("Error ", err);
-      alert("Something went wrong, please try again: ", err);
-    }
-  };
-
-  getGraph = () => {
-    console.log("this.props.vacationsNames: ", this.props.vacationsNames);
-    let ctx = document.getElementById("myChart").getContext("2d");
-    let myChart = new Chart(ctx, {
-      type: "bar",
-      data: {
-        // labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-        labels: this.props.vacationsNames,
-        datasets: [
-          {
-            // TODO: מה זה הלייבל
-            label: "# of Votes",
-            // data: [12, 19, 3, 5, 2, 3],
-            data: this.props.numberOfStars,
-            backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)", "rgba(255, 206, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(255, 159, 64, 0.2)"],
-            borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)", "rgba(255, 206, 86, 1)", "rgba(75, 192, 192, 1)", "rgba(153, 102, 255, 1)", "rgba(255, 159, 64, 1)"],
-            borderWidth: 1,
-          },
-        ],
-      },
-      // options: {
-      //   scales: {
-      //     y: {
-      //       beginAtZero: true,
-      //     },
-      //   },
-      // },
-    });
-  };
   render() {
     return (
       <div
@@ -213,13 +120,12 @@ class RegistrationForm extends Component {
           backgroundRepeat: "no-repeat",
         }}
       >
-        {/* <form action="get"> */}
         <div className="RegistrationForm p-5">
           <div className="row">
             <div className="col-12">
               <Link to="/">
                 <abbr title="Close">
-                  <i className="fas fa-times float-end" onClick={() => this.closeRegistrationForm()}></i>
+                  <i className="fas fa-times float-end"></i>
                 </abbr>
               </Link>
             </div>
@@ -245,7 +151,6 @@ class RegistrationForm extends Component {
             </Link>
           </div>
         </div>
-        {/* </form> */}
       </div>
     );
   }
@@ -283,18 +188,7 @@ const mapDispatchToProps = (dispatch) => {
         payload: value,
       });
     },
-    updateLogInStatus(value) {
-      dispatch({
-        type: "updateLogInStatus",
-        payload: value,
-      });
-    },
-    updateUserFormStatus(value) {
-      dispatch({
-        type: "updateUserFormStatus",
-        payload: value,
-      });
-    },
+
     updateUserID(value) {
       dispatch({
         type: "updateUserID",
@@ -307,13 +201,7 @@ const mapDispatchToProps = (dispatch) => {
         payload: value,
       });
     },
-    // vacation form
-    // UpdateShowVacationForm(value) {
-    //   dispatch({
-    //     type: "UpdateShowVacationForm",
-    //     payload: value,
-    //   });
-    // },
+
     // updateVacationButtonsForm(value) {
     //   dispatch({
     //     type: "updateVacationButtonsForm",
