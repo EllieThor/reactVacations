@@ -254,10 +254,8 @@ const mapStateToProps = (state) => {
     user: state.user,
     userID: state.userID,
     userRole: state.userRole,
-    logInFormStatus: state.logInFormStatus,
-    userFormStatus: state.userFormStatus,
+
     // vacationForm
-    showVacationForm: state.showVacationForm,
     vacationFormButtonsStatus: state.vacationFormButtonsStatus,
     vacationToEdit: state.vacationToEdit,
     // graph
@@ -265,6 +263,7 @@ const mapStateToProps = (state) => {
     numberOfStars: state.numberOfStars,
   };
 };
+
 const mapDispatchToProps = (dispatch) => {
   return {
     updateVacations(value) {
@@ -320,5 +319,4 @@ const mapDispatchToProps = (dispatch) => {
     },
   };
 };
-
 export default connect(mapStateToProps, mapDispatchToProps)(Vacations);
