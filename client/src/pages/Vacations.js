@@ -246,7 +246,7 @@ class Vacations extends Component {
             <AddVacationForm onChangeFN={this.onChangeFN} fileChangeEvent={this.fileChangeEvent} upload={this.upload} insertVacationToDB={this.insertVacationToDB} updateVacationDetailsInDB={this.updateVacationDetailsInDB} vacationFormButtonsStatus={this.props.vacationFormButtonsStatus} vacationToEdit={this.props.vacationToEdit} />
           </div>
           <div className="row">{this.props.userID === 0 ? "" : <SingleVacationCard userRole={this.props.userRole} userID={this.props.userID} vacations={this.props.vacations} insertNewFallowToDB={this.insertNewFallowToDB} deleteUserFallowFromDB={this.deleteUserFallowFromDB} deleteVacationFromDB={this.deleteVacationFromDB} editVacationClicked={this.editVacationClicked} />}</div>
-          {/* <div className="row footer">{this.props.userID === 0 ? "" : <Footer />}</div> */}
+          <div className="row footer">{this.props.userID === 0 ? "" : <Footer />}</div>
         </div>
       );
     }
