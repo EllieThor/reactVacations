@@ -24,6 +24,7 @@ class Vacations extends Component {
   onChangeFN = (e) => {
     this.inputsObj[e.target.id] = e.target.value;
     console.log("new Input To inputsObj :", e.target.id, "value: ", e.target.value);
+    console.log("yael inputsObj :", this.inputsObj);
   };
 
   // logOut
@@ -127,7 +128,6 @@ class Vacations extends Component {
   editVacationClicked = (vacationObj) => {
     // witch button
     this.props.updateVacationButtonsForm(1);
-
     //witch vacation edit
     this.props.updateVacationToForm(vacationObj);
   };
@@ -192,6 +192,7 @@ class Vacations extends Component {
       }
     }
   };
+
   updateVacationDetailsInDB = async (vacationId) => {
     let currentObj = {
       ID: vacationId,
@@ -216,7 +217,6 @@ class Vacations extends Component {
     }
   };
 
-  // TODO: Warning before deletion
   deleteVacationFromDB = async (vacationID) => {
     let currentObj = {
       ID: vacationID,

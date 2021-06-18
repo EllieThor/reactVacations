@@ -15,21 +15,9 @@ const sequelize = require("./utils/database");
 const VacationsModel = require("./models/VacationsModel");
 const UsersModel = require("./models/UsersModel");
 const FollowsModel = require("./models/FollowsModel");
-// UsersVacations = sequelize.define("UsersVacations", {
-//   role: Sequelize.STRING,
-// });
-
-// const Vications = require("./models/VicationsModel");
-// const Users = require("./models/UsersModel");
-
-// UsersModel.belongsToMany(VacationsModel, { through: "UsersVacations" });
-
-// UsersModel.belongsToMany(VacationsModel, { through: UsersVacations });
-//FollowsModel.belongsTo(VacationsModel);
 
 VacationsModel.hasMany(FollowsModel);
 UsersModel.hasMany(FollowsModel);
-// // FollowsModel.belongsTo(VacationsModel);
 
 app.use(
   bodyParser.urlencoded({
@@ -85,11 +73,11 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 app.post("/upload", upload.array("uploads[]", 12), function (req, res) {
-  console.log("aaaa upload : ", upload);
+  console.log("upload : ", upload);
   imgEnd = "";
-  console.log("files#@####", req.files);
+  console.log("files", req.files);
   res.send(req.files);
-  console.log("upload or not?? ", req.files);
+  console.log("upload or not", req.files);
 });
 
 // var server = app.listen(port, function () {
