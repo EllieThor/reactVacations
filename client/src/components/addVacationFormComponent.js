@@ -1,6 +1,6 @@
 import React from "react";
 import "../css/style.css";
-import * as Api from "../Api/apiCalls";
+
 const AddVacationForm = (props) => {
   let vacationToEdit = props.vacationToEdit;
   let ButtonsStatus = props.vacationFormButtonsStatus;

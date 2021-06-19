@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import "../css/style.css";
-import axios from "axios";
 import { connect } from "react-redux";
 import * as Api from "../Api/apiCalls";
 import { Link, Redirect } from "react-router-dom";
-import Chart from "chart.js/auto";
 
 class LogIn extends Component {
   componentDidMount() {}
@@ -39,7 +37,7 @@ class LogIn extends Component {
   };
 
   render() {
-    if (this.props.userID != 0) {
+    if (this.props.userID !== 0) {
       return <Redirect from="/" to="/Vacations" />;
     } else {
       return (

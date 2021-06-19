@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import "../css/style.css";
-import axios from "axios";
 import { connect } from "react-redux";
-import * as Api from "../Api/apiCalls";
 import { Redirect } from "react-router-dom";
 import Chart from "chart.js/auto";
 

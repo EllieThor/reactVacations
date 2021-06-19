@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import "../css/style.css";
-import axios from "axios";
 import { connect } from "react-redux";
 import * as Api from "../Api/apiCalls";
-import { Route, Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 import Nav from "../components/nav";
 import Footer from "../components/footerComponent";
@@ -144,7 +143,7 @@ class Vacations extends Component {
   };
 
   upload = async () => {
-    if (this.inputsObj.filesToUpload != undefined) {
+    if (this.inputsObj.filesToUpload !== undefined) {
       const formData = new FormData();
       const files = this.inputsObj.filesToUpload;
 
@@ -176,7 +175,7 @@ class Vacations extends Component {
       // `vacations`-`ID`, `Destination`, `Description`, `Price`, `ImageName`, `StartDate`, `EndDate`, `createdAt`, `updatedAt`
     };
     console.log("currentObj: ", currentObj);
-    if (currentObj.Destination === "" || currentObj.Description === "" || currentObj.Price <= 0 || currentObj.Price == undefined || currentObj.ImageName == undefined || currentObj.StartDate === undefined || currentObj.EndDate === undefined) {
+    if (currentObj.Destination === "" || currentObj.Description === "" || currentObj.Price <= 0 || currentObj.Price === undefined || currentObj.ImageName === undefined || currentObj.StartDate === undefined || currentObj.EndDate === undefined) {
       alert("All fields must be filled out");
     } else {
       try {

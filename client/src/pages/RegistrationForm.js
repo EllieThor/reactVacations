@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import "../css/style.css";
-import axios from "axios";
 import { connect } from "react-redux";
 import * as Api from "../Api/apiCalls";
-import Chart from "chart.js/auto";
 
-import { Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class RegistrationForm extends Component {
   componentDidMount() {}
@@ -29,7 +27,7 @@ class RegistrationForm extends Component {
     };
 
     // TODO: unique email -הוספתי בדאטה בייס יוניק אבל בגלל שהוא לא מקבל מייל שקיים הוא זורק שגיאה- אם השגיאה היא כזו אז לכתוב מייל קיים
-    if (currentObj.FirstName === undefined || currentObj.LastName === undefined || currentObj.Email == undefined || currentObj.Password === undefined) {
+    if (currentObj.FirstName === undefined || currentObj.LastName === undefined || currentObj.Email === undefined || currentObj.Password === undefined) {
       alert("All fields must be filled out");
 
       // let currentAlert = "";
