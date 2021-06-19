@@ -19,6 +19,7 @@ font-family: 'Open Sans', sans-serif; */
 }
 .logo {
   font-family: "Cinzel Decorative", cursive;
+  /* color: white; */
 }
 .vacationLogo {
   text-decoration: none;
@@ -27,6 +28,7 @@ font-family: 'Open Sans', sans-serif; */
 .welcome {
   font-family: "Merienda", cursive;
   /* display: inline-block; */
+  /* margin-right: 600px; */
 }
 
 /* .logInROW { */
@@ -42,9 +44,6 @@ font-family: 'Open Sans', sans-serif; */
   width: 500px;
   background-color: rgba(255, 255, 255, 0.5);
 }
-.addVacationROW {
-  width: 100%;
-}
 
 .isStar {
   color: gold;
@@ -59,8 +58,16 @@ font-family: 'Open Sans', sans-serif; */
   color: rgba(0, 0, 0, 0.699);
 }
 
+.header {
+  color: white;
+  /* background-image: url("assets/images/header.png"); */
+}
+.single-card {
+  height: 400px;
+}
+
 .footer {
-  background-color: crimson;
+  background-color: #f25e5e;
   color: white;
   height: 80px;
 }

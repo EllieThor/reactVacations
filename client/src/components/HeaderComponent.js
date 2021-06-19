@@ -58,7 +58,7 @@ const HeaderComponent = (props) => {
   // let time = new Date().getHours();
   // console.log(".time: ", time, " welcome: ", welcomeTime);
   return (
-    <div className="row">
+    <div className="row header pt-2">
       <div className="col-3">
         <h2 className="logo">Vacation Stars</h2>
       </div>

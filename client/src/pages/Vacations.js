@@ -238,15 +238,23 @@ class Vacations extends Component {
       return <Redirect from="/Vacations" to="/" />;
     } else {
       return (
-        <div className="container">
-          <div className="row mt-3">{this.props.user[0] === undefined ? "" : <HeaderComponent logOutIconClicked={this.logOutIconClicked} user={this.props.user} userRole={this.props.userRole} addVacationClicked={this.addVacationClicked} />}</div>
-          {/* <div className="row mt-3">{this.props.user[0] === undefined ? "" : <Nav logOutIconClicked={this.logOutIconClicked} user={this.props.user} userRole={this.props.userRole} addVacationClicked={this.addVacationClicked} />}</div> */}
-
-          <div className="row addVacationROW">
+        <div>
+          {/* <div
+            style={{
+              backgroundImage: `url(${"assets/images/header.png"})`,
+              backgroundRepeat: "no-repeat",
+            }}
+          >
+            {this.props.user[0] === undefined ? "" : <HeaderComponent logOutIconClicked={this.logOutIconClicked} user={this.props.user} userRole={this.props.userRole} addVacationClicked={this.addVacationClicked} />}
+          </div> */}
+          <div>{this.props.user[0] === undefined ? "" : <Nav logOutIconClicked={this.logOutIconClicked} user={this.props.user} userRole={this.props.userRole} addVacationClicked={this.addVacationClicked} />}</div>
+          <div className="row">
             <AddVacationForm onChangeFN={this.onChangeFN} fileChangeEvent={this.fileChangeEvent} upload={this.upload} insertVacationToDB={this.insertVacationToDB} updateVacationDetailsInDB={this.updateVacationDetailsInDB} vacationFormButtonsStatus={this.props.vacationFormButtonsStatus} vacationToEdit={this.props.vacationToEdit} />
           </div>
-          <div className="row">{this.props.userID === 0 ? "" : <SingleVacationCard userRole={this.props.userRole} userID={this.props.userID} vacations={this.props.vacations} insertNewFallowToDB={this.insertNewFallowToDB} deleteUserFallowFromDB={this.deleteUserFallowFromDB} deleteVacationFromDB={this.deleteVacationFromDB} editVacationClicked={this.editVacationClicked} />}</div>
-          <div className="row footer">{this.props.userID === 0 ? "" : <Footer />}</div>
+          <div className="container">
+            <div className="row mt-3">{this.props.userID === 0 ? "" : <SingleVacationCard userRole={this.props.userRole} userID={this.props.userID} vacations={this.props.vacations} insertNewFallowToDB={this.insertNewFallowToDB} deleteUserFallowFromDB={this.deleteUserFallowFromDB} deleteVacationFromDB={this.deleteVacationFromDB} editVacationClicked={this.editVacationClicked} />}</div>
+          </div>
+          <div className="footer">{this.props.userID === 0 ? "" : <Footer />}</div>
         </div>
       );
     }

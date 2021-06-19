@@ -85,7 +85,8 @@ const Nav = (props) => {
               ) : (
                 ""
               )}
-              {props.userRole === 1 ? (
+              {/* FIXME: להוריד את האפשרות להוסיף חופשה מדוחות */}
+              {props.userRole === 1 && window.location.pathname === "/Vacations" ? (
                 <abbr title="Add New Vacation">
                   <i className="fas fa-plus fa-2x px-3 iconsColor" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => props.addVacationClicked()}></i>
                 </abbr>
