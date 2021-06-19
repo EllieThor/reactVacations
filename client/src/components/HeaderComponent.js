@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../css/style.css";
 
 const HeaderComponent = (props) => {
@@ -27,8 +27,6 @@ const HeaderComponent = (props) => {
     case 13:
     case 14:
     case 15:
-    // welcomeTime = "Good Noon, ";
-    // break;
     case 16:
     case 17:
     case 18:
@@ -38,7 +36,9 @@ const HeaderComponent = (props) => {
     case 20:
     case 21:
       welcomeTime = "Good Evening, ";
-
+      break;
+    default:
+      welcomeTime = "Hello, ";
     // case 4 < time < 12:
     //   welcomeTime = "Good Morning, ";
     //   break;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../css/style.css";
 
 const Nav = (props) => {
@@ -27,8 +27,6 @@ const Nav = (props) => {
     case 13:
     case 14:
     case 15:
-    // welcomeTime = "Good Noon, ";
-    // break;
     case 16:
     case 17:
     case 18:
@@ -37,33 +35,17 @@ const Nav = (props) => {
     case 19:
     case 20:
     case 21:
-      welcomeTime = "Good Evening, ";
-
-    // case 4 < time < 12:
-    //   welcomeTime = "Good Morning, ";
-    //   break;
-    // case 11 < time < 16:
-    //   welcomeTime = "Good Noon, ";
-    //   break;
-    // case 15 < time < 22:
-    //   welcomeTime = "Good Afternoon, ";
-    //   break;
-    // case 21 < time < 24:
-    //   welcomeTime = "Good Evening, ";
-    //   break;
-    // case 0 < time < 5:
-    //   welcomeTime = "Good Night, ";
-    //   break;
+      break;
+    default:
+      welcomeTime = "Hello, ";
   }
-  // let time = new Date().getHours();
-  // console.log(".time: ", time, " welcome: ", welcomeTime);
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light">
         <div className="container-fluid">
-          <a className="navbar-brand">
+          <span className="navbar-brand">
             <h2 className="logo">Vacation Stars</h2>
-          </a>
+          </span>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
