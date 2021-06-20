@@ -42,7 +42,7 @@ const Nav = (props) => {
   }
 
   return (
-    <div className="headerS p-4">
+    <div className="headerS p-4 pb-2">
       <nav className="navbar navbar-expand-lg navbar-light">
         <div className="container-fluid">
           <span className="navbar-brand ps-5 ms-5">
