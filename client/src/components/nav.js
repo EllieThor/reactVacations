@@ -35,10 +35,12 @@ const Nav = (props) => {
     case 19:
     case 20:
     case 21:
+      welcomeTime = "Good Evening, ";
       break;
     default:
       welcomeTime = "Hello, ";
   }
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light">
@@ -50,7 +52,7 @@ const Nav = (props) => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div className="navbar-nav">
+            <div className="navbar-nav ms-auto">
               <h5 className="welcome"> {props.user[0] === undefined ? "" : welcomeTime + props.user[0].FirstName + " " + props.user[0].LastName}</h5>
               {props.userRole === 1 && window.location.pathname === "/Vacations" ? (
                 <Link to="/Reports">

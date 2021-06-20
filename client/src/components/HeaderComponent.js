@@ -39,21 +39,6 @@ const HeaderComponent = (props) => {
       break;
     default:
       welcomeTime = "Hello, ";
-    // case 4 < time < 12:
-    //   welcomeTime = "Good Morning, ";
-    //   break;
-    // case 11 < time < 16:
-    //   welcomeTime = "Good Noon, ";
-    //   break;
-    // case 15 < time < 22:
-    //   welcomeTime = "Good Afternoon, ";
-    //   break;
-    // case 21 < time < 24:
-    //   welcomeTime = "Good Evening, ";
-    //   break;
-    // case 0 < time < 5:
-    //   welcomeTime = "Good Night, ";
-    //   break;
   }
   // let time = new Date().getHours();
   // console.log(".time: ", time, " welcome: ", welcomeTime);
