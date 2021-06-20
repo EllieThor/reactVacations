@@ -5,7 +5,7 @@ import { Redirect } from "react-router-dom";
 import Chart from "chart.js/auto";
 
 import ReportsCOMP from "../components/reportsComponent";
-import HeaderComponent from "../components/HeaderComponent";
+import Nav from "../components/nav";
 
 class Reports extends Component {
   componentDidMount() {
@@ -61,9 +61,9 @@ class Reports extends Component {
       return <Redirect from="/Reports" to="/" />;
     } else {
       return (
-        <div className="container">
-          <div className="row mt-3">
-            <HeaderComponent logOutIconClicked={this.logOutIconClicked} userRole={this.props.userRole} user={this.props.user} userRole={this.props.userRole} addVacationClicked={this.addVacationClicked} />
+        <div>
+          <div className="row">
+            <Nav logOutIconClicked={this.logOutIconClicked} userRole={this.props.userRole} user={this.props.user} userRole={this.props.userRole} addVacationClicked={this.addVacationClicked} />
           </div>
           <div className="row mt-3">
             <ReportsCOMP />

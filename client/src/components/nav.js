@@ -42,18 +42,18 @@ const Nav = (props) => {
   }
 
   return (
-    <div>
+    <div className="headerS p-4">
       <nav className="navbar navbar-expand-lg navbar-light">
         <div className="container-fluid">
-          <span className="navbar-brand">
+          <span className="navbar-brand ps-5 ms-5">
             <h2 className="logo">Vacation Stars</h2>
           </span>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div className="navbar-nav ms-auto">
-              <h5 className="welcome"> {props.user[0] === undefined ? "" : welcomeTime + props.user[0].FirstName + " " + props.user[0].LastName}</h5>
+            <div className="navbar-nav ms-auto pe-5 me-5">
+              <h5 className="welcome me-2"> {props.user[0] === undefined ? "" : welcomeTime + props.user[0].FirstName + " " + props.user[0].LastName}</h5>
               {props.userRole === 1 && window.location.pathname === "/Vacations" ? (
                 <Link to="/Reports">
                   <abbr title="Reports">
@@ -69,7 +69,6 @@ const Nav = (props) => {
               ) : (
                 ""
               )}
-              {/* FIXME: להוריד את האפשרות להוסיף חופשה מדוחות */}
               {props.userRole === 1 && window.location.pathname === "/Vacations" ? (
                 <abbr title="Add New Vacation">
                   <i className="fas fa-plus fa-2x px-3 iconsColor" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => props.addVacationClicked()}></i>

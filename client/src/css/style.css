@@ -62,9 +62,14 @@ font-family: 'Open Sans', sans-serif; */
   color: white;
   /* background-image: url("assets/images/header.png"); */
 }
-.single-card {
-  height: 400px;
+
+.headerS {
+  background-color: rgba(3, 149, 165, 0.7);
 }
+/* FIXME: הגובה לא שווה  */
+/* .single-card {
+  height: 400px;
+} */
 
 .footer {
   background-color: #f25e5e;
