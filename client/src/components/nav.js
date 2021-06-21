@@ -45,9 +45,9 @@ const Nav = (props) => {
     <div className="headerS p-4 pb-2">
       <nav className="navbar navbar-expand-lg navbar-light">
         <div className="container-fluid">
-          <span className="navbar-brand ps-5 ms-5">
+          <div className="navbar-brand">
             <h2 className="logo">Vacation Stars</h2>
-          </span>
+          </div>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
@@ -75,7 +75,7 @@ const Nav = (props) => {
                 <div className="col-4">
                   {props.userRole === 1 && window.location.pathname === "/Vacations" ? (
                     <abbr title="Add New Vacation">
-                      <i className="fas fa-plus fa-2x  iconsColor" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => props.addVacationClicked()}></i>
+                      <i className="fas fa-plus fa-2x iconsColor" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => props.addVacationClicked()}></i>
                     </abbr>
                   ) : (
                     ""
@@ -84,7 +84,7 @@ const Nav = (props) => {
                 <div className="col-4">
                   <Link to="/">
                     <abbr title="Log Out">
-                      <i className="fas fa-sign-out-alt fa-2x   iconsColor" onClick={props.logOutIconClicked}></i>
+                      <i className="fas fa-sign-out-alt fa-2x iconsColor" onClick={props.logOutIconClicked}></i>
                     </abbr>
                   </Link>
                 </div>

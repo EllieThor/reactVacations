@@ -57,9 +57,6 @@ font-family: 'Open Sans', sans-serif; */
 .iconsColor {
   color: rgba(0, 0, 0, 0.699);
 }
-.icons {
-  display: inline-block;
-}
 
 .header {
   color: white;
@@ -89,8 +86,16 @@ font-family: 'Open Sans', sans-serif; */
 
 .footer {
   background-color: #f25e5e;
-  color: white;
   height: 80px;
+}
+
+.footerIcon {
+  text-decoration: none;
+  color: white;
+}
+
+.footerIcon:hover {
+  color: rgba(0, 0, 0, 0.699);
 }
 
 .a {

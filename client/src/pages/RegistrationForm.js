@@ -33,40 +33,23 @@ class RegistrationForm extends Component {
       // let currentAlert = "";
       // switch (currentObj) {
       //   case currentObj.FirstName === undefined:
-      //     currentAlert = "A First Name must be entered ";
+      //     // currentAlert = "A First Name must be filled out";
+      //     alert("The First Name must be filled out");
       //     break;
       //   case currentObj.LastName === undefined:
-      //     currentAlert = "A Last Name must be entered";
+      //     // currentAlert = "A Last Name must be filled out";
+      //     alert("The Last Name must be filled out");
       //     break;
       //   case currentObj.Email == undefined:
-      //     currentAlert = "An email address must be entered";
+      //     // currentAlert = "An email address must be filled out";
+      //     alert("The Email Address must be filled out");
       //     break;
       //   case currentObj.Password === undefined:
-      //     currentAlert = "A Password must be entered";
+      //     // currentAlert = "A Password must be filled out";
+      //     alert("The Password must be filled out");
       //     break;
       // }
       // alert(currentAlert);
-
-      // const action = "say_hello";
-      // switch (action) {
-      //   case "say_hello": {
-      //     // added brackets
-      //     let message = "hello";
-      //     console.log(message);
-      //     break;
-      //   } // added brackets
-      //   case "say_hi": {
-      //     // added brackets
-      //     let message = "hi";
-      //     console.log(message);
-      //     break;
-      //   } // added brackets
-      //   default: {
-      //     // added brackets
-      //     console.log("Empty action received.");
-      //     break;
-      //   } // added brackets
-      // }
     } else {
       try {
         let user = await Api.postRequest("/users/insertUserToDb", currentObj);
