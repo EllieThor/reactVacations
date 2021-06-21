@@ -84,12 +84,9 @@ const Nav = (props) => {
                 </div>
                 <div className="col-4">
                   {props.user[0] === undefined ? (
-                    // TODO: modal onClick={props.logOutIconClicked}
-                    <Link to="/">
-                      <abbr title="Log In">
-                        <i className="fas fa-user-circle fa-2x iconsColor"></i>
-                      </abbr>
-                    </Link>
+                    <abbr title="Log In">
+                      <i className="fas fa-user-circle fa-2x iconsColor" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                    </abbr>
                   ) : (
                     <Link to="/Home">
                       <abbr title="Log Out">

@@ -5,6 +5,7 @@ import * as Api from "../Api/apiCalls";
 import { Link, Redirect } from "react-router-dom";
 
 import Nav from "../components/nav";
+import Modal from "../components/Modal";
 import LogInComp from "../components/LogInFormComp";
 import Footer from "../components/footerComponent";
 class Home extends Component {
@@ -49,7 +50,7 @@ class Home extends Component {
               <Nav logOutIconClicked={this.logOutIconClicked} user={this.props.user} userRole={this.props.userRole} addVacationClicked={this.addVacationClicked} />
             </div>
             <div className="row">
-              <LogInComp />
+              <Modal body={1} />
             </div>
             <div className="row">text image</div>
             <div className="row">last vacation</div>

@@ -3,7 +3,7 @@ import "../css/style.css";
 import { connect } from "react-redux";
 import * as Api from "../Api/apiCalls";
 import { Link, Redirect } from "react-router-dom";
-import * as FN from "../functions/functions";
+import * as GlobalFNs from "../functions/functions";
 
 class LogInComp extends Component {
   componentDidMount() {}
@@ -19,8 +19,8 @@ class LogInComp extends Component {
 
   getUserFromDB = async () => {
     let OBJ = {
-      Email: FN.inputsObj.userEmail,
-      Password: FN.inputsObj.userPassword,
+      Email: GlobalFNs.inputsObj.userEmail,
+      Password: GlobalFNs.inputsObj.userPassword,
     };
     try {
       let user = await Api.postRequest(`/users/getUserFromDb`, OBJ);
@@ -39,21 +39,12 @@ class LogInComp extends Component {
 
   render() {
     return (
-      <div className="container p-3 mt-3 logInPage">
-        <div className="logInForm p-5">
-          <div className="row">
-            <div className="col-12">
-              <Link to="/Home">
-                <abbr title="Close">
-                  <i className="fas fa-times float-end"></i>
-                </abbr>
-              </Link>
-            </div>
-          </div>
+      <div className="container p-3 mt-3">
+        <div className=" p-5">
           <h1 className="h3 mb-3 fw-normal">Please Log In</h1>
-          <input type="email" id="userEmail" className="form-control m-2" placeholder="Email address" required="" autoFocus="" onChange={(e) => FN.onChangeFN(e)} />
-          <input type="password" id="userPassword" className="form-control  m-2" placeholder="Password" required="" autoComplete="" onChange={(e) => FN.onChangeFN(e)} />
-          <button className="w-100 btn btn-lg m-2 btn-dark" onClick={() => this.getUserFromDB()}>
+          <input type="email" id="userEmail" className="form-control m-2" placeholder="Email address" required="" autoFocus="" onChange={(e) => GlobalFNs.onChangeFN(e)} />
+          <input type="password" id="userPassword" className="form-control  m-2" placeholder="Password" required="" autoComplete="" onChange={(e) => GlobalFNs.onChangeFN(e)} />
+          <button className="w-100 btn btn-lg m-2 btn-dark" data-bs-dismiss="modal" onClick={() => this.getUserFromDB()}>
             Log in
           </button>
           <Link to="/RegistrationForm">
