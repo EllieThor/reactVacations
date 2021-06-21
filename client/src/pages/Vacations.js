@@ -238,14 +238,6 @@ class Vacations extends Component {
     } else {
       return (
         <div>
-          {/* <div
-            style={{
-              backgroundImage: `url(${"assets/images/header.png"})`,
-              backgroundRepeat: "no-repeat",
-            }}
-          >
-            {this.props.user[0] === undefined ? "" : <HeaderComponent logOutIconClicked={this.logOutIconClicked} user={this.props.user} userRole={this.props.userRole} addVacationClicked={this.addVacationClicked} />}
-          </div> */}
           <div>{this.props.user[0] === undefined ? "" : <Nav logOutIconClicked={this.logOutIconClicked} user={this.props.user} userRole={this.props.userRole} addVacationClicked={this.addVacationClicked} />}</div>
           <div className="row ">{this.props.userID === 0 ? "" : <AddVacationForm onChangeFN={this.onChangeFN} fileChangeEvent={this.fileChangeEvent} upload={this.upload} insertVacationToDB={this.insertVacationToDB} updateVacationDetailsInDB={this.updateVacationDetailsInDB} vacationFormButtonsStatus={this.props.vacationFormButtonsStatus} vacationToEdit={this.props.vacationToEdit} />}</div>
           <div className="container">

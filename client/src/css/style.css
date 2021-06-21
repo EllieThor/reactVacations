@@ -57,6 +57,9 @@ font-family: 'Open Sans', sans-serif; */
 .iconsColor {
   color: rgba(0, 0, 0, 0.699);
 }
+.icons {
+  display: inline-block;
+}
 
 .header {
   color: white;
@@ -64,8 +67,21 @@ font-family: 'Open Sans', sans-serif; */
 }
 
 .headerS {
-  background-color: rgba(3, 149, 165, 0.7);
+  /* background-color: rgba(3, 149, 165, 0.7); */
+  /* background: linear-gradient(-70deg, #024873 30%, rgba(0, 0, 0, 0) 30%), #f28963; */
+  background: linear-gradient(-70deg, #024873 20%, rgba(0, 0, 0, 0) 80%), #f28963;
 }
+
+/* @media (max-width: 1028px) {
+  #title {
+    text-align: center;
+  }
+  .title-img {
+    position: static;
+    transform: rotate(0);
+  }
+} */
+
 /* FIXME: הגובה לא שווה  */
 /* .single-card {
   height: 400px;
