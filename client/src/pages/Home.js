@@ -5,7 +5,7 @@ import * as Api from "../Api/apiCalls";
 import { Link, Redirect } from "react-router-dom";
 
 import Nav from "../components/nav";
-import HeaderComponent from "../components/HeaderComponent";
+import LogInComp from "../components/LogInFormComp";
 import Footer from "../components/footerComponent";
 class Home extends Component {
   componentDidMount() {}
@@ -47,6 +47,9 @@ class Home extends Component {
           <div className="container">
             <div className="row">
               <Nav logOutIconClicked={this.logOutIconClicked} user={this.props.user} userRole={this.props.userRole} addVacationClicked={this.addVacationClicked} />
+            </div>
+            <div className="row">
+              <LogInComp />
             </div>
             <div className="row">text image</div>
             <div className="row">last vacation</div>

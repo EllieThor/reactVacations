@@ -5,7 +5,7 @@ import * as Api from "../Api/apiCalls";
 import { Link, Redirect } from "react-router-dom";
 import * as FN from "../functions/functions";
 
-class LogIn extends Component {
+class LogInComp extends Component {
   componentDidMount() {}
   // patterns OBJ
   inputsObj = {
@@ -38,40 +38,30 @@ class LogIn extends Component {
   };
 
   render() {
-    if (this.props.userID !== 0) {
-      return <Redirect from="/" to="/Vacations" />;
-    } else {
-      return (
-        <div
-          className="container p-3 mt-3 logInPage"
-          style={{
-            backgroundImage: `url(${"assets/images/tapetTest.png"})`,
-            backgroundRepeat: "no-repeat",
-          }}
-        >
-          <div className="logInForm p-5">
-            <div className="row">
-              <div className="col-12">
-                <Link to="/Home">
-                  <abbr title="Close">
-                    <i className="fas fa-times float-end"></i>
-                  </abbr>
-                </Link>
-              </div>
+    return (
+      <div className="container p-3 mt-3 logInPage">
+        <div className="logInForm p-5">
+          <div className="row">
+            <div className="col-12">
+              <Link to="/Home">
+                <abbr title="Close">
+                  <i className="fas fa-times float-end"></i>
+                </abbr>
+              </Link>
             </div>
-            <h1 className="h3 mb-3 fw-normal">Please Log In</h1>
-            <input type="email" id="userEmail" className="form-control m-2" placeholder="Email address" required="" autoFocus="" onChange={(e) => FN.onChangeFN(e)} />
-            <input type="password" id="userPassword" className="form-control  m-2" placeholder="Password" required="" autoComplete="" onChange={(e) => FN.onChangeFN(e)} />
-            <button className="w-100 btn btn-lg m-2 btn-dark" onClick={() => this.getUserFromDB()}>
-              Log in
-            </button>
-            <Link to="/RegistrationForm">
-              <button className="w-100 btn btn-lg m-2 btn-dark">Registration</button>
-            </Link>
           </div>
+          <h1 className="h3 mb-3 fw-normal">Please Log In</h1>
+          <input type="email" id="userEmail" className="form-control m-2" placeholder="Email address" required="" autoFocus="" onChange={(e) => FN.onChangeFN(e)} />
+          <input type="password" id="userPassword" className="form-control  m-2" placeholder="Password" required="" autoComplete="" onChange={(e) => FN.onChangeFN(e)} />
+          <button className="w-100 btn btn-lg m-2 btn-dark" onClick={() => this.getUserFromDB()}>
+            Log in
+          </button>
+          <Link to="/RegistrationForm">
+            <button className="w-100 btn btn-lg m-2 btn-dark">Registration</button>
+          </Link>
         </div>
-      );
-    }
+      </div>
+    );
   }
 }
 const mapStateToProps = (state) => {
@@ -146,4 +136,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LogIn);
+export default connect(mapStateToProps, mapDispatchToProps)(LogInComp);
