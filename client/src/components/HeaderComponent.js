@@ -40,57 +40,62 @@ const HeaderComponent = (props) => {
     default:
       welcomeTime = "Hello, ";
   }
-  // let time = new Date().getHours();
-  // console.log(".time: ", time, " welcome: ", welcomeTime);
   return (
-    <div className="row header pt-2">
-      <div className="col-3">
-        <h2 className="logo">Vacation Stars</h2>
-      </div>
-      <div className="col-5 d-flex align-items-end">
-        <h5 className="welcome"> {props.user[0] === undefined ? "" : welcomeTime + props.user[0].FirstName + " " + props.user[0].LastName}</h5>
-      </div>
-      <div className="col-4 text-end">
-        <div className="row">
-          <div className="col-4 offset-8">
-            <div className="row">
-              <div className="col-4">
-                {props.userRole === 1 && window.location.pathname === "/Vacations" ? (
-                  <Link to="/Reports">
-                    <abbr title="Reports">
-                      <i className="far fa-chart-bar fa-2x px-3 iconsColor"></i>
+    <div className="headerS p-4 pb-2">
+      <nav className="navbar navbar-expand-lg navbar-light">
+        <div className="container-fluid">
+          <div className="navbar-brand">
+            <h2 className="logo">Vacation Stars</h2>
+          </div>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div className="navbar-nav ms-auto pe-5 me-5">
+              <h5 className="welcome me-2 pe-4"> {props.user[0] === undefined ? "" : welcomeTime + props.user[0].FirstName + " " + props.user[0].LastName}</h5>
+              <div className="row">
+                <div className="col-4">
+                  {props.userRole === 1 && window.location.pathname === "/Vacations" ? (
+                    <Link to="/Reports">
+                      <abbr title="Reports">
+                        <i className="far fa-chart-bar fa-2x  iconsColor"></i>
+                      </abbr>
+                    </Link>
+                  ) : props.userRole === 1 && window.location.pathname === "/Reports" ? (
+                    <Link to="/Vacations">
+                      <abbr title="Back to Vacation">
+                        <i className="fas fa-map-marked-alt fa-2x  iconsColor"></i>
+                      </abbr>
+                    </Link>
+                  ) : (
+                    ""
+                  )}
+                </div>
+                <div className="col-4">
+                  {props.userRole === 1 && window.location.pathname === "/Vacations" ? (
+                    <abbr title="Add New Vacation">
+                      <i className="fas fa-plus fa-2x iconsColor" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => props.addVacationClicked()}></i>
                     </abbr>
-                  </Link>
-                ) : props.userRole === 1 && window.location.pathname === "/Reports" ? (
-                  <Link to="/Vacations">
-                    <abbr title="Back to Vacation">
-                      <i className="fas fa-map-marked-alt fa-2x px-3 iconsColor"></i>
-                    </abbr>
-                  </Link>
-                ) : (
-                  ""
-                )}
-              </div>
-              <div className="col-4">
-                {props.userRole === 1 ? (
-                  <abbr title="Add New Vacation">
-                    <i className="fas fa-plus fa-2x px-3 iconsColor" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => props.addVacationClicked()}></i>
-                  </abbr>
-                ) : (
-                  ""
-                )}
-              </div>
-              <div className="col-4">
-                <Link to="/">
-                  <abbr title="Log Out">
-                    <i className="fas fa-sign-out-alt fa-2x  px-3 iconsColor" onClick={props.logOutIconClicked}></i>
-                  </abbr>
-                </Link>
+                  ) : (
+                    ""
+                  )}
+                </div>
+                <div className="col-4">
+                  {props.user[0] === undefined ? (
+                    ""
+                  ) : (
+                    <Link to="/">
+                      <abbr title="Log Out">
+                        <i className="fas fa-sign-out-alt fa-2x iconsColor" onClick={props.logOutIconClicked}></i>
+                      </abbr>
+                    </Link>
+                  )}
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </nav>
     </div>
   );
 };

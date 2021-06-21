@@ -4,6 +4,7 @@ import "../css/style.css";
 
 const Nav = (props) => {
   let welcomeTime;
+  // 19 <= time <= 21;
   switch (new Date().getHours()) {
     case 22:
     case 23:
@@ -82,11 +83,18 @@ const Nav = (props) => {
                   )}
                 </div>
                 <div className="col-4">
-                  <Link to="/">
-                    <abbr title="Log Out">
-                      <i className="fas fa-sign-out-alt fa-2x iconsColor" onClick={props.logOutIconClicked}></i>
+                  {props.user[0] === undefined ? (
+                    // TODO: modal
+                    <abbr title="Log In">
+                      <i className="fas fa-user-circle fa-2x iconsColor" onClick={props.logOutIconClicked}></i>
                     </abbr>
-                  </Link>
+                  ) : (
+                    <Link to="/">
+                      <abbr title="Log Out">
+                        <i className="fas fa-sign-out-alt fa-2x iconsColor" onClick={props.logOutIconClicked}></i>
+                      </abbr>
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>
