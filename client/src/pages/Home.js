@@ -4,10 +4,7 @@ import { connect } from "react-redux";
 import * as Api from "../Api/apiCalls";
 import { Link, Redirect } from "react-router-dom";
 
-import Nav from "../components/nav";
 import Header from "../components/HeaderComponent";
-import Modal from "../components/Modal";
-import LogInComp from "../components/LogInComp";
 import Footer from "../components/footerComponent";
 class Home extends Component {
   componentDidMount() {}

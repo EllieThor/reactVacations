@@ -36,7 +36,9 @@ class LogInComp extends Component {
       alert("Something went wrong, please try again");
     }
   };
-
+  updateContent = (value) => {
+    this.props.updateContent(value);
+  };
   render() {
     return (
       <div className="container p-3 mt-3">
@@ -48,7 +50,10 @@ class LogInComp extends Component {
             Log in
           </button>
           {/* <Link to="/RegistrationForm"> */}
-          <button className="w-100 btn btn-lg m-2 btn-dark">Registration</button>
+          {/* TODO: modal inside modal */}
+          <button className="w-100 btn btn-lg m-2 btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => this.updateContent(1)}>
+            Registration
+          </button>
           {/* </Link> */}
         </div>
       </div>
@@ -68,6 +73,8 @@ const mapStateToProps = (state) => {
     // graph
     vacationsNames: state.vacationsNames,
     numberOfStars: state.numberOfStars,
+    //modal
+    content: state.content,
   };
 };
 
@@ -121,6 +128,13 @@ const mapDispatchToProps = (dispatch) => {
     updateNumberOfStars(value) {
       dispatch({
         type: "updateNumberOfStars",
+        payload: value,
+      });
+    },
+    //modal
+    updateContent(value) {
+      dispatch({
+        type: "updateContent",
         payload: value,
       });
     },
