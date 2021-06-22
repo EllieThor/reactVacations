@@ -1,6 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import "../css/style.css";
+import { Link } from "react-router-dom";
 
 const Nav = (props) => {
   let welcomeTime;
@@ -41,7 +41,6 @@ const Nav = (props) => {
     default:
       welcomeTime = "Hello, ";
   }
-
   return (
     <div className="headerS p-4 pb-2">
       <nav className="navbar navbar-expand-lg navbar-light">
@@ -69,6 +68,10 @@ const Nav = (props) => {
                         <i className="fas fa-map-marked-alt fa-2x  iconsColor"></i>
                       </abbr>
                     </Link>
+                  ) : props.user[0] === undefined ? (
+                    <abbr title="Log In">
+                      <i className="fas fa-user-circle fa-2x iconsColor" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => props.updateContent(1)}></i>
+                    </abbr>
                   ) : (
                     ""
                   )}
@@ -84,8 +87,8 @@ const Nav = (props) => {
                 </div>
                 <div className="col-4">
                   {props.user[0] === undefined ? (
-                    <abbr title="Log In">
-                      <i className="fas fa-user-circle fa-2x iconsColor" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                    <abbr title="Register">
+                      <i className="fas fa-user-plus fa-2x iconsColor" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => props.updateContent(2)}></i>
                     </abbr>
                   ) : (
                     <Link to="/Home">

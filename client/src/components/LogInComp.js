@@ -47,9 +47,9 @@ class LogInComp extends Component {
           <button className="w-100 btn btn-lg m-2 btn-dark" data-bs-dismiss="modal" onClick={() => this.getUserFromDB()}>
             Log in
           </button>
-          <Link to="/RegistrationForm">
-            <button className="w-100 btn btn-lg m-2 btn-dark">Registration</button>
-          </Link>
+          {/* <Link to="/RegistrationForm"> */}
+          <button className="w-100 btn btn-lg m-2 btn-dark">Registration</button>
+          {/* </Link> */}
         </div>
       </div>
     );

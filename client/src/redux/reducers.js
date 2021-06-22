@@ -10,6 +10,8 @@ const initialState = {
   // graph
   vacationsNames: [],
   numberOfStars: [],
+  // modal content
+  content: 1,
 };
 
 function rootReducer(state = initialState, action) {
@@ -42,6 +44,10 @@ function rootReducer(state = initialState, action) {
       break;
     case "updateNumberOfStars":
       state = { ...state, numberOfStars: action.payload };
+      break;
+    // modal
+    case "updateContent":
+      state = { ...state, content: action.payload };
       break;
   }
   return state;

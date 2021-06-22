@@ -95,7 +95,7 @@ class RegistrationComp extends Component {
   render() {
     return (
       <div>
-        <div className="RegistrationForm p-5">
+        <div className="container p-3 mt-3">
           <div className="row">
             <h1 className="h3 mb-3 fw-normal">Please register</h1>
             <div className="col">
@@ -110,11 +110,11 @@ class RegistrationComp extends Component {
               <label htmlFor="Password">Password:</label>
               <input type="password" id="Password" className="form-control" onChange={(e) => this.onChangeFN(e)} />
             </div>
-            <Link to="/Vacations">
-              <button className="btn btn-dark mt-3" onClick={() => this.insertUserToDB()}>
-                add user
-              </button>
-            </Link>
+            {/* <Link to="/Vacations"> */}
+            <button className="btn btn-dark mt-3" onClick={() => this.insertUserToDB()}>
+              add user
+            </button>
+            {/* </Link> */}
           </div>
         </div>
       </div>

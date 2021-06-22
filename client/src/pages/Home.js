@@ -5,8 +5,9 @@ import * as Api from "../Api/apiCalls";
 import { Link, Redirect } from "react-router-dom";
 
 import Nav from "../components/nav";
+import Header from "../components/HeaderComponent";
 import Modal from "../components/Modal";
-import LogInComp from "../components/LogInFormComp";
+import LogInComp from "../components/LogInComp";
 import Footer from "../components/footerComponent";
 class Home extends Component {
   componentDidMount() {}
@@ -39,25 +40,23 @@ class Home extends Component {
       alert("Something went wrong, please try again");
     }
   };
+  updateContent = (value) => {
+    this.props.updateContent(value);
+  };
   render() {
     if (this.props.userID !== 0) {
       return <Redirect from="/Home" to="/Vacations" />;
     } else {
       return (
         <div>
-          <div className="container">
-            <div className="row">
-              <Nav logOutIconClicked={this.logOutIconClicked} user={this.props.user} userRole={this.props.userRole} addVacationClicked={this.addVacationClicked} />
-            </div>
-            <div className="row">
-              <Modal body={1} />
-            </div>
-            <div className="row">text image</div>
-            <div className="row">last vacation</div>
-            <div className="row">most popular 3 vacations</div>
-            <div className="row">
-              <Footer />
-            </div>
+          <div className="row">
+            <Header />
+          </div>
+          <div className="row">text image</div>
+          <div className="row">last vacation</div>
+          <div className="row">most popular 3 vacations</div>
+          <div className="row">
+            <Footer />
           </div>
         </div>
       );
@@ -77,6 +76,8 @@ const mapStateToProps = (state) => {
     // graph
     vacationsNames: state.vacationsNames,
     numberOfStars: state.numberOfStars,
+    //modal
+    content: state.content,
   };
 };
 
@@ -130,6 +131,13 @@ const mapDispatchToProps = (dispatch) => {
     updateNumberOfStars(value) {
       dispatch({
         type: "updateNumberOfStars",
+        payload: value,
+      });
+    },
+    //modal
+    updateContent(value) {
+      dispatch({
+        type: "updateContent",
         payload: value,
       });
     },
