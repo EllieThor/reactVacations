@@ -91,7 +91,7 @@ const Nav = (props) => {
                       <i className="fas fa-user-plus fa-2x iconsColor" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => props.updateContent(2)}></i>
                     </abbr>
                   ) : (
-                    <Link to="/Home">
+                    <Link to="/">
                       <abbr title="Log Out">
                         <i className="fas fa-sign-out-alt fa-2x iconsColor" onClick={props.logOutIconClicked}></i>
                       </abbr>

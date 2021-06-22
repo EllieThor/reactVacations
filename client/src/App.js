@@ -17,8 +17,8 @@ function App() {
     <Provider store={store}>
       <Router>
         <Switch>
-          <Route path="/Home" exact component={Home} />
-          <Route path="/" exact component={LogInForm} />
+          <Route path="/" exact component={Home} />
+          {/* <Route path="/" exact component={LogInForm} /> */}
           <Route path="/RegistrationForm" exact component={RegistrationForm} />
           <Route path="/Vacations" exact component={Vacations} />
           <Route path="/Reports" exact component={Reports} />

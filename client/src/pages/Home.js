@@ -45,7 +45,7 @@ class Home extends Component {
   };
   render() {
     if (this.props.userID !== 0) {
-      return <Redirect from="/Home" to="/Vacations" />;
+      return <Redirect from="/" to="/Vacations" />;
     } else {
       return (
         <div>

@@ -12,8 +12,8 @@ class Header extends Component {
   globalObj = {
     welcomeTime: "",
   };
+  //FIXME: welcome is not work
   getTime = () => {
-    // 19 <= time <= 21;
     switch (new Date().getHours()) {
       case 22:
       case 23:
@@ -82,7 +82,7 @@ class Header extends Component {
             </button>
             <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
               <div className="navbar-nav ms-auto pe-5 me-5">
-                <h5 className="welcome me-2 pe-4"> {this.props.user[0] === undefined ? "" : this.globalObj.welcomeTime + this.props.user[0].FirstName + " " + this.props.user[0].LastName}</h5>
+                <h5 className="welcome me-2 pe-4"> {this.props.user[0] === undefined ? "" : "Hello,  " + this.globalObj.welcomeTime + this.props.user[0].FirstName + " " + this.props.user[0].LastName}</h5>
                 <div className="row">
                   <div className="col-4">
                     {this.props.userRole === 1 && window.location.pathname === "/Vacations" ? (
@@ -120,7 +120,7 @@ class Header extends Component {
                         <i className="fas fa-user-plus fa-2x iconsColor" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => this.updateContent(2)}></i>
                       </abbr>
                     ) : (
-                      <Link to="/Home">
+                      <Link to="/">
                         <abbr title="Log Out">
                           <i className="fas fa-sign-out-alt fa-2x iconsColor" onClick={this.logOutIconClicked}></i>
                         </abbr>
