@@ -52,9 +52,12 @@ class Home extends Component {
           <div className="row">
             <Header />
           </div>
-          <div className="row">text image</div>
-          <div className="row">last vacation</div>
-          <div className="row">most popular 3 vacations</div>
+          {/* text image */}
+          <div className="row">row 1</div>
+          {/* last vacation */}
+          <div className="row">row 2</div>
+          {/* most popular 3 vacations */}
+          <div className="row">row 3</div>
           <div className="row">
             <Footer />
           </div>

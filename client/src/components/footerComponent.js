@@ -9,13 +9,13 @@ const Footer = () => {
       <a href="https://www.facebook.com/Ellie.kurts/" className="footerIcon">
         <i className="fab fa-facebook px-2 fa-lg"></i>
       </a>
-      <a href="www.linkedin.com/‪ellie-thor‬‏-a42195203" className="footerIcon">
+      <a href="https://www.linkedin.com/in/%E2%80%AAellie-thor%E2%80%AC%E2%80%8F-a42195203" className="footerIcon">
         <i className="fab fa-linkedin px-2 fa-lg "></i>
       </a>
-      <a href="mailto:webmaster@gmail.com" className="footerIcon">
+      <a href="mailto:elliethor18@gmail.com" className="footerIcon">
         <i className="fas fa-envelope px-2 fa-lg"></i>
       </a>
-      <a href="" className="footerIcon">
+      <a href="https://github.com/EllieThor" className="footerIcon">
         <i className="fab fa-github px-2 fa-lg"></i>
       </a>
     </div>
