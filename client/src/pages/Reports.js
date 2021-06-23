@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import Chart from "chart.js/auto";
 
-import ReportsCOMP from "../components/reportsComponent";
+import Footer from "../components/footerComponent";
 import Header from "../components/HeaderComponent";
 
 class Reports extends Component {
@@ -21,21 +21,19 @@ class Reports extends Component {
     this.inputsObj[e.target.id] = e.target.value;
     console.log("new Input To inputsObj :", e.target.id, "value: ", e.target.value);
   };
+
   getGraph = () => {
-    console.log("this.props.vacationsName: ", this.props.vacationsNames);
     let ctx = document.getElementById("myChart").getContext("2d");
     let myChart = new Chart(ctx, {
       type: "bar",
       data: {
         // labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-        // labels: this.props.vacationsNames,
         labels: this.props.vacations.filter((vac) => vac.follows.length > 0).map((vacation) => vacation.Destination),
         datasets: [
           {
             // TODO: מה זה הלייבל
             label: "# of Votes",
             // data: [12, 19, 3, 5, 2, 3],
-            // data: this.props.numberOfStars,
             data: this.props.vacations.filter((vac) => vac.follows.length > 0).map((vacation) => vacation.follows.length),
             backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)", "rgba(255, 206, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(255, 159, 64, 0.2)"],
             borderColor: ["rgba(255, 99, 132, 1)", "rgba(54, 162, 235, 1)", "rgba(255, 206, 86, 1)", "rgba(75, 192, 192, 1)", "rgba(153, 102, 255, 1)", "rgba(255, 159, 64, 1)"],
@@ -67,8 +65,13 @@ class Reports extends Component {
           <div className="row">
             <Header />
           </div>
-          <div className="row mt-3">
-            <ReportsCOMP />
+          <div className="row mt-3 py-4">
+            <div id="graphDIV" className="graph">
+              <canvas id="myChart" className="graph"></canvas>
+            </div>
+          </div>
+          <div className="row">
+            <Footer />
           </div>
         </div>
       );

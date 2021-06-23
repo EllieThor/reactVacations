@@ -49,14 +49,17 @@ class Home extends Component {
     try {
       let vacations = await Api.postRequest(`/vacations/getVacationsFromDb`);
       let allVacations = vacations.data;
+      console.log("allVacations: ", allVacations);
       // last
-      // let popP = allVacations.pop();
-      // console.log("test pop: ", popP);
+      // let popVacation = [...allVacations];
+      // let lastVacation = popVacation.pop();
+      // console.log("test pop: ", lastVacation);
+      // console.log("test popVacation: ", popVacation);
       // console.log("allVacations pop: ", allVacations);
       // graph
-      let vacationsNames = [];
-      let numberOfStars = [];
-      let numberOf = 0;
+      // let vacationsNames = [];
+      // let numberOfStars = [];
+      // let numberOf = 0;
       // let test = 0; else : ניסיון
 
       // map on vacations array in order to edit follows array In each of the items
@@ -73,11 +76,11 @@ class Home extends Component {
         // console.log("usersIDs : ", usersIDs);
 
         //graph
-        numberOf = item.follows.length;
-        if (numberOf > 0) {
-          numberOfStars.push(item.follows.length);
-          vacationsNames.push(item.Destination);
-        }
+        // numberOf = item.follows.length;
+        // if (numberOf > 0) {
+        //   numberOfStars.push(item.follows.length);
+        //   vacationsNames.push(item.Destination);
+        // }
 
         // sorting
         let isUserExist = usersIDs.includes(this.props.userID);
@@ -90,13 +93,13 @@ class Home extends Component {
 
       // vacations array
       this.props.updateVacations(allVacations);
-      console.log("all vacations: ", allVacations);
+      console.log("all vacations after map: ", this.props.vacations);
       // graph names
-      this.props.updateVacationsNames(vacationsNames);
-      console.log("vacationsNames: ", this.props.vacationsNames);
-      // graph stars
-      this.props.updateNumberOfStars(numberOfStars);
-      console.log("numberOfStars: ", this.props.numberOfStars);
+      // this.props.updateVacationsNames(vacationsNames);
+      // console.log("vacationsNames: ", this.props.vacationsNames);
+      // // graph stars
+      // this.props.updateNumberOfStars(numberOfStars);
+      // console.log("numberOfStars: ", this.props.numberOfStars);
 
       // TODO: delete graph before updating ???? אם הפונקציה של הגרף כבויה אין בעיות אבל העדכון של נתונים חדשים דופק אותה
       // this.getGraph();
