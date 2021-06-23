@@ -6,14 +6,29 @@ import { Link } from "react-router-dom";
 import Modal from "./Modal";
 
 class Header extends Component {
-  componentDidMount() {
-    this.getTime();
-  }
+  componentDidMount() {}
   globalObj = {
     welcomeTime: "",
   };
-  //FIXME: welcome is not work
-  getTime = () => {
+
+  addVacationClicked = () => {
+    // witch button
+    this.props.updateVacationButtonsForm(0);
+    //update modal content
+    this.props.updateContent(3);
+  };
+
+  updateContent = (value) => {
+    this.props.updateContent(value);
+  };
+  // logOut
+  logOutIconClicked = () => {
+    this.props.updateUserID(0);
+    this.props.updateUser([]);
+    this.props.updateUserRole(0);
+  };
+
+  render() {
     switch (new Date().getHours()) {
       case 22:
       case 23:
@@ -50,26 +65,6 @@ class Header extends Component {
       default:
         this.globalObj.welcomeTime = "Hello, ";
     }
-  };
-
-  addVacationClicked = () => {
-    // witch button
-    this.props.updateVacationButtonsForm(0);
-    //update modal content
-    this.props.updateContent(3);
-  };
-
-  updateContent = (value) => {
-    this.props.updateContent(value);
-  };
-  // logOut
-  logOutIconClicked = () => {
-    this.props.updateUserID(0);
-    this.props.updateUser([]);
-    this.props.updateUserRole(0);
-  };
-
-  render() {
     return (
       <div className="headerS p-4 pb-2">
         <nav className="navbar navbar-expand-lg navbar-light">
@@ -82,7 +77,7 @@ class Header extends Component {
             </button>
             <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
               <div className="navbar-nav ms-auto pe-5 me-5">
-                <h5 className="welcome me-2 pe-4"> {this.props.user[0] === undefined ? "" : "Hello,  " + this.globalObj.welcomeTime + this.props.user[0].FirstName + " " + this.props.user[0].LastName}</h5>
+                <h5 className="welcome me-2 pe-4"> {this.props.user[0] === undefined ? "" : this.globalObj.welcomeTime + this.props.user[0].FirstName + " " + this.props.user[0].LastName}</h5>
                 <div className="row">
                   <div className="col-4">
                     {this.props.userRole === 1 && window.location.pathname === "/Vacations" ? (
