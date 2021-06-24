@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../css/style.css";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-
+import moment from "moment";
 import Modal from "./Modal";
 
 class Header extends Component {
@@ -29,7 +29,7 @@ class Header extends Component {
   };
 
   render() {
-    switch (new Date().getHours()) {
+    switch (Number(moment().format("H"))) {
       case 22:
       case 23:
       case 0:

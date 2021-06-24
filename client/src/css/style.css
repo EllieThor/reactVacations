@@ -84,6 +84,10 @@ font-family: 'Open Sans', sans-serif; */
   height: 400px;
 } */
 
+.lastVacationCard {
+  width: 800px;
+}
+
 .footer {
   background-color: #f25e5e;
   height: 80px;

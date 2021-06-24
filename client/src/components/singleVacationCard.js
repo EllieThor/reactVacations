@@ -1,4 +1,5 @@
 import React from "react";
+import "../css/style.css";
 import FollowIcon from "./iconFollowComponent";
 import EditIcons from "./iconsEditAdminComponent";
 

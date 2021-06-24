@@ -39,17 +39,11 @@ class Vacations extends Component {
       let vacations = await Api.postRequest(`/vacations/getVacationsFromDb`);
       let allVacations = vacations.data;
 
-      // graph
-      let vacationsNames = [];
-      let numberOfStars = [];
-      let numberOf = 0;
-      // let test = 0; else : ניסיון
-
       // map on vacations array in order to edit follows array In each of the items
       allVacations.map((item, i) => {
         let followsArr = item.follows;
         let usersIDs = [];
-
+        // משפיע גם בקומפוננטה של אייקון פולו
         // map on followsArr array in order to convert followsArr from array of objects to arr of usersId's numbers
         followsArr.map((id, i) => {
           let testing = Object.values(followsArr[i]);
@@ -58,15 +52,8 @@ class Vacations extends Component {
         item.follows = usersIDs;
         // console.log("usersIDs : ", usersIDs);
 
-        //graph
-        numberOf = item.follows.length;
-        if (numberOf > 0) {
-          numberOfStars.push(item.follows.length);
-          vacationsNames.push(item.Destination);
-        }
-
         // sorting
-        let isUserExist = usersIDs.includes(this.props.userID);
+        let isUserExist = item.follows.includes(this.props.userID);
         if (isUserExist) {
           allVacations.splice(i, 1);
           allVacations.unshift(item);
@@ -77,12 +64,6 @@ class Vacations extends Component {
       // vacations array
       this.props.updateVacations(allVacations);
       console.log("all vacations: ", allVacations);
-      // graph names
-      this.props.updateVacationsNames(vacationsNames);
-      console.log("vacationsNames: ", this.props.vacationsNames);
-      // graph stars
-      this.props.updateNumberOfStars(numberOfStars);
-      console.log("numberOfStars: ", this.props.numberOfStars);
 
       // TODO: delete graph before updating ???? אם הפונקציה של הגרף כבויה אין בעיות אבל העדכון של נתונים חדשים דופק אותה
       // this.getGraph();
@@ -262,9 +243,7 @@ const mapStateToProps = (state) => {
     // vacationForm
     vacationFormButtonsStatus: state.vacationFormButtonsStatus,
     vacationToEdit: state.vacationToEdit,
-    // graph
-    vacationsNames: state.vacationsNames,
-    numberOfStars: state.numberOfStars,
+
     //modal
     content: state.content,
   };
@@ -307,19 +286,6 @@ const mapDispatchToProps = (dispatch) => {
     updateVacationToForm(value) {
       dispatch({
         type: "updateVacationToForm",
-        payload: value,
-      });
-    },
-    // graph
-    updateVacationsNames(value) {
-      dispatch({
-        type: "updateVacationsNames",
-        payload: value,
-      });
-    },
-    updateNumberOfStars(value) {
-      dispatch({
-        type: "updateNumberOfStars",
         payload: value,
       });
     },

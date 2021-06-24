@@ -7,9 +7,7 @@ const initialState = {
   // vacation form
   vacationFormButtonsStatus: 0,
   vacationToEdit: {},
-  // graph
-  vacationsNames: [],
-  numberOfStars: [],
+
   // modal content
   content: 1,
 };
@@ -38,10 +36,7 @@ function rootReducer(state = initialState, action) {
     case "updateVacationToForm":
       state = { ...state, vacationToEdit: action.payload };
       break;
-    // graph
-    case "updateVacationsNames":
-      state = { ...state, vacationsNames: action.payload };
-      break;
+
     case "updateNumberOfStars":
       state = { ...state, numberOfStars: action.payload };
       break;

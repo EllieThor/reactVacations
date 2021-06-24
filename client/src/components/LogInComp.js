@@ -70,9 +70,7 @@ const mapStateToProps = (state) => {
     // vacationForm
     vacationFormButtonsStatus: state.vacationFormButtonsStatus,
     vacationToEdit: state.vacationToEdit,
-    // graph
-    vacationsNames: state.vacationsNames,
-    numberOfStars: state.numberOfStars,
+
     //modal
     content: state.content,
   };
@@ -118,19 +116,7 @@ const mapDispatchToProps = (dispatch) => {
         payload: value,
       });
     },
-    // graph
-    updateVacationsNames(value) {
-      dispatch({
-        type: "updateVacationsNames",
-        payload: value,
-      });
-    },
-    updateNumberOfStars(value) {
-      dispatch({
-        type: "updateNumberOfStars",
-        payload: value,
-      });
-    },
+
     //modal
     updateContent(value) {
       dispatch({

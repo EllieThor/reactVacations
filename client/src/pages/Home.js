@@ -3,9 +3,10 @@ import "../css/style.css";
 import { connect } from "react-redux";
 import * as Api from "../Api/apiCalls";
 import { Link, Redirect } from "react-router-dom";
+import moment from "moment";
 
 import Header from "../components/HeaderComponent";
-import LastVacation from "../components/LastVacationComp";
+import LastVacation from "../components/NextVacationComp";
 import Footer from "../components/footerComponent";
 class Home extends Component {
   componentDidMount() {
@@ -14,6 +15,7 @@ class Home extends Component {
   // patterns OBJ
   inputsObj = {
     imageName: "",
+    nearestVacIndex: 0,
   };
 
   onChangeFN = (e) => {
@@ -50,18 +52,27 @@ class Home extends Component {
       let vacations = await Api.postRequest(`/vacations/getVacationsFromDb`);
       let allVacations = vacations.data;
       console.log("allVacations: ", allVacations);
-      // last
-      // let popVacation = [...allVacations];
-      // let lastVacation = popVacation.pop();
-      // console.log("test pop: ", lastVacation);
-      // console.log("test popVacation: ", popVacation);
-      // console.log("allVacations pop: ", allVacations);
-      // graph
-      // let vacationsNames = [];
-      // let numberOfStars = [];
-      // let numberOf = 0;
-      // let test = 0; else : ניסיון
 
+      const dateToCheckFor = moment();
+      let nearestDate;
+
+      allVacations.forEach((date, i) => {
+        let diff = moment(date.StartDate).diff(moment(dateToCheckFor), "days");
+        if (diff > 0) {
+          if (nearestDate) {
+            if (moment(date.StartDate).diff(moment(nearestDate), "days") < 0) {
+              nearestDate = date.StartDate;
+              console.log("ii" + " " + i);
+              this.nearestVacIndex = i;
+            }
+          } else {
+            nearestDate = date.StartDate;
+            this.nearestVacIndex = i;
+          }
+        }
+      });
+      console.log("nearestDate: ", nearestDate, " AND nearestVacation: ", this.nearestVacIndex);
+      console.log("nearest Vacation: ", allVacations[this.nearestVacIndex]);
       // map on vacations array in order to edit follows array In each of the items
       allVacations.map((item, i) => {
         let followsArr = item.follows;
@@ -73,14 +84,6 @@ class Home extends Component {
           usersIDs.push(...testing);
         });
         item.follows = usersIDs;
-        // console.log("usersIDs : ", usersIDs);
-
-        //graph
-        // numberOf = item.follows.length;
-        // if (numberOf > 0) {
-        //   numberOfStars.push(item.follows.length);
-        //   vacationsNames.push(item.Destination);
-        // }
 
         // sorting
         let isUserExist = usersIDs.includes(this.props.userID);
@@ -94,12 +97,6 @@ class Home extends Component {
       // vacations array
       this.props.updateVacations(allVacations);
       console.log("all vacations after map: ", this.props.vacations);
-      // graph names
-      // this.props.updateVacationsNames(vacationsNames);
-      // console.log("vacationsNames: ", this.props.vacationsNames);
-      // // graph stars
-      // this.props.updateNumberOfStars(numberOfStars);
-      // console.log("numberOfStars: ", this.props.numberOfStars);
 
       // TODO: delete graph before updating ???? אם הפונקציה של הגרף כבויה אין בעיות אבל העדכון של נתונים חדשים דופק אותה
       // this.getGraph();
@@ -121,11 +118,9 @@ class Home extends Component {
           {/* text image */}
           <div className="row">row 1</div>
           {/* last vacation */}
-          <div className="row">
-            <LastVacation vacation={this.props.vacations.pop()} />
-          </div>
+          <div className="row">{this.props.vacations[this.nearestVacIndex] === undefined ? "" : <LastVacation vacation={this.props.vacations[this.nearestVacIndex]} />}</div>
           {/* most popular 3 vacations */}
-          <div className="row">{this.props.vacation === undefined ? "" : this.props.vacation.pop().Price}</div>
+          <div className="row">row 3</div>
           <div className="row">
             <Footer />
           </div>
@@ -144,9 +139,7 @@ const mapStateToProps = (state) => {
     // vacationForm
     vacationFormButtonsStatus: state.vacationFormButtonsStatus,
     vacationToEdit: state.vacationToEdit,
-    // graph
-    vacationsNames: state.vacationsNames,
-    numberOfStars: state.numberOfStars,
+
     //modal
     content: state.content,
   };
@@ -192,19 +185,7 @@ const mapDispatchToProps = (dispatch) => {
         payload: value,
       });
     },
-    // graph
-    updateVacationsNames(value) {
-      dispatch({
-        type: "updateVacationsNames",
-        payload: value,
-      });
-    },
-    updateNumberOfStars(value) {
-      dispatch({
-        type: "updateNumberOfStars",
-        payload: value,
-      });
-    },
+
     //modal
     updateContent(value) {
       dispatch({
