@@ -111,6 +111,8 @@ class Vacations extends Component {
     this.props.updateVacationButtonsForm(1);
     //witch vacation edit
     this.props.updateVacationToForm(vacationObj);
+    //update modal content
+    this.props.updateContent(3);
   };
 
   addVacationClicked = () => {

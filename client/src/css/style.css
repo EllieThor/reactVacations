@@ -84,10 +84,25 @@ font-family: 'Open Sans', sans-serif; */
   height: 400px;
 } */
 
-.lastVacationCard {
-  width: 800px;
+/* Next vacation */
+.nextVacTitle {
+  font-family: "Merienda", cursive;
+}
+.nextVacationCard {
+  width: 850px;
+  /* margin-left: 15rem; */
+}
+.nextVacationImg {
+  width: 400px;
+  border-radius: 8px;
+  transition: 0.5s all ease-in-out;
+}
+.nextVacationDiv:hover img {
+  transform: scale(1.1);
+  transform: rotate(3deg);
 }
 
+/* Footer */
 .footer {
   background-color: #f25e5e;
   height: 80px;
