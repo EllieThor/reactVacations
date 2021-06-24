@@ -93,13 +93,23 @@ font-family: 'Open Sans', sans-serif; */
   /* margin-left: 15rem; */
 }
 .nextVacationImg {
-  width: 400px;
+  width: 600px;
   border-radius: 8px;
   transition: 0.5s all ease-in-out;
+  margin: 0 auto;
 }
 .nextVacationDiv:hover img {
   transform: scale(1.1);
   transform: rotate(3deg);
+}
+
+/* Popular */
+.popularRow {
+  width: 1400px;
+  margin: 0 auto;
+}
+.cardIMG {
+  width: 18rem;
 }
 
 /* Footer */

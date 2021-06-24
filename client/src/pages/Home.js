@@ -7,6 +7,7 @@ import moment from "moment";
 
 import Header from "../components/HeaderComponent";
 import LastVacation from "../components/NextVacationComp";
+import MostPopularComp from "../components/MostPopularComp";
 import Footer from "../components/footerComponent";
 class Home extends Component {
   componentDidMount() {
@@ -16,6 +17,7 @@ class Home extends Component {
   inputsObj = {
     imageName: "",
     nearestVacIndex: 0,
+    threeVacations: [],
   };
 
   onChangeFN = (e) => {
@@ -53,6 +55,7 @@ class Home extends Component {
       let allVacations = vacations.data;
       console.log("allVacations: ", allVacations);
 
+      // next vacation
       const dateToCheckFor = moment();
       let nearestDate;
 
@@ -62,7 +65,6 @@ class Home extends Component {
           if (nearestDate) {
             if (moment(date.StartDate).diff(moment(nearestDate), "days") < 0) {
               nearestDate = date.StartDate;
-              console.log("ii" + " " + i);
               this.nearestVacIndex = i;
             }
           } else {
@@ -73,6 +75,10 @@ class Home extends Component {
       });
       console.log("nearestDate: ", nearestDate, " AND nearestVacation: ", this.nearestVacIndex);
       console.log("nearest Vacation: ", allVacations[this.nearestVacIndex]);
+      // 3 popular
+      let vacTest = [...allVacations];
+      this.threeVacations = vacTest.sort((a, b) => b.follows.length - a.follows.length).slice(0, 3);
+      console.log("this.threeVacations!!!!: ", this.threeVacations);
       // map on vacations array in order to edit follows array In each of the items
       allVacations.map((item, i) => {
         let followsArr = item.follows;
@@ -119,8 +125,11 @@ class Home extends Component {
           <div className="row">row 1</div>
           {/* last vacation */}
           <div className="row">{this.props.vacations[this.nearestVacIndex] === undefined ? "" : <LastVacation vacation={this.props.vacations[this.nearestVacIndex]} />}</div>
-          {/* most popular 3 vacations */}
-          <div className="row">row 3</div>
+          {/*  TODO: most popular 3 vacations */}
+
+          <h2 className="text-center py-5">The three most popular vacations</h2>
+          {/* <div className="row">{this.props.vacations === undefined ? "" : <MostPopularComp vacations={this.threeVacations} />}</div> */}
+          <div className="row">{this.props.vacations === undefined ? "" : <MostPopularComp vacations={this.threeVacations} />}</div>
           <div className="row">
             <Footer />
           </div>
