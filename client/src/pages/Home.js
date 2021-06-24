@@ -125,12 +125,10 @@ class Home extends Component {
           <div className="row">row 1</div>
           {/* last vacation */}
           <div className="row">{this.props.vacations[this.nearestVacIndex] === undefined ? "" : <LastVacation vacation={this.props.vacations[this.nearestVacIndex]} />}</div>
-          {/*  TODO: most popular 3 vacations */}
 
           <h2 className="text-center py-5">The three most popular vacations</h2>
-          {/* <div className="row">{this.props.vacations === undefined ? "" : <MostPopularComp vacations={this.threeVacations} />}</div> */}
-          <div className="row">{this.props.vacations === undefined ? "" : <MostPopularComp vacations={this.threeVacations} />}</div>
-          <div className="row">
+          <div className="row mb-5">{this.props.vacations === undefined ? "" : <MostPopularComp vacations={this.threeVacations} />}</div>
+          <div className="row mt-2">
             <Footer />
           </div>
         </div>
