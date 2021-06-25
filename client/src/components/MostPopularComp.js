@@ -8,15 +8,15 @@ const MostPopularComp = (props) => {
           let img = "http://localhost:5004/" + vacation.ImageName;
           return (
             <div key={i} className="col-4 text-center">
-              <div class="a-box">
-                <div class="img-container">
-                  <div class="img-inner">
-                    <div class="inner-skew">
+              <div className="a-box">
+                <div className="img-container">
+                  <div className="img-inner">
+                    <div className="inner-skew">
                       <img src={img} alt={vacation.ImageName} />
                     </div>
                   </div>
                 </div>
-                <div class="text-container">
+                <div className="text-container">
                   <h2 className="card-text">{i === 0 ? "First Place" : i === 1 ? "Second Place" : i === 2 ? "Third Place" : ""}</h2>
                   <h3>{vacation.Destination}</h3>
                   <div>{vacation.Description}</div>
