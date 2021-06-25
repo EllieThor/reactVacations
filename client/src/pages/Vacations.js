@@ -4,12 +4,9 @@ import { connect } from "react-redux";
 import * as Api from "../Api/apiCalls";
 import { Redirect } from "react-router-dom";
 
-import Header from "../components/HeaderComponent";
-import SingleVacationCard from "../components/singleVacationCard";
-import Footer from "../components/footerComponent";
-
-import Nav from "../components/nav";
-import AddVacationForm from "../components/addVacationFormComponent";
+import Header from "../components/HeaderComp";
+import SingleVacationCard from "../components/SingleVacCardCopm";
+import Footer from "../components/FooterComp";
 
 class Vacations extends Component {
   componentDidMount() {

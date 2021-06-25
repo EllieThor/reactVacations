@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import Chart from "chart.js/auto";
 
-import Footer from "../components/footerComponent";
-import Header from "../components/HeaderComponent";
+import Footer from "../components/FooterComp";
+import Header from "../components/HeaderComp";
 
 class Reports extends Component {
   componentDidMount() {

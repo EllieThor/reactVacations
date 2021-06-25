@@ -5,10 +5,10 @@ import * as Api from "../Api/apiCalls";
 import { Link, Redirect } from "react-router-dom";
 import moment from "moment";
 
-import Header from "../components/HeaderComponent";
+import Header from "../components/HeaderComp";
 import LastVacation from "../components/NextVacationComp";
 import MostPopularComp from "../components/MostPopularComp";
-import Footer from "../components/footerComponent";
+import Footer from "../components/FooterComp";
 class Home extends Component {
   componentDidMount() {
     this.getVacationsFromDB();

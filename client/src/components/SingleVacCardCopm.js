@@ -1,7 +1,7 @@
 import React from "react";
 import "../css/style.css";
-import FollowIcon from "./iconFollowComponent";
-import EditIcons from "./iconsEditAdminComponent";
+import StarsIcons from "./IconsStarsComp";
+import EditIcons from "./IconsEditComp";
 
 const SingleVacationCard = (props) => {
   let vacationCard = props.vacations.map((vacation, i) => {
@@ -24,7 +24,7 @@ const SingleVacationCard = (props) => {
                 {props.userRole === 1 ? (
                   <EditIcons vacationToEdit={vacation} vacationID={vacation.ID} deleteVacationFromDB={props.deleteVacationFromDB} editVacationClicked={props.editVacationClicked} updateVacationDetailsInDB={props.updateVacationDetailsInDB} />
                 ) : (
-                  <FollowIcon vacationID={vacation.ID} userID={props.userID} vacationFollows={vacation.follows} insertNewFallowToDB={props.insertNewFallowToDB} deleteUserFallowFromDB={props.deleteUserFallowFromDB} />
+                  <StarsIcons vacationID={vacation.ID} userID={props.userID} vacationFollows={vacation.follows} insertNewFallowToDB={props.insertNewFallowToDB} deleteUserFallowFromDB={props.deleteUserFallowFromDB} />
                 )}
               </div>
             </div>

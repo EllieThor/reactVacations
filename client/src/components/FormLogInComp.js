@@ -3,9 +3,9 @@ import "../css/style.css";
 import { connect } from "react-redux";
 import * as Api from "../Api/apiCalls";
 import { Link, Redirect } from "react-router-dom";
-import * as FN from "../functions/functions";
+import * as GlobalFNs from "../functions/functions";
 
-class LogIn extends Component {
+class LogInComp extends Component {
   componentDidMount() {}
   // patterns OBJ
   inputsObj = {
@@ -19,8 +19,8 @@ class LogIn extends Component {
 
   getUserFromDB = async () => {
     let OBJ = {
-      Email: FN.inputsObj.userEmail,
-      Password: FN.inputsObj.userPassword,
+      Email: GlobalFNs.inputsObj.userEmail,
+      Password: GlobalFNs.inputsObj.userPassword,
     };
     try {
       let user = await Api.postRequest(`/users/getUserFromDb`, OBJ);
@@ -36,42 +36,26 @@ class LogIn extends Component {
       alert("Something went wrong, please try again");
     }
   };
-
+  updateContent = (value) => {
+    this.props.updateContent(value);
+  };
   render() {
-    if (this.props.userID !== 0) {
-      return <Redirect from="/" to="/Vacations" />;
-    } else {
-      return (
-        <div
-          className="container p-3 mt-3 logInPage"
-          style={{
-            backgroundImage: `url(${"assets/images/tapetTest.png"})`,
-            backgroundRepeat: "no-repeat",
-          }}
-        >
-          <div className="logInForm p-5">
-            <div className="row">
-              <div className="col-12">
-                <Link to="/Home">
-                  <abbr title="Close">
-                    <i className="fas fa-times float-end"></i>
-                  </abbr>
-                </Link>
-              </div>
-            </div>
-            <h1 className="h3 mb-3 fw-normal">Please Log In</h1>
-            <input type="email" id="userEmail" className="form-control m-2" placeholder="Email address" required="" autoFocus="" onChange={(e) => FN.onChangeFN(e)} />
-            <input type="password" id="userPassword" className="form-control  m-2" placeholder="Password" required="" autoComplete="" onChange={(e) => FN.onChangeFN(e)} />
-            <button className="w-100 btn btn-lg m-2 btn-dark" onClick={() => this.getUserFromDB()}>
-              Log in
-            </button>
-            <Link to="/RegistrationForm">
-              <button className="w-100 btn btn-lg m-2 btn-dark">Registration</button>
-            </Link>
-          </div>
+    return (
+      <div className="container p-3 mt-3">
+        <div className=" p-5">
+          <h1 className="h3 mb-3 fw-normal">Please Log In</h1>
+          <input type="email" id="userEmail" className="form-control m-2" placeholder="Email address" required="" autoFocus="" onChange={(e) => GlobalFNs.onChangeFN(e)} />
+          <input type="password" id="userPassword" className="form-control  m-2" placeholder="Password" required="" autoComplete="" onChange={(e) => GlobalFNs.onChangeFN(e)} />
+          <button className="w-100 btn btn-lg m-2 btn-dark" data-bs-dismiss="modal" onClick={() => this.getUserFromDB()}>
+            Log in
+          </button>
+          {/* TODO: modal inside modal */}
+          <button className="w-100 btn btn-lg m-2 btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => this.updateContent(1)}>
+            Registration
+          </button>
         </div>
-      );
-    }
+      </div>
+    );
   }
 }
 const mapStateToProps = (state) => {
@@ -84,9 +68,9 @@ const mapStateToProps = (state) => {
     // vacationForm
     vacationFormButtonsStatus: state.vacationFormButtonsStatus,
     vacationToEdit: state.vacationToEdit,
-    // graph
-    vacationsNames: state.vacationsNames,
-    numberOfStars: state.numberOfStars,
+
+    //modal
+    content: state.content,
   };
 };
 
@@ -130,20 +114,15 @@ const mapDispatchToProps = (dispatch) => {
         payload: value,
       });
     },
-    // graph
-    updateVacationsNames(value) {
+
+    //modal
+    updateContent(value) {
       dispatch({
-        type: "updateVacationsNames",
-        payload: value,
-      });
-    },
-    updateNumberOfStars(value) {
-      dispatch({
-        type: "updateNumberOfStars",
+        type: "updateContent",
         payload: value,
       });
     },
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LogIn);
+export default connect(mapStateToProps, mapDispatchToProps)(LogInComp);

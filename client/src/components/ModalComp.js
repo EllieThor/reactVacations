@@ -1,7 +1,8 @@
 import React from "react";
-import LogInComp from "./LogInComp";
-import RegistrationComp from "./RegistrationComp";
-import AddVacationComp from "./VacationFormComp";
+import LogInComp from "./FormLogInComp";
+import RegistrationComp from "./FormRegisterComp";
+import AddVacationComp from "./FormVacationComp";
+
 const Modal = (props) => {
   return (
     <div>

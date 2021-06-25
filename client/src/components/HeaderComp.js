@@ -3,7 +3,7 @@ import "../css/style.css";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import Modal from "./Modal";
+import Modal from "./ModalComp";
 
 class Header extends Component {
   componentDidMount() {}

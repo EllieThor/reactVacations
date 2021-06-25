@@ -5,8 +5,6 @@ import reducers from "./redux/reducers";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Home from "./pages/Home";
-import LogInForm from "./pages/LogInForm";
-import RegistrationForm from "./pages/RegistrationForm";
 import Vacations from "./pages/Vacations";
 import Reports from "./pages/Reports";
 
@@ -18,8 +16,6 @@ function App() {
       <Router>
         <Switch>
           <Route path="/" exact component={Home} />
-          {/* <Route path="/" exact component={LogInForm} /> */}
-          {/* <Route path="/RegistrationForm" exact component={RegistrationForm} /> */}
           <Route path="/Vacations" exact component={Vacations} />
           <Route path="/Reports" exact component={Reports} />
         </Switch>
