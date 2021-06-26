@@ -2,6 +2,12 @@ import { connect } from "react-redux";
 import * as Api from "../Api/apiCalls";
 export let inputsObj = {
   imageName: "",
+  // Destination: "",
+  // Description: "",
+  // Price: 0,
+  // ImageName: "",
+  // StartDate: "",
+  // EndDate: "",
 };
 
 export function onChangeFN(e) {

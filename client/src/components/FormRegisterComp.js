@@ -3,8 +3,6 @@ import "../css/style.css";
 import { connect } from "react-redux";
 import * as Api from "../Api/apiCalls";
 
-import { Link } from "react-router-dom";
-
 class RegistrationComp extends Component {
   componentDidMount() {}
   // patterns OBJ
@@ -110,11 +108,9 @@ class RegistrationComp extends Component {
               <label htmlFor="Password">Password:</label>
               <input type="password" id="Password" className="form-control" onChange={(e) => this.onChangeFN(e)} />
             </div>
-            {/* <Link to="/Vacations"> */}
-            <button className="btn btn-dark mt-3" onClick={() => this.insertUserToDB()}>
+            <button className="btn btn-dark mt-3" data-bs-dismiss="modal" onClick={() => this.insertUserToDB()}>
               add user
             </button>
-            {/* </Link> */}
           </div>
         </div>
       </div>
