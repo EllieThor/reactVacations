@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "../css/style.css";
 import { connect } from "react-redux";
 import * as Api from "../Api/apiCalls";
-import { Link, Redirect } from "react-router-dom";
 import * as GlobalFNs from "../functions/functions";
 
 class LogInComp extends Component {
@@ -24,25 +23,23 @@ class LogInComp extends Component {
     };
     try {
       let user = await Api.postRequest(`/users/getUserFromDb`, OBJ);
-      // console.log("user.data: ", user.data);
       this.props.updateUser(user.data);
-      // console.log("user: ", this.props.user);
       this.props.updateUserRole(user.data[0].Role);
-      // console.log("userRole: ", this.props.userRole);
       this.props.updateUserID(user.data[0].ID);
-      // console.log("userID: ", this.props.userID);
     } catch (err) {
       console.log("Error ", err);
       alert("Something went wrong, please try again");
     }
   };
+
   updateContent = (value) => {
     this.props.updateContent(value);
   };
+
   render() {
     return (
       <div className="container p-3 mt-3">
-        <div className=" p-5">
+        <div className="">
           <h1 className="h3 mb-3 fw-normal">Please Log In</h1>
           <input type="email" id="userEmail" className="form-control m-2" placeholder="Email address" required="" autoFocus="" onChange={(e) => GlobalFNs.onChangeFN(e)} />
           <input type="password" id="userPassword" className="form-control  m-2" placeholder="Password" required="" autoComplete="" onChange={(e) => GlobalFNs.onChangeFN(e)} />

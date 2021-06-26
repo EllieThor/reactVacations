@@ -38,7 +38,7 @@ class VacationsFormComp extends Component {
     this.inputsObj.filesToUpload = e.target.files;
   };
 
-  upload = async () => {
+  uploadIMG = async () => {
     if (this.inputsObj.filesToUpload !== undefined) {
       const formData = new FormData();
       const files = this.inputsObj.filesToUpload;
@@ -173,6 +173,7 @@ class VacationsFormComp extends Component {
   render() {
     return (
       <div>
+        <h5>{this.props.vacationFormButtonsStatus === 0 ? "Add New Vacation" : "Edit vacation"}</h5>
         {/* FIXME: input stay like the last one end not updated after change  */}
         <label htmlFor="Destination">Destination:</label>
         <input type="text" id="Destination" className="form-control m-2" defaultValue={this.props.vacationFormButtonsStatus === 0 ? "" : this.props.vacationToEdit.Destination} placeholder="Destination" onChange={(e) => this.onChangeFN(e)} />
@@ -185,7 +186,7 @@ class VacationsFormComp extends Component {
         <label htmlFor="EndDate">EndDate:</label>
         <input type="date" id="EndDate" className="form-control  m-2" defaultValue={this.props.vacationFormButtonsStatus === 0 ? "" : this.props.vacationToEdit.EndDate} placeholder="EndDate" onChange={(e) => this.onChangeFN(e)} />
         <input id="filesToUpload" name="filesToUpload" type="file" onChange={(e) => this.fileChangeEvent(e)} />
-        <button type="button" className="btn btn-dark btn-s" onClick={() => this.upload()}>
+        <button type="button" className="btn btn-dark btn-s" onClick={() => this.uploadIMG()}>
           <i className="fas fa-file-upload"></i>&nbsp;Upload
         </button>
         {this.props.vacationFormButtonsStatus === 0 ? this.addVacationButton() : this.saveEditedVacationButton()}
