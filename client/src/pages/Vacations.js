@@ -24,13 +24,6 @@ class Vacations extends Component {
     console.log("yael inputsObj :", this.inputsObj);
   };
 
-  // // logOut
-  // logOutIconClicked = () => {
-  //   this.props.updateUserID(0);
-  //   this.props.updateUser([]);
-  //   this.props.updateUserRole(0);
-  // };
-
   getVacationsFromDB = async () => {
     try {
       let vacations = await Api.postRequest(`/vacations/getVacationsFromDb`);
@@ -69,15 +62,15 @@ class Vacations extends Component {
       alert("Something went wrong, please try again: ", err);
     }
   };
-  // follow or not on vacations
-  insertNewFallowToDB = async (vacationID) => {
+
+  insertStarToDB = async (vacationID) => {
     let currentObj = {
       vacationID: vacationID,
       userID: this.props.userID,
     };
 
     try {
-      let userFallow = await Api.postRequest("/users/insertNewFallowToDb", currentObj);
+      let userFallow = await Api.postRequest("/users/insertStar", currentObj);
       console.log("if user star: ", userFallow);
       this.getVacationsFromDB();
     } catch (err) {
@@ -86,13 +79,13 @@ class Vacations extends Component {
     }
   };
 
-  deleteUserFallowFromDB = async (vacationID) => {
+  deleteStarFromDB = async (vacationID) => {
     let currentObj = {
       vacationID: vacationID,
       userID: this.props.userID,
     };
     try {
-      let vacation = await Api.postRequest("/users/deleteUserFallowFromDb", currentObj);
+      let vacation = await Api.postRequest("/users/deleteStar", currentObj);
       this.getVacationsFromDB();
       console.log("all vacations: ", this.props.vacations);
     } catch (err) {
@@ -119,86 +112,6 @@ class Vacations extends Component {
     this.props.updateContent(3);
   };
 
-  // // upload image
-  // fileChangeEvent = (e) => {
-  //   console.log("e.target.files: ", e.target.files);
-  //   this.inputsObj.filesToUpload = e.target.files;
-  // };
-
-  // upload = async () => {
-  //   if (this.inputsObj.filesToUpload !== undefined) {
-  //     const formData = new FormData();
-  //     const files = this.inputsObj.filesToUpload;
-
-  //     for (let i = 0; i < files.length; i++) {
-  //       formData.append("uploads[]", files[i], files[i]["name"]);
-  //     }
-  //     console.log("UPLOAD! ", formData);
-  //     console.log("name:! ", files[0].name);
-  //     this.inputsObj.imageNameForServer = files[0].name;
-  //     let imgName = files[0].name;
-  //     console.log("cccc: ", imgName);
-  //     this.inputsObj.imageName = imgName;
-  //     console.log("this.inputsObj.imageName: ", this.inputsObj.imageName);
-  //     let res = await Api.postRequest("/upload", formData);
-  //     console.log("react is IMG? ", res);
-  //   } else {
-  //     alert("Click to upload image please");
-  //   }
-  // };
-
-  // insertVacationToDB = async () => {
-  //   let currentObj = {
-  //     Destination: this.inputsObj.Destination,
-  //     Description: this.inputsObj.Description,
-  //     Price: this.inputsObj.Price,
-  //     ImageName: this.inputsObj.imageNameForServer,
-  //     StartDate: this.inputsObj.StartDate,
-  //     EndDate: this.inputsObj.EndDate,
-  //     // `vacations`-`ID`, `Destination`, `Description`, `Price`, `ImageName`, `StartDate`, `EndDate`, `createdAt`, `updatedAt`
-  //   };
-  //   console.log("currentObj: ", currentObj);
-  //   if (currentObj.Destination === "" || currentObj.Description === "" || currentObj.Price <= 0 || currentObj.Price === undefined || currentObj.ImageName === undefined || currentObj.StartDate === undefined || currentObj.EndDate === undefined) {
-  //     alert("All fields must be filled out");
-  //   } else {
-  //     try {
-  //       let vacation = await Api.postRequest("/vacations/insertVacationToDb", currentObj);
-  //       this.getVacationsFromDB();
-  //       this.inputsObj = {
-  //         imageName: "",
-  //       };
-  //       console.log("new vacations: ", this.props.vacations);
-  //     } catch (err) {
-  //       console.log("Error ", err);
-  //       alert("Something went wrong, please try again");
-  //     }
-  //   }
-  // };
-
-  // updateVacationDetailsInDB = async (vacationId) => {
-  //   let currentObj = {
-  //     ID: vacationId,
-  //     Destination: this.inputsObj.Destination,
-  //     Description: this.inputsObj.Description,
-  //     Price: this.inputsObj.Price,
-  //     ImageName: this.inputsObj.imageNameForServer,
-  //     StartDate: this.inputsObj.StartDate,
-  //     EndDate: this.inputsObj.EndDate,
-  //   };
-
-  //   try {
-  //     let vacation = await Api.postRequest("/vacations/updateVacationDetailsInDb", currentObj);
-  //     this.getVacationsFromDB();
-  //     this.inputsObj = {
-  //       imageName: "",
-  //     };
-  //     console.log("all vacations: ", this.props.vacations);
-  //   } catch (err) {
-  //     console.log("Error ", err);
-  //     alert("Something went wrong, please try again");
-  //   }
-  // };
-
   deleteVacationFromDB = async (vacationID) => {
     let currentObj = {
       ID: vacationID,
@@ -224,7 +137,7 @@ class Vacations extends Component {
         <div>
           <div>{this.props.user[0] === undefined ? "" : <Header />}</div>
           <div className="container">
-            <div className="row mt-3">{this.props.userID === 0 ? "" : <SingleVacationCard userRole={this.props.userRole} userID={this.props.userID} vacations={this.props.vacations} insertNewFallowToDB={this.insertNewFallowToDB} deleteUserFallowFromDB={this.deleteUserFallowFromDB} deleteVacationFromDB={this.deleteVacationFromDB} editVacationClicked={this.editVacationClicked} />}</div>
+            <div className="row mt-3">{this.props.userID === 0 ? "" : <SingleVacationCard userRole={this.props.userRole} userID={this.props.userID} vacations={this.props.vacations} insertStarToDB={this.insertStarToDB} deleteStarFromDB={this.deleteStarFromDB} deleteVacationFromDB={this.deleteVacationFromDB} editVacationClicked={this.editVacationClicked} />}</div>
           </div>
           <div className="footer">{this.props.userID === 0 ? "" : <Footer />}</div>
         </div>

@@ -38,11 +38,11 @@ exports.getUserFromDb = async (req, res, next) => {
 };
 
 // CREATE (follows)
-exports.insertNewFallowToDb = async (req, res) => {
+exports.insertStar = async (req, res) => {
   await FollowsModel.create(req.body)
     .then((result) => {
       res.send({ result });
-      console.log("insertNewFallowToDb result: ", result);
+      console.log("insertStar result: ", result);
     })
     .catch((err) => {
       console.log(err);
@@ -51,11 +51,11 @@ exports.insertNewFallowToDb = async (req, res) => {
 };
 
 // DELETE (follows)
-exports.deleteUserFallowFromDb = async (req, res) => {
+exports.deleteStar = async (req, res) => {
   await FollowsModel.destroy({ where: { userID: req.body.userID, vacationID: req.body.vacationID } })
     .then((result) => {
       res.send({ result });
-      console.log("deleteUserFallowFromDb result: ", result);
+      console.log("deleteStar result: ", result);
     })
     .catch((err) => {
       console.log(err);

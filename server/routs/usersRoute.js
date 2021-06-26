@@ -9,7 +9,7 @@ router.post("/insertUserToDb", usersController.insertUserToDb);
 
 // `follows`-`FollowID`, `createdAt`, `updatedAt`, `userID`, `vacationID`
 
-router.post("/insertNewFallowToDb", usersController.insertNewFallowToDb);
-router.post("/deleteUserFallowFromDb", usersController.deleteUserFallowFromDb);
+router.post("/insertStar", usersController.insertStar);
+router.post("/deleteStar", usersController.deleteStar);
 
 module.exports = router;

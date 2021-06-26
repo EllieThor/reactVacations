@@ -5,10 +5,10 @@ const FollowIcon = (props) => {
   const isStar = props.vacationFollows.includes(props.userID);
 
   let addNewFollow = () => {
-    return <i className="far fa-star" onClick={() => props.insertNewFallowToDB(props.vacationID)}></i>;
+    return <i className="far fa-star" onClick={() => props.insertStarToDB(props.vacationID)}></i>;
   };
   let removeFollow = () => {
-    return <i className="fas fa-star isStar" onClick={() => props.deleteUserFallowFromDB(props.vacationID)}></i>;
+    return <i className="fas fa-star isStar" onClick={() => props.deleteStarFromDB(props.vacationID)}></i>;
   };
   return (
     <div className="row">

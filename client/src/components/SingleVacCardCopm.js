@@ -24,7 +24,7 @@ const SingleVacationCard = (props) => {
                 {props.userRole === 1 ? (
                   <EditIcons vacationToEdit={vacation} vacationID={vacation.ID} deleteVacationFromDB={props.deleteVacationFromDB} editVacationClicked={props.editVacationClicked} updateVacationDetailsInDB={props.updateVacationDetailsInDB} />
                 ) : (
-                  <StarsIcons vacationID={vacation.ID} userID={props.userID} vacationFollows={vacation.follows} insertNewFallowToDB={props.insertNewFallowToDB} deleteUserFallowFromDB={props.deleteUserFallowFromDB} />
+                  <StarsIcons vacationID={vacation.ID} userID={props.userID} vacationFollows={vacation.follows} insertStarToDB={props.insertStarToDB} deleteStarFromDB={props.deleteStarFromDB} />
                 )}
               </div>
             </div>

@@ -25,26 +25,6 @@ class Home extends Component {
     console.log("new Input To inputsObj :", e.target.id, "value: ", e.target.value);
   };
 
-  // getUserFromDB = async () => {
-  //   let OBJ = {
-  //     Email: this.inputsObj.userEmail,
-  //     Password: this.inputsObj.userPassword,
-  //   };
-  //   try {
-  //     let user = await Api.postRequest(`/users/getUserFromDb`, OBJ);
-  //     console.log("user.data: ", user.data);
-  //     this.props.updateUser(user.data);
-  //     console.log("user: ", this.props.user);
-  //     this.props.updateUserRole(user.data[0].Role);
-  //     console.log("userRole: ", this.props.userRole);
-  //     this.props.updateUserID(user.data[0].ID);
-  //     console.log("userID: ", this.props.userID);
-  //   } catch (err) {
-  //     console.log("Error ", err);
-  //     alert("Something went wrong, please try again");
-  //   }
-  // };
-
   updateContent = (value) => {
     this.props.updateContent(value);
   };
