@@ -8,7 +8,7 @@ const SingleVacationCard = (props) => {
     let img = "http://localhost:5004/" + vacation.ImageName;
 
     return (
-      <div key={i} className=" col-sm-12 col-md-6 col-xl-3 p-3">
+      <div key={i} className="col-sm-12 col-md-6 col-xl-3 p-3">
         <div className="card single-card">
           <img className="card-img-top productImg" src={img} alt={vacation.Destination} />
           <div className="card-body productCard d-grid gap-2">

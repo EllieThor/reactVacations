@@ -6,7 +6,7 @@ import { Link, Redirect } from "react-router-dom";
 import moment from "moment";
 
 import Header from "../components/HeaderComp";
-import LastVacation from "../components/NextVacationComp";
+import NextVacationComp from "../components/NextVacationComp";
 import MostPopularComp from "../components/MostPopularComp";
 import Footer from "../components/FooterComp";
 class Home extends Component {
@@ -59,26 +59,27 @@ class Home extends Component {
       let vacTest = [...allVacations];
       this.threeVacations = vacTest.sort((a, b) => b.follows.length - a.follows.length).slice(0, 3);
       console.log("this.threeVacations!!!!: ", this.threeVacations);
+      // לא שמיש כאן
       // map on vacations array in order to edit follows array In each of the items
-      allVacations.map((item, i) => {
-        let followsArr = item.follows;
-        let usersIDs = [];
+      // allVacations.map((item, i) => {
+      //   let followsArr = item.follows;
+      //   let usersIDs = [];
 
-        // map on followsArr array in order to convert followsArr from array of objects to arr of usersId's numbers
-        followsArr.map((id, i) => {
-          let testing = Object.values(followsArr[i]);
-          usersIDs.push(...testing);
-        });
-        item.follows = usersIDs;
+      //   // map on followsArr array in order to convert followsArr from array of objects to arr of usersId's numbers
+      //   followsArr.map((id, i) => {
+      //     let testing = Object.values(followsArr[i]);
+      //     usersIDs.push(...testing);
+      //   });
+      //   item.follows = usersIDs;
 
-        // sorting
-        let isUserExist = usersIDs.includes(this.props.userID);
-        if (isUserExist) {
-          allVacations.splice(i, 1);
-          allVacations.unshift(item);
-        }
-        // console.log("this.props.userID: ", this.props.userID, "usersIDs: ", usersIDs, " test sorting: ", isUserExist);
-      });
+      //   // sorting
+      //   let isUserExist = usersIDs.includes(this.props.userID);
+      //   if (isUserExist) {
+      //     allVacations.splice(i, 1);
+      //     allVacations.unshift(item);
+      //   }
+      //   // console.log("this.props.userID: ", this.props.userID, "usersIDs: ", usersIDs, " test sorting: ", isUserExist);
+      // });
 
       // vacations array
       this.props.updateVacations(allVacations);
@@ -103,10 +104,9 @@ class Home extends Component {
           </div>
           {/* text image */}
           <div className="row">row 1</div>
-          {/* last vacation */}
-          <div className="row">{this.props.vacations[this.nearestVacIndex] === undefined ? "" : <LastVacation vacation={this.props.vacations[this.nearestVacIndex]} />}</div>
-
-          <h2 className="text-center py-5">The three most popular vacations</h2>
+          <h2 className="text-center py-5 homeTitle">Our next vacation</h2>
+          <div className="row">{this.props.vacations[this.nearestVacIndex] === undefined ? "" : <NextVacationComp vacation={this.props.vacations[this.nearestVacIndex]} />}</div>
+          <h2 className="text-center py-5 homeTitle">The three most popular vacations</h2>
           <div className="row mb-5">{this.props.vacations === undefined ? "" : <MostPopularComp vacations={this.threeVacations} />}</div>
           <div className="row mt-2">
             <Footer />

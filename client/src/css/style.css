@@ -50,15 +50,28 @@ font-family: 'Open Sans', sans-serif; */
 } */
 
 /* Next vacation */
-.nextVacTitle {
+@media (max-width: 1028px) {
+  /* #title {
+    text-align: center;
+  }
+  .title-img {
+    position: static;
+    transform: rotate(0);
+  } */
+  /* .nextVacationCard {
+    width: 1200px;
+  } */
+}
+
+.homeTitle {
   font-family: "Merienda", cursive;
 }
 .nextVacationCard {
-  width: 850px;
+  /* width: 850px; */
   /* margin-left: 15rem; */
 }
 .nextVacationImg {
-  width: 600px;
+  width: 200px;
   border-radius: 8px;
   transition: 0.5s all ease-in-out;
   margin: 0 auto;
