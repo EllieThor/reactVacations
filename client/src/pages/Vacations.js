@@ -8,6 +8,8 @@ import Header from "../components/HeaderComp";
 import SingleVacationCard from "../components/SingleVacCardCopm";
 import Footer from "../components/FooterComp";
 
+import VacationComp from "../components/FormVacationComp";
+
 class Vacations extends Component {
   componentDidMount() {
     this.getVacationsFromDB();
@@ -101,10 +103,18 @@ class Vacations extends Component {
     this.props.updateVacationButtonsForm(1);
     //witch vacation edit
     this.props.updateVacationToForm(vacationObj);
+    console.log("YAEL: && BEFORE FN 1 : ", this.props.vacationToEdit);
+
+    this.fn();
+    console.log("YAEL: && AFTER 2 : ", this.props.vacationToEdit);
+
     //update modal content
     this.props.updateContent(3);
   };
-
+  fn() {
+    console.log("YAEL: && FN  3: ", this.props.vacationToEdit);
+  }
+  // TODO: להעיף להאדר
   addVacationClicked = () => {
     // witch button
     this.props.updateVacationButtonsForm(0);
@@ -136,6 +146,7 @@ class Vacations extends Component {
       return (
         <div>
           <div>{this.props.user[0] === undefined ? "" : <Header />}</div>
+          <div>{this.props.user[0] === undefined ? "" : <VacationComp />}</div>
           <div className="container">
             <div className="row mt-3">{this.props.userID === 0 ? "" : <SingleVacationCard userRole={this.props.userRole} userID={this.props.userID} vacations={this.props.vacations} insertStarToDB={this.insertStarToDB} deleteStarFromDB={this.deleteStarFromDB} deleteVacationFromDB={this.deleteVacationFromDB} editVacationClicked={this.editVacationClicked} />}</div>
           </div>

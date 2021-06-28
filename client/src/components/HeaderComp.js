@@ -10,6 +10,7 @@ class Header extends Component {
   globalObj = {
     welcomeTime: "",
   };
+  // addNewVacBtn = () => (!this.props.newVac ? this.props.updateAddNewVac(true) : this.props.updateAddNewVac(false));
 
   addVacationClicked = () => {
     // witch button

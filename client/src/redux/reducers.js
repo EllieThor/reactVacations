@@ -1,6 +1,7 @@
 const initialState = {
   vacations: [],
   user: [],
+  //FIXME: להוריד ולהשתמש דרך יוזר במקום 0 נקודה משהו
   userID: 0,
   userRole: 0,
 

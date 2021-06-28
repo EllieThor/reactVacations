@@ -1,7 +1,7 @@
 import React from "react";
 import LogInComp from "./FormLogInComp";
 import RegistrationComp from "./FormRegisterComp";
-import AddVacationComp from "./FormVacationComp";
+import VacationComp from "./FormVacationComp";
 
 const Modal = (props) => {
   return (
@@ -15,7 +15,7 @@ const Modal = (props) => {
               </h5>
               <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div className="modal-body">{props.content === 1 ? <LogInComp /> : props.content === 2 ? <RegistrationComp /> : props.content === 3 ? <AddVacationComp /> : "error, please reload again"}</div>
+            <div className="modal-body">{props.content === 1 ? <LogInComp /> : props.content === 2 ? <RegistrationComp /> : props.content === 3 ? <VacationComp /> : "error, please reload again"}</div>
             <div className="modal-footer">
               <button type="reset" className="btn btn-dark" data-bs-dismiss="modal">
                 Close
