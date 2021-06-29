@@ -45,14 +45,14 @@ class Reports extends Component {
   };
 
   render() {
-    if (this.props.userID === 0) {
+    if (this.props.user[0] === undefined) {
       return <Redirect from="/Reports" to="/" />;
     } else {
       return (
         <div>
-          <div>{this.props.userID === 0 ? "" : <Header />}</div>
-          <div className="mt-3 py-4 graph">{this.props.userID === 0 ? "" : <Bar data={this.data} options={this.options} className="graph my-4" />}</div>
-          <div>{this.props.userID === 0 ? "" : <Footer />}</div>
+          <div>{this.props.user[0] === undefined ? "" : <Header />}</div>
+          <div className="mt-3 py-4 graph">{this.props.user[0] === undefined ? "" : <Bar data={this.data} options={this.options} className="graph my-4" />}</div>
+          <div>{this.props.user[0] === undefined ? "" : <Footer />}</div>
         </div>
       );
     }
@@ -61,7 +61,7 @@ class Reports extends Component {
 const mapStateToProps = (state) => {
   return {
     vacations: state.vacations,
-    userID: state.userID,
+    user: state.user,
   };
 };
 
@@ -73,9 +73,9 @@ const mapDispatchToProps = (dispatch) => {
         payload: value,
       });
     },
-    updateUserID(value) {
+    updateUser(value) {
       dispatch({
-        type: "updateUserID",
+        type: "updateUser",
         payload: value,
       });
     },

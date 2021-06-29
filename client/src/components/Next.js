@@ -9,7 +9,7 @@ const Next = (props) => {
         <div className="img-container-green">
           <div className="img-inner">
             <div className="inner-skew-purple">
-              <img className="IMGNext" src="http://localhost:5004/cyprus.png" />
+              <img className="IMGNext" alt="" src="http://localhost:5004/cyprus.png" />
             </div>
           </div>
         </div>

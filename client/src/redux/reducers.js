@@ -1,9 +1,6 @@
 const initialState = {
   vacations: [],
   user: [],
-  //FIXME: להוריד ולהשתמש דרך יוזר במקום 0 נקודה משהו
-  userID: 0,
-  userRole: 0,
 
   // vacation form
   vacationFormButtonsStatus: 0,
@@ -24,12 +21,6 @@ function rootReducer(state = initialState, action) {
       state = { ...state, user: action.payload };
       break;
 
-    case "updateUserID":
-      state = { ...state, userID: action.payload };
-      break;
-    case "updateUserRole":
-      state = { ...state, userRole: action.payload };
-      break;
     // vacation form
     case "updateVacationButtonsForm":
       state = { ...state, vacationFormButtonsStatus: action.payload };

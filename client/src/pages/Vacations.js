@@ -45,12 +45,12 @@ class Vacations extends Component {
         // console.log("usersIDs : ", usersIDs);
 
         // sorting
-        let isUserExist = item.follows.includes(this.props.userID);
+        let isUserExist = item.follows.includes(this.props.user[0] === undefined ? 0 : this.props.user[0].ID);
         if (isUserExist) {
           allVacations.splice(i, 1);
           allVacations.unshift(item);
         }
-        // console.log("this.props.userID: ", this.props.userID, "usersIDs: ", usersIDs, " test sorting: ", isUserExist);
+        // console.log("this.props.user[0].ID: ", this.props.user[0].ID, "usersIDs: ", usersIDs, " test sorting: ", isUserExist);
       });
 
       // vacations array
@@ -68,7 +68,7 @@ class Vacations extends Component {
   insertStarToDB = async (vacationID) => {
     let currentObj = {
       vacationID: vacationID,
-      userID: this.props.userID,
+      userID: this.props.user[0].ID,
     };
 
     try {
@@ -84,7 +84,7 @@ class Vacations extends Component {
   deleteStarFromDB = async (vacationID) => {
     let currentObj = {
       vacationID: vacationID,
-      userID: this.props.userID,
+      userID: this.props.user[0].ID,
     };
     try {
       let vacation = await Api.postRequest("/users/deleteStar", currentObj);
@@ -140,17 +140,17 @@ class Vacations extends Component {
 
   // end img
   render() {
-    if (this.props.userID === 0) {
+    if (this.props.user[0] === undefined) {
       return <Redirect from="/Vacations" to="/" />;
     } else {
       return (
         <div>
           <div>{this.props.user[0] === undefined ? "" : <Header />}</div>
-          <div>{this.props.user[0] === undefined ? "" : <VacationComp />}</div>
+          {/* <div>{this.props.user[0] === undefined ? "" : <VacationComp />}</div> */}
           <div className="container">
-            <div className="row mt-3">{this.props.userID === 0 ? "" : <SingleVacationCard userRole={this.props.userRole} userID={this.props.userID} vacations={this.props.vacations} insertStarToDB={this.insertStarToDB} deleteStarFromDB={this.deleteStarFromDB} deleteVacationFromDB={this.deleteVacationFromDB} editVacationClicked={this.editVacationClicked} />}</div>
+            <div className="row mt-3">{this.props.user[0] === undefined ? "" : <SingleVacationCard user={this.props.user[0]} vacations={this.props.vacations} insertStarToDB={this.insertStarToDB} deleteStarFromDB={this.deleteStarFromDB} deleteVacationFromDB={this.deleteVacationFromDB} editVacationClicked={this.editVacationClicked} />}</div>
           </div>
-          <div className="footer">{this.props.userID === 0 ? "" : <Footer />}</div>
+          <div className="footer">{this.props.user[0] === undefined ? "" : <Footer />}</div>
         </div>
       );
     }
@@ -160,8 +160,6 @@ const mapStateToProps = (state) => {
   return {
     vacations: state.vacations,
     user: state.user,
-    userID: state.userID,
-    userRole: state.userRole,
 
     // vacationForm
     vacationFormButtonsStatus: state.vacationFormButtonsStatus,
@@ -183,19 +181,6 @@ const mapDispatchToProps = (dispatch) => {
     updateUser(value) {
       dispatch({
         type: "updateUser",
-        payload: value,
-      });
-    },
-
-    updateUserID(value) {
-      dispatch({
-        type: "updateUserID",
-        payload: value,
-      });
-    },
-    updateUserRole(value) {
-      dispatch({
-        type: "updateUserRole",
         payload: value,
       });
     },

@@ -9,6 +9,7 @@ class VacationsFormComp extends Component {
   inputsObj = {
     imageName: "",
   };
+  // `vacations`-`ID`, `Destination`, `Description`, `Price`, `ImageName`, `StartDate`, `EndDate`, `createdAt`, `updatedAt`
 
   onChangeFN = (e) => {
     this.inputsObj[e.target.id] = e.target.value;
@@ -131,12 +132,12 @@ class VacationsFormComp extends Component {
         // console.log("usersIDs : ", usersIDs);
 
         // sorting
-        let isUserExist = item.follows.includes(this.props.userID);
+        let isUserExist = item.follows.includes(this.props.user[0].ID);
         if (isUserExist) {
           allVacations.splice(i, 1);
           allVacations.unshift(item);
         }
-        // console.log("this.props.userID: ", this.props.userID, "usersIDs: ", usersIDs, " test sorting: ", isUserExist);
+        // console.log("this.props.user[0].ID: ", this.props.user[0].ID, "usersIDs: ", usersIDs, " test sorting: ", isUserExist);
       });
 
       // vacations array
@@ -179,8 +180,6 @@ const mapStateToProps = (state) => {
   return {
     vacations: state.vacations,
     user: state.user,
-    userID: state.userID,
-    userRole: state.userRole,
 
     // vacationForm
     vacationFormButtonsStatus: state.vacationFormButtonsStatus,
@@ -202,19 +201,6 @@ const mapDispatchToProps = (dispatch) => {
     updateUser(value) {
       dispatch({
         type: "updateUser",
-        payload: value,
-      });
-    },
-
-    updateUserID(value) {
-      dispatch({
-        type: "updateUserID",
-        payload: value,
-      });
-    },
-    updateUserRole(value) {
-      dispatch({
-        type: "updateUserRole",
         payload: value,
       });
     },

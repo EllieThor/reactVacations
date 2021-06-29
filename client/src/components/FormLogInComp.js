@@ -58,8 +58,6 @@ const mapStateToProps = (state) => {
   return {
     vacations: state.vacations,
     user: state.user,
-    userID: state.userID,
-    userRole: state.userRole,
 
     // vacationForm
     vacationFormButtonsStatus: state.vacationFormButtonsStatus,
@@ -81,19 +79,6 @@ const mapDispatchToProps = (dispatch) => {
     updateUser(value) {
       dispatch({
         type: "updateUser",
-        payload: value,
-      });
-    },
-
-    updateUserID(value) {
-      dispatch({
-        type: "updateUserID",
-        payload: value,
-      });
-    },
-    updateUserRole(value) {
-      dispatch({
-        type: "updateUserRole",
         payload: value,
       });
     },
