@@ -24,9 +24,7 @@ class Header extends Component {
   };
   // logOut
   logOutIconClicked = () => {
-    this.props.updateUserID(0);
     this.props.updateUser([]);
-    this.props.updateUserRole(0);
   };
 
   render() {

@@ -78,8 +78,6 @@ class RegistrationComp extends Component {
     try {
       let user = await Api.postRequest(`/users/getUserFromDb`, OBJ);
       this.props.updateUser(user.data);
-      this.props.updateUserRole(user.data[0].Role);
-      this.props.updateUserID(user.data[0].ID);
     } catch (err) {
       console.log("Error ", err);
       alert("Something went wrong, please try again");
