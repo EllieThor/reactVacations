@@ -9,13 +9,31 @@ class VacationsFormComp extends Component {
   inputsObj = {
     imageName: "",
   };
+
   // `vacations`-`ID`, `Destination`, `Description`, `Price`, `ImageName`, `StartDate`, `EndDate`, `createdAt`, `updatedAt`
 
   onChangeFN = (e) => {
     this.inputsObj[e.target.id] = e.target.value;
     console.log("new Input To inputsObj :", e.target.id, "value: ", e.target.value);
     console.log("yael inputsObj :", this.inputsObj);
+    console.log("yael vacationFormButtonsStatus addVsEdit :", this.props.vacationFormButtonsStatus);
   };
+
+  // onChangeFN = (e) => {
+  //   if (!inputsObj.destination) {
+  //     currentVacation.destination = CurrentVac.destination;
+  //   } else this.inputsObj[e.target.id] = e.target.value;
+  //   console.log("new Input To inputsObj :", e.target.id, "value: ", e.target.value);
+  //   console.log("yael inputsObj :", this.inputsObj);
+  // };
+
+  // onChangeFN = (e) => {
+  //   if (!this.inputsObj[e.target.id]) {
+  //     this.inputsObj[e.target.id] = e.target.value;
+  //   } else this.inputsObj[e.target.id] = e.target.value;
+  //   console.log("new Input To inputsObj :", e.target.id, "value: ", e.target.value);
+  //   console.log("yael inputsObj :", this.inputsObj);
+  // };
 
   addVacationButton = () => {
     return (
@@ -143,9 +161,6 @@ class VacationsFormComp extends Component {
       // vacations array
       this.props.updateVacations(allVacations);
       console.log("all vacations: ", allVacations);
-
-      // TODO: delete graph before updating ???? אם הפונקציה של הגרף כבויה אין בעיות אבל העדכון של נתונים חדשים דופק אותה
-      // this.getGraph();
     } catch (err) {
       console.log("Error ", err);
       alert("Something went wrong, please try again: ", err);
@@ -155,22 +170,23 @@ class VacationsFormComp extends Component {
   render() {
     return (
       <div>
-        <h5>{this.props.vacationFormButtonsStatus === 0 ? "Add New Vacation" : "Edit vacation"}</h5>
+        <h5>{this.props.vacationFormButtonsStatus === 0 ? "Add New Vacation 0" : "Edit vacation 1"}</h5>
+        <h5>destination: {this.props.vacationFormButtonsStatus === 0 ? "new vacation?" : this.props.vacationToEdit.Destination}</h5>
         {/* FIXME: input stay like the last one end not updated after change  */}
-        <label htmlFor="Destination">Destination:</label>
+        {/* <label htmlFor="Destination">Destination:</label> */}
         <input type="text" id="Destination" className="form-control m-2" defaultValue={this.props.vacationFormButtonsStatus === 0 ? "" : this.props.vacationToEdit.Destination} placeholder="Destination" onChange={(e) => this.onChangeFN(e)} />
-        <label htmlFor="Description">Description:</label>
-        <input type="text" id="Description" className="form-control  m-2" defaultValue={this.props.vacationFormButtonsStatus === 0 ? "" : this.props.vacationToEdit.Description} placeholder="Description" onChange={(e) => this.onChangeFN(e)} />
-        <label htmlFor="Price">Price:</label>
-        <input type="number" id="Price" min="0" className="form-control  m-2" defaultValue={this.props.vacationFormButtonsStatus === 0 ? "" : this.props.vacationToEdit.Price} placeholder="Price" onChange={(e) => this.onChangeFN(e)} />
-        <label htmlFor="StartDate">StartDate:</label>
-        <input type="date" id="StartDate" className="form-control  m-2" defaultValue={this.props.vacationFormButtonsStatus === 0 ? "" : this.props.vacationToEdit.StartDate} placeholder="StartDate" onChange={(e) => this.onChangeFN(e)} />
-        <label htmlFor="EndDate">EndDate:</label>
-        <input type="date" id="EndDate" className="form-control  m-2" defaultValue={this.props.vacationFormButtonsStatus === 0 ? "" : this.props.vacationToEdit.EndDate} placeholder="EndDate" onChange={(e) => this.onChangeFN(e)} />
-        <input id="filesToUpload" name="filesToUpload" type="file" onChange={(e) => this.fileChangeEvent(e)} />
-        <button type="button" className="btn btn-dark btn-s" onClick={() => this.uploadIMG()}>
+        {/* <label htmlFor="Description">Description:</label> */}
+        {/* <input type="text" id="Description" className="form-control  m-2" defaultValue={this.props.vacationFormButtonsStatus === 0 ? "" : this.props.vacationToEdit.Description} placeholder="Description" onChange={(e) => this.onChangeFN(e)} /> */}
+        {/* <label htmlFor="Price">Price:</label> */}
+        {/* <input type="number" id="Price" min="0" className="form-control  m-2" defaultValue={this.props.vacationFormButtonsStatus === 0 ? "" : this.props.vacationToEdit.Price} placeholder="Price" onChange={(e) => this.onChangeFN(e)} /> */}
+        {/* <label htmlFor="StartDate">StartDate:</label> */}
+        {/* <input type="date" id="StartDate" className="form-control  m-2" defaultValue={this.props.vacationFormButtonsStatus === 0 ? "" : this.props.vacationToEdit.StartDate} placeholder="StartDate" onChange={(e) => this.onChangeFN(e)} /> */}
+        {/* <label htmlFor="EndDate">EndDate:</label> */}
+        {/* <input type="date" id="EndDate" className="form-control  m-2" defaultValue={this.props.vacationFormButtonsStatus === 0 ? "" : this.props.vacationToEdit.EndDate} placeholder="EndDate" onChange={(e) => this.onChangeFN(e)} /> */}
+        {/* <input id="filesToUpload" name="filesToUpload" type="file" onChange={(e) => this.fileChangeEvent(e)} /> */}
+        {/* <button type="button" className="btn btn-dark btn-s" onClick={() => this.uploadIMG()}>
           <i className="fas fa-file-upload"></i>&nbsp;Upload
-        </button>
+        </button> */}
         {this.props.vacationFormButtonsStatus === 0 ? this.addVacationButton() : this.saveEditedVacationButton()}
       </div>
     );

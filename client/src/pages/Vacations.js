@@ -14,7 +14,7 @@ class Vacations extends Component {
   componentDidMount() {
     this.getVacationsFromDB();
   }
-
+  state = {};
   // patterns OBJ
   inputsObj = {
     imageName: "",
@@ -56,9 +56,6 @@ class Vacations extends Component {
       // vacations array
       this.props.updateVacations(allVacations);
       console.log("all vacations: ", allVacations);
-
-      // TODO: delete graph before updating ???? אם הפונקציה של הגרף כבויה אין בעיות אבל העדכון של נתונים חדשים דופק אותה
-      // this.getGraph();
     } catch (err) {
       console.log("Error ", err);
       alert("Something went wrong, please try again: ", err);
@@ -99,21 +96,20 @@ class Vacations extends Component {
   // TODO: inputs stay after default- לא קשור לריקון האובייקט הגלובלי כי זה דיפולט! ברגע שכבר יש ערך הוא שם אותו
   // vacation form buttons
   editVacationClicked = (vacationObj) => {
+    console.log("ELLIE : ", vacationObj);
+    this.props.updateVacationToForm({});
+    console.log("ELLIE : ", this.props.vacationToEdit);
     // witch button
     this.props.updateVacationButtonsForm(1);
     //witch vacation edit
+
     this.props.updateVacationToForm(vacationObj);
     console.log("YAEL: && BEFORE FN 1 : ", this.props.vacationToEdit);
-
-    this.fn();
-    console.log("YAEL: && AFTER 2 : ", this.props.vacationToEdit);
 
     //update modal content
     this.props.updateContent(3);
   };
-  fn() {
-    console.log("YAEL: && FN  3: ", this.props.vacationToEdit);
-  }
+
   // TODO: להעיף להאדר
   addVacationClicked = () => {
     // witch button
@@ -138,6 +134,14 @@ class Vacations extends Component {
     }
   };
 
+  teyMe = () => {
+    document.getElementById("removeMe").remove();
+  };
+
+  returnMe = () => {
+    document.getElementById("removeMe").hide();
+  };
+
   // end img
   render() {
     if (this.props.user[0] === undefined) {
@@ -145,8 +149,18 @@ class Vacations extends Component {
     } else {
       return (
         <div>
+          {/* <div>
+            <div>
+              but not me!
+              <div id="removeMe">hi destroy me!</div>
+            </div>
+            <button className="btn btn-info" onClick={() => this.teyMe()}>
+              try me
+            </button>
+            <hr />
+          </div> */}
           <div>{this.props.user[0] === undefined ? "" : <Header />}</div>
-          {/* <div>{this.props.user[0] === undefined ? "" : <VacationComp />}</div> */}
+          <div>{this.props.user[0] === undefined ? "" : <VacationComp />}</div>
           <div className="container">
             <div className="row mt-3">{this.props.user[0] === undefined ? "" : <SingleVacationCard user={this.props.user[0]} vacations={this.props.vacations} insertStarToDB={this.insertStarToDB} deleteStarFromDB={this.deleteStarFromDB} deleteVacationFromDB={this.deleteVacationFromDB} editVacationClicked={this.editVacationClicked} />}</div>
           </div>

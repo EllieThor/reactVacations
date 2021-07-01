@@ -64,9 +64,6 @@ class Home extends Component {
       // vacations array
       this.props.updateVacations(allVacations);
       console.log("all vacations after map: ", this.props.vacations);
-
-      // TODO: delete graph before updating ???? אם הפונקציה של הגרף כבויה אין בעיות אבל העדכון של נתונים חדשים דופק אותה
-      // this.getGraph();
     } catch (err) {
       console.log("Error ", err);
       alert("Something went wrong, please try again: ", err);

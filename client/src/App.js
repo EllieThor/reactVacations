@@ -8,6 +8,12 @@ import Home from "./pages/Home";
 import Vacations from "./pages/Vacations";
 import Reports from "./pages/Reports";
 
+import Modal from "./components/ModalComp";
+
+import LogInComp from "./components/FormLogInComp";
+import RegistrationComp from "./components/FormRegisterComp";
+import VacationComp from "./components/FormVacationComp";
+
 const store = createStore(reducers);
 
 function App() {
