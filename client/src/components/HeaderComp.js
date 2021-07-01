@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import Modal from "./ModalComp";
+import ModalTRY from "./ModalTry";
 
 class Header extends Component {
   componentDidMount() {}
@@ -128,6 +129,7 @@ class Header extends Component {
         </nav>
         <div className="row">
           <Modal content={this.props.content} />
+          {/* <ModalTRY content={this.props.content} /> */}
         </div>
       </div>
     );

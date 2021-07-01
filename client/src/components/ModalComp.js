@@ -1,4 +1,6 @@
 import React from "react";
+import ReactDOM from "react-dom";
+
 import LogInComp from "./FormLogInComp";
 import RegistrationComp from "./FormRegisterComp";
 import VacationComp from "./FormVacationComp";
@@ -27,5 +29,5 @@ const Modal = (props) => {
     </div>
   );
 };
-
+// ReactDOM.render(<Modal />, document.getElementById("root"));
 export default Modal;

@@ -8,11 +8,7 @@ import Home from "./pages/Home";
 import Vacations from "./pages/Vacations";
 import Reports from "./pages/Reports";
 
-import Modal from "./components/ModalComp";
-
-import LogInComp from "./components/FormLogInComp";
-import RegistrationComp from "./components/FormRegisterComp";
-import VacationComp from "./components/FormVacationComp";
+import ModalTRY from "./components/ModalTry";
 
 const store = createStore(reducers);
 
@@ -24,6 +20,7 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/Vacations" exact component={Vacations} />
           <Route path="/Reports" exact component={Reports} />
+          <ModalTRY />
         </Switch>
       </Router>
     </Provider>
