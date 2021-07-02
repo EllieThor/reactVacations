@@ -96,15 +96,15 @@ class Vacations extends Component {
   // TODO: inputs stay after default- לא קשור לריקון האובייקט הגלובלי כי זה דיפולט! ברגע שכבר יש ערך הוא שם אותו
   // vacation form buttons
   editVacationClicked = (vacationObj) => {
-    console.log("ELLIE : ", vacationObj);
+    console.log("editVacationClicked vacationObj : ", vacationObj);
     this.props.updateVacationToForm({});
-    console.log("ELLIE : ", this.props.vacationToEdit);
+    console.log("AFTER DELETE vacationToEdit : ", this.props.vacationToEdit);
     // witch button
     this.props.updateVacationButtonsForm(1);
     //witch vacation edit
 
     this.props.updateVacationToForm(vacationObj);
-    console.log("YAEL: && BEFORE FN 1 : ", this.props.vacationToEdit);
+    console.log("AFTER UPDATE vacationToEdit : ", this.props.vacationToEdit);
 
     //update modal content
     this.props.updateContent(3);

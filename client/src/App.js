@@ -20,7 +20,7 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/Vacations" exact component={Vacations} />
           <Route path="/Reports" exact component={Reports} />
-          <ModalTRY />
+          {/* <ModalTRY /> */}
         </Switch>
       </Router>
     </Provider>

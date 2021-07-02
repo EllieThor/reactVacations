@@ -20,14 +20,6 @@ class VacationsFormComp extends Component {
   };
 
   // onChangeFN = (e) => {
-  //   if (!inputsObj.destination) {
-  //     currentVacation.destination = CurrentVac.destination;
-  //   } else this.inputsObj[e.target.id] = e.target.value;
-  //   console.log("new Input To inputsObj :", e.target.id, "value: ", e.target.value);
-  //   console.log("yael inputsObj :", this.inputsObj);
-  // };
-
-  // onChangeFN = (e) => {
   //   if (!this.inputsObj[e.target.id]) {
   //     this.inputsObj[e.target.id] = e.target.value;
   //   } else this.inputsObj[e.target.id] = e.target.value;
@@ -124,6 +116,8 @@ class VacationsFormComp extends Component {
       this.inputsObj = {
         imageName: "",
       };
+
+      console.log("this.inputsObj AFTER : ", this.inputsObj);
       console.log("all vacations: ", this.props.vacations);
     } catch (err) {
       console.log("Error ", err);
@@ -171,10 +165,10 @@ class VacationsFormComp extends Component {
     return (
       <div>
         <h5>{this.props.vacationFormButtonsStatus === 0 ? "Add New Vacation 0" : "Edit vacation 1"}</h5>
-        <h5>destination: {this.props.vacationFormButtonsStatus === 0 ? "new vacation?" : this.props.vacationToEdit.Destination}</h5>
+        <h5>destination: {this.props.vacationFormButtonsStatus === 0 ? "new vacation 0" : this.props.vacationToEdit.Destination}</h5>
         {/* FIXME: input stay like the last one end not updated after change  */}
         {/* <label htmlFor="Destination">Destination:</label> */}
-        <input type="text" id="Destination" className="form-control m-2" defaultValue={this.props.vacationFormButtonsStatus === 0 ? "" : this.props.vacationToEdit.Destination} placeholder="Destination" onChange={(e) => this.onChangeFN(e)} />
+        <input type="text" id="Destination" className="form-control m-2" placeholder={this.props.vacationFormButtonsStatus === 0 ? "ffff" : this.props.vacationToEdit.Destination} onChange={(e) => this.onChangeFN(e)} />
         {/* <label htmlFor="Description">Description:</label> */}
         {/* <input type="text" id="Description" className="form-control  m-2" defaultValue={this.props.vacationFormButtonsStatus === 0 ? "" : this.props.vacationToEdit.Description} placeholder="Description" onChange={(e) => this.onChangeFN(e)} /> */}
         {/* <label htmlFor="Price">Price:</label> */}
