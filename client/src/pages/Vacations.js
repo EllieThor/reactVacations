@@ -9,6 +9,7 @@ import SingleVacationCard from "../components/SingleVacCardCopm";
 import Footer from "../components/FooterComp";
 
 import VacationComp from "../components/FormVacationComp";
+import SweetAlert from "../components/SweetAlertComp";
 
 class Vacations extends Component {
   componentDidMount() {
@@ -163,6 +164,10 @@ class Vacations extends Component {
           <div>{this.props.user[0] === undefined ? "" : <VacationComp />}</div>
           <div className="container">
             <div className="row mt-3">{this.props.user[0] === undefined ? "" : <SingleVacationCard user={this.props.user[0]} vacations={this.props.vacations} insertStarToDB={this.insertStarToDB} deleteStarFromDB={this.deleteStarFromDB} deleteVacationFromDB={this.deleteVacationFromDB} editVacationClicked={this.editVacationClicked} />}</div>
+          </div>
+          <div className="row">
+            ss
+            <SweetAlert />
           </div>
           <div className="footer">{this.props.user[0] === undefined ? "" : <Footer />}</div>
         </div>
