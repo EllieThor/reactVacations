@@ -13,6 +13,9 @@ class Header extends Component {
   componentDidMount() {}
   globalObj = {
     welcomeTime: "",
+    fileToUpload: "",
+    imageName: "",
+    imageNameForServer: "",
   };
   // addNewVacBtn = () => (!this.props.newVac ? this.props.updateAddNewVac(true) : this.props.updateAddNewVac(false));
 
@@ -44,7 +47,6 @@ class Header extends Component {
         if (!email || !password) {
           Swal.showValidationMessage(`Please enter email and password`);
         }
-        // this.getUserFromDB(email, password);
         return { email: email, password: password };
       },
     }).then((result) => {
@@ -52,12 +54,12 @@ class Header extends Component {
     });
   };
 
-  SweetAlertRegister = (title) => {
+  SweetAlertRegister = (title, FirstName, LastName) => {
     Swal.fire({
       title: title === 0 ? "Please Register" : "user is already exists, Please try another email",
       html: `
-      <input type="text" id="firstName" class="swal2-input" placeholder="FirstName">
-      <input type="text" id="lastName" class="swal2-input" placeholder="LastName">
+      <input type="text" id="firstName" class="swal2-input" value="${FirstName == undefined ? "" : FirstName}"  placeholder="FirstName">
+      <input type="text" id="lastName" class="swal2-input"  value="${LastName == undefined ? "" : LastName}" placeholder="LastName">
       <input type="text" id="email" class="swal2-input" placeholder="Email">
       <input type="password" id="password" class="swal2-input" placeholder="Password">`,
       confirmButtonText: "Sign in",
@@ -70,7 +72,6 @@ class Header extends Component {
         if (!email || !password || !firstName || !lastName) {
           Swal.showValidationMessage(`Please enter all fields`);
         }
-        // this.getUserFromDB(email, password);
         return { email: email, password: password, firstName: firstName, lastName: lastName };
       },
     }).then((result) => {
@@ -91,11 +92,12 @@ class Header extends Component {
       let user = await Api.postRequest("/users/insertUserToDb", currentObj);
       if (user.statusText === "OK") {
         if (user.data.name === "SequelizeUniqueConstraintError") {
-          alert("user is already exists, Please try another email");
+          // alert("user is already exists, Please try another email");
+          this.SweetAlertRegister(1, FirstName, LastName);
         } else {
           console.log("insert user answer: ", user.data);
-          // this.inputsObj.userEmail = user.data.Email;
-          // this.inputsObj.userPassword = user.data.Password;
+          // this.globalObj.userEmail = user.data.Email;
+          // this.globalObj.userPassword = user.data.Password;
           this.getUserFromDB(user.data.Email, user.data.Password);
         }
       } else {
@@ -122,6 +124,203 @@ class Header extends Component {
     } catch (err) {
       console.log("Error ", err);
       alert("Something went wrong, please try again");
+    }
+  };
+
+  SweetAlertVacation = (title) => {
+    Swal.fire({
+      title: title === 0 ? "Add new Vacation" : "Edit Vacation",
+      html: `
+        <label htmlFor="Destination">Destination:</label>
+        <input type="text" id="Destination" class="swal2-input" placeholder="Destination">
+        <label htmlFor="Description">Description:</label>
+        <input type="text" id="Description" class="swal2-input" placeholder="Description">
+        <label htmlFor="Price">Price:</label>
+        <input type="number" id="Price" class="swal2-input" placeholder="Price"><br/>
+        <label htmlFor="StartDate">StartDate:</label>
+        <input type="date" id="StartDate" class="swal2-input" placeholder="StartDate"><br/>
+        <label htmlFor="EndDate">EndDate:</label>
+        <input type="date" id="EndDate" class="swal2-input" placeholder="EndDate">
+        <input type="file" id="fileToUpload" class="swal2-input" name="Image">
+        
+      `,
+      // `Destination`, `Description`, `Price`, `ImageName`, `StartDate`, `EndDate`
+      confirmButtonText: "Sign in",
+      focusConfirm: false,
+      preConfirm: () => {
+        const Destination = Swal.getPopup().querySelector("#Destination").value;
+        const Description = Swal.getPopup().querySelector("#Description").value;
+        const Price = Swal.getPopup().querySelector("#Price").value;
+        const StartDate = Swal.getPopup().querySelector("#StartDate").value;
+        const EndDate = Swal.getPopup().querySelector("#EndDate").value;
+        const fileToUpload = Swal.getPopup().querySelector("#fileToUpload").files[0];
+        if (!Destination || !Description || !Price || !StartDate || !EndDate || !fileToUpload) {
+          Swal.showValidationMessage(`Please enter all fields`);
+        }
+        return { Destination: Destination, Description: Description, Price: Price, StartDate: StartDate, EndDate: EndDate, fileToUpload: fileToUpload };
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // this.fileChangeEvent(result.value.fileToUpload);
+        this.uploadIMGToServer(result.value.fileToUpload);
+        console.log("result.value.fileToUpload : ", result.value.fileToUpload);
+        this.insertVacationToDB(result.value.Destination, result.value.Description, result.value.Price, result.value.StartDate, result.value.EndDate, result.value.fileToUpload.name);
+      }
+    });
+  };
+
+  insertVacationToDB = async (Destination, Description, Price, StartDate, EndDate, ImgName) => {
+    let currentObj = {
+      Destination: Destination,
+      Description: Description,
+      Price: Price,
+      ImageName: ImgName,
+      StartDate: StartDate,
+      EndDate: EndDate,
+      // `vacations`-`ID`, `Destination`, `Description`, `Price`, `ImageName`, `StartDate`, `EndDate`, `createdAt`, `updatedAt`
+    };
+    console.log("currentObj: ", currentObj);
+
+    try {
+      let vacation = await Api.postRequest("/vacations/insertVacationToDb", currentObj);
+      this.getVacationsFromDB();
+      this.globalObj = {
+        welcomeTime: "",
+        fileToUpload: "",
+        imageName: "",
+        imageNameForServer: "",
+      };
+      console.log("new vacations: ", this.props.vacations);
+    } catch (err) {
+      console.log("Error ", err);
+      alert("Something went wrong, please try again");
+    }
+  };
+
+  getVacationsFromDB = async () => {
+    try {
+      let vacations = await Api.postRequest(`/vacations/getVacationsFromDb`);
+      let allVacations = vacations.data;
+
+      // map on vacations array in order to edit follows array In each of the items
+      allVacations.map((item, i) => {
+        let followsArr = item.follows;
+        let usersIDs = [];
+        // משפיע גם בקומפוננטה של אייקון פולו
+        // map on followsArr array in order to convert followsArr from array of objects to arr of usersId's numbers
+        followsArr.map((id, i) => {
+          let testing = Object.values(followsArr[i]);
+          usersIDs.push(...testing);
+        });
+        item.follows = usersIDs;
+        // console.log("usersIDs : ", usersIDs);
+
+        // sorting
+        let isUserExist = item.follows.includes(this.props.user[0] === undefined ? 0 : this.props.user[0].ID);
+        if (isUserExist) {
+          allVacations.splice(i, 1);
+          allVacations.unshift(item);
+        }
+        // console.log("this.props.user[0].ID: ", this.props.user[0].ID, "usersIDs: ", usersIDs, " test sorting: ", isUserExist);
+      });
+
+      // vacations array
+      this.props.updateVacations(allVacations);
+      console.log("all vacations: ", allVacations);
+    } catch (err) {
+      console.log("Error ", err);
+      alert("Something went wrong, please try again: ", err);
+    }
+  };
+
+  SweetAlertVacationTest = async () => {
+    const { value: file } = await Swal.fire({
+      title: "Select image",
+      input: "file",
+      inputAttributes: {
+        accept: "image/*",
+        "aria-label": "Upload your profile picture",
+      },
+      html: `
+        <label htmlFor="Destination">Destination:</label>
+        <input type="text" id="Destination" class="swal2-input" placeholder="Destination">
+        <label htmlFor="Description">Description:</label>
+        <input type="text" id="Description" class="swal2-input" placeholder="Description">
+        <label htmlFor="Price">Price:</label>
+        <input type="number" id="Price" class="swal2-input" placeholder="Price"><br/>
+        <label htmlFor="StartDate">StartDate:</label>
+        <input type="date" id="StartDate" class="swal2-input" placeholder="StartDate">
+        <label htmlFor="EndDate">EndDate:</label>
+        <input type="date" id="EndDate" class="swal2-input" placeholder="EndDate">
+      `,
+      // confirmButtonText: "Sign in",
+      // focusConfirm: false,
+      preConfirm: () => {
+        const Destination = Swal.getPopup().querySelector("#Destination").value;
+        const Description = Swal.getPopup().querySelector("#Description").value;
+        const Price = Swal.getPopup().querySelector("#Price").value;
+        const StartDate = Swal.getPopup().querySelector("#StartDate").value;
+        const EndDate = Swal.getPopup().querySelector("#EndDate").value;
+        if (!Destination || !Description || !Price || !StartDate || !EndDate) {
+          Swal.showValidationMessage(`Please enter all fields`);
+        }
+        return { Destination: Destination, Description: Description, Price: Price, StartDate: StartDate, EndDate: EndDate };
+      },
+    });
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        Swal.fire({
+          title: "Your uploaded picture",
+          imageUrl: e.target.result,
+          imageAlt: "The uploaded picture",
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  fileChangeEvent = (file) => {
+    console.log("fileChangeEvent :  ", file);
+    this.globalObj.fileToUpload = file;
+    this.uploadIMG();
+  };
+
+  uploadIMG = async () => {
+    if (this.globalObj.fileToUpload !== undefined) {
+      const formData = new FormData();
+      const files = this.globalObj.fileToUpload;
+
+      for (let i = 0; i < files.length; i++) {
+        formData.append("uploads[]", files[i], files[i]["name"]);
+      }
+      console.log("UPLOAD! ", formData);
+
+      let res = await Api.postRequest("/upload", formData);
+      console.log("react is IMG? ", res);
+    } else {
+      alert("Click to upload image please");
+    }
+  };
+
+  uploadIMGToServer = async (file) => {
+    console.log("$#$#$# file : ", file);
+    if (file !== undefined) {
+      const formData = new FormData();
+      const files = file;
+      console.log("files : files:  ", files);
+
+      for (let i = 0; i < files.length; i++) {
+        formData.append("uploads[]", files[i], files[i]["name"]);
+      }
+      console.log("formData : formData:  ", formData);
+      console.log("UPLOAD! ", formData);
+
+      let res = await Api.postRequest("/upload", formData);
+      console.log("react is IMG? ", res);
+    } else {
+      alert("Click to upload image please");
     }
   };
 
@@ -201,7 +400,9 @@ class Header extends Component {
                   <div className="col-4">
                     {(this.props.user[0] === undefined ? "" : this.props.user[0].Role) === 1 && window.location.pathname === "/Vacations" ? (
                       <abbr title="Add New Vacation">
-                        <i className="fas fa-plus fa-2x iconsColor" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => this.addVacationClicked()}></i>
+                        {/* <i className="fas fa-plus fa-2x iconsColor" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => this.addVacationClicked()}></i> */}
+                        <i className="fas fa-plus fa-2x iconsColor" onClick={() => this.SweetAlertVacation(0)}></i>
+                        {/* <i className="fas fa-plus fa-2x iconsColor" onClick={() => this.SweetAlertVacationTest()}></i> */}
                       </abbr>
                     ) : (
                       ""
@@ -236,6 +437,7 @@ class Header extends Component {
 }
 const mapStateToProps = (state) => {
   return {
+    vacations: state.vacations,
     user: state.user,
 
     // vacationForm
@@ -248,6 +450,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    updateVacations(value) {
+      dispatch({
+        type: "updateVacations",
+        payload: value,
+      });
+    },
     updateUser(value) {
       dispatch({
         type: "updateUser",
