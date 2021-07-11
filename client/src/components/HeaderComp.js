@@ -154,6 +154,7 @@ class Header extends Component {
         const StartDate = Swal.getPopup().querySelector("#StartDate").value;
         const EndDate = Swal.getPopup().querySelector("#EndDate").value;
         const fileToUpload = Swal.getPopup().querySelector("#fileToUpload").files[0];
+        console.log("rea:", fileToUpload);
         if (!Destination || !Description || !Price || !StartDate || !EndDate || !fileToUpload) {
           Swal.showValidationMessage(`Please enter all fields`);
         }
@@ -164,7 +165,7 @@ class Header extends Component {
         // this.fileChangeEvent(result.value.fileToUpload);
         this.uploadIMGToServer(result.value.fileToUpload);
         console.log("result.value.fileToUpload : ", result.value.fileToUpload);
-        this.insertVacationToDB(result.value.Destination, result.value.Description, result.value.Price, result.value.StartDate, result.value.EndDate, result.value.fileToUpload.name);
+        // this.insertVacationToDB(result.value.Destination, result.value.Description, result.value.Price, result.value.StartDate, result.value.EndDate, result.value.fileToUpload.name);
       }
     });
   };

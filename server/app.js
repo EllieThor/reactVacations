@@ -54,30 +54,30 @@ app.use(function (req, res, next) {
 });
 
 var storage = multer.diskStorage({
+  // destination
   destination: function (req, file, cb) {
     cb(null, "./uploads/");
   },
   filename: function (req, file, cb) {
-    let imgEnd = file.name.split(".");
+    let imgEnd = file.originalname.split(".");
     imgEnd = imgEnd[imgEnd.length - 1];
     console.log("imgEnd$$: ", imgEnd);
 
     let now = Date.now();
-    console.log("hi check: ", file.name);
+    console.log("hi check: ", file.originalname);
     // cb(null, file.originalname[0] + now + "." + imgEnd);
-    cb(null, file.name);
+    cb(null, file.originalname);
   },
 });
 
 var upload = multer({ storage: storage });
 
 app.post("/upload", upload.array("uploads[]", 12), function (req, res) {
-  // console.log("upload !!: ", upload);
-  // imgEnd = "";
-  // console.log("files !!:", req.files);
-  // res.send(req.files);
-  // console.log("upload or not!!: ", req.files);
-  console.log("$#$#$##5555555$: ", req.files);
+  console.log("upload : ", upload);
+  imgEnd = "";
+  console.log("files", req.files);
+  res.send(req.files);
+  console.log("upload or not", req.files);
 });
 
 // var server = app.listen(port, function () {
