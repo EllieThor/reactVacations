@@ -22,7 +22,7 @@ class SweetAlert extends Component {
         const login = Swal.getPopup().querySelector("#login").value;
         const password = Swal.getPopup().querySelector("#password").value;
         if (!login || !password) {
-          Swal.showValidationMessage(`Please enter login and password`);
+          Swal.showValidationMessage(`Please enter email and password`);
         }
         return { login: login, password: password };
       },
@@ -44,13 +44,11 @@ class SweetAlert extends Component {
     }
   };
   // html: `<div>${this.props.content === 1 ? <LogInComp /> : this.props.content === 2 ? <RegistrationComp /> : this.props.content === 3 ? <VacationComp /> : "error, please reload again"}</div>`,
-  updateContent = (value) => {
-    this.props.updateContent(value);
-  };
+
   render() {
     return (
       <div>
-        <button className="btn btn-success" onClick={() => this.updateContent(2)} onClick={this.SweetAlertOpen}>
+        <button className="btn btn-success" onClick={this.SweetAlertOpen}>
           try me!
         </button>
       </div>

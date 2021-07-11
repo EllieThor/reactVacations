@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import "../css/style.css";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import moment from "moment";
 import Modal from "./ModalComp";
 import ModalTRY from "./ModalTry";
+
+import * as Api from "../Api/apiCalls";
+import Swal from "sweetalert2";
 
 class Header extends Component {
   componentDidMount() {}
@@ -26,6 +29,100 @@ class Header extends Component {
   // logOut
   logOutIconClicked = () => {
     this.props.updateUser([]);
+  };
+  SweetAlertLogIn = (title) => {
+    Swal.fire({
+      title: title === 0 ? "Please Login" : "email or password wrong, please try again",
+      html: `
+      <input type="text" id="email" class="swal2-input" placeholder="Email">
+      <input type="password" id="password" class="swal2-input" placeholder="Password">`,
+      confirmButtonText: "Sign in",
+      focusConfirm: false,
+      preConfirm: () => {
+        const email = Swal.getPopup().querySelector("#email").value;
+        const password = Swal.getPopup().querySelector("#password").value;
+        if (!email || !password) {
+          Swal.showValidationMessage(`Please enter email and password`);
+        }
+        // this.getUserFromDB(email, password);
+        return { email: email, password: password };
+      },
+    }).then((result) => {
+      if (result.isConfirmed) this.getUserFromDB(result.value.email, result.value.password);
+    });
+  };
+
+  SweetAlertRegister = (title) => {
+    Swal.fire({
+      title: title === 0 ? "Please Register" : "user is already exists, Please try another email",
+      html: `
+      <input type="text" id="firstName" class="swal2-input" placeholder="FirstName">
+      <input type="text" id="lastName" class="swal2-input" placeholder="LastName">
+      <input type="text" id="email" class="swal2-input" placeholder="Email">
+      <input type="password" id="password" class="swal2-input" placeholder="Password">`,
+      confirmButtonText: "Sign in",
+      focusConfirm: false,
+      preConfirm: () => {
+        const email = Swal.getPopup().querySelector("#email").value;
+        const password = Swal.getPopup().querySelector("#password").value;
+        const firstName = Swal.getPopup().querySelector("#firstName").value;
+        const lastName = Swal.getPopup().querySelector("#lastName").value;
+        if (!email || !password || !firstName || !lastName) {
+          Swal.showValidationMessage(`Please enter all fields`);
+        }
+        // this.getUserFromDB(email, password);
+        return { email: email, password: password, firstName: firstName, lastName: lastName };
+      },
+    }).then((result) => {
+      if (result.isConfirmed) this.insertUserToDB(result.value.firstName, result.value.lastName, result.value.email, result.value.password);
+    });
+  };
+
+  insertUserToDB = async (FirstName, LastName, Email, Password) => {
+    let currentObj = {
+      FirstName: FirstName,
+      LastName: LastName,
+      Email: Email,
+      Password: Password,
+      Role: 0,
+    };
+
+    try {
+      let user = await Api.postRequest("/users/insertUserToDb", currentObj);
+      if (user.statusText === "OK") {
+        if (user.data.name === "SequelizeUniqueConstraintError") {
+          alert("user is already exists, Please try another email");
+        } else {
+          console.log("insert user answer: ", user.data);
+          // this.inputsObj.userEmail = user.data.Email;
+          // this.inputsObj.userPassword = user.data.Password;
+          this.getUserFromDB(user.data.Email, user.data.Password);
+        }
+      } else {
+        alert("something went wrong, please try again");
+      }
+    } catch (err) {
+      console.log("Error ", err);
+      alert("Something went wrong, please try again");
+    }
+  };
+
+  getUserFromDB = async (userEmail, userPassword) => {
+    let OBJ = {
+      Email: userEmail,
+      Password: userPassword,
+    };
+    try {
+      let user = await Api.postRequest(`/users/getUserFromDb`, OBJ);
+      console.log("user result : ", user.data.length);
+      // if (user.data.length == 0) alert("user or password wrong");
+      // FIXME: אולי יפריע לרגיסטר
+      if (user.data.length == 0) this.SweetAlertLogIn(1);
+      else this.props.updateUser(user.data);
+    } catch (err) {
+      console.log("Error ", err);
+      alert("Something went wrong, please try again");
+    }
   };
 
   render() {
@@ -82,7 +179,8 @@ class Header extends Component {
                   <div className="col-4">
                     {this.props.user[0] === undefined ? (
                       <abbr title="Log In">
-                        <i className="fas fa-user-circle fa-2x iconsColor" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => this.updateContent(1)}></i>
+                        {/* <i className="fas fa-user-circle fa-2x iconsColor" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => this.updateContent(1)}></i> */}
+                        <i className="fas fa-user-circle fa-2x iconsColor" onClick={() => this.SweetAlertLogIn(0)}></i>
                       </abbr>
                     ) : this.props.user[0].Role === 1 && window.location.pathname === "/Vacations" ? (
                       <Link to="/Reports">
@@ -112,7 +210,8 @@ class Header extends Component {
                   <div className="col-4">
                     {this.props.user[0] === undefined ? (
                       <abbr title="Register">
-                        <i className="fas fa-user-plus fa-2x iconsColor" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => this.updateContent(2)}></i>
+                        {/* <i className="fas fa-user-plus fa-2x iconsColor" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => this.updateContent(2)}></i> */}
+                        <i className="fas fa-user-plus fa-2x iconsColor" onClick={() => this.SweetAlertRegister(0)}></i>
                       </abbr>
                     ) : (
                       <Link to="/">

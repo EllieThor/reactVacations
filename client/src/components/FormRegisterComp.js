@@ -89,7 +89,7 @@ class RegistrationComp extends Component {
       <div>
         <div className="container p-3 mt-3">
           <div className="row">
-            <h1 className="h3 mb-3 fw-normal">Please register</h1>
+            <h1 className="h3 mb-3 fw-normal">Please Register</h1>
             <div className="col">
               <label htmlFor="FirstName">First Name:</label>
               <input type="text" id="FirstName" className="form-control" onChange={(e) => this.onChangeFN(e)} />

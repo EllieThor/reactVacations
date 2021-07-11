@@ -18,7 +18,7 @@ exports.insertUserToDb = async (req, res, next) => {
   await Users.create(newUserOBJ)
     .then((result) => {
       res.send(result);
-      console.log("Jane's auto-generated ID:", user.id);
+      console.log("Jane's auto-generated ID:", result.id);
     })
     .catch((err) => {
       res.send(err);
