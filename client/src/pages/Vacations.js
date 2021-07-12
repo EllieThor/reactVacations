@@ -165,10 +165,6 @@ class Vacations extends Component {
           <div className="container">
             <div className="row mt-3">{this.props.user[0] === undefined ? "" : <SingleVacationCard user={this.props.user[0]} vacations={this.props.vacations} insertStarToDB={this.insertStarToDB} deleteStarFromDB={this.deleteStarFromDB} deleteVacationFromDB={this.deleteVacationFromDB} editVacationClicked={this.editVacationClicked} />}</div>
           </div>
-          <div className="row">
-            ss
-            <SweetAlert />
-          </div>
           <div className="footer">{this.props.user[0] === undefined ? "" : <Footer />}</div>
         </div>
       );

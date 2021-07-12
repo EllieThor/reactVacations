@@ -145,7 +145,7 @@ class Header extends Component {
         
       `,
       // `Destination`, `Description`, `Price`, `ImageName`, `StartDate`, `EndDate`
-      confirmButtonText: "Sign in",
+      confirmButtonText: "Add Vacation",
       focusConfirm: false,
       preConfirm: () => {
         const Destination = Swal.getPopup().querySelector("#Destination").value;
@@ -153,8 +153,7 @@ class Header extends Component {
         const Price = Swal.getPopup().querySelector("#Price").value;
         const StartDate = Swal.getPopup().querySelector("#StartDate").value;
         const EndDate = Swal.getPopup().querySelector("#EndDate").value;
-        const fileToUpload = Swal.getPopup().querySelector("#fileToUpload").files[0];
-        console.log("rea:", fileToUpload);
+        const fileToUpload = Swal.getPopup().querySelector("#fileToUpload").files;
         if (!Destination || !Description || !Price || !StartDate || !EndDate || !fileToUpload) {
           Swal.showValidationMessage(`Please enter all fields`);
         }
@@ -162,12 +161,29 @@ class Header extends Component {
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        // this.fileChangeEvent(result.value.fileToUpload);
         this.uploadIMGToServer(result.value.fileToUpload);
-        console.log("result.value.fileToUpload : ", result.value.fileToUpload);
-        // this.insertVacationToDB(result.value.Destination, result.value.Description, result.value.Price, result.value.StartDate, result.value.EndDate, result.value.fileToUpload.name);
+        console.log("image name for insert : ", result.value.fileToUpload[0]["name"]);
+        this.insertVacationToDB(result.value.Destination, result.value.Description, result.value.Price, result.value.StartDate, result.value.EndDate, result.value.fileToUpload[0]["name"]);
       }
     });
+  };
+  uploadIMGToServer = async (file) => {
+    if (file !== undefined) {
+      const formData = new FormData();
+      const files = file;
+      console.log("files : ", files);
+
+      for (let i = 0; i < files.length; i++) {
+        formData.append("uploads[]", files[i], files[i]["name"]);
+      }
+      console.log("formData :  ", formData);
+      console.log("UPLOAD! ", formData);
+
+      let res = await Api.postRequest("/upload", formData);
+      console.log("IMG is upload : ", res);
+    } else {
+      alert("Click to upload image please");
+    }
   };
 
   insertVacationToDB = async (Destination, Description, Price, StartDate, EndDate, ImgName) => {
@@ -231,97 +247,6 @@ class Header extends Component {
     } catch (err) {
       console.log("Error ", err);
       alert("Something went wrong, please try again: ", err);
-    }
-  };
-
-  SweetAlertVacationTest = async () => {
-    const { value: file } = await Swal.fire({
-      title: "Select image",
-      input: "file",
-      inputAttributes: {
-        accept: "image/*",
-        "aria-label": "Upload your profile picture",
-      },
-      html: `
-        <label htmlFor="Destination">Destination:</label>
-        <input type="text" id="Destination" class="swal2-input" placeholder="Destination">
-        <label htmlFor="Description">Description:</label>
-        <input type="text" id="Description" class="swal2-input" placeholder="Description">
-        <label htmlFor="Price">Price:</label>
-        <input type="number" id="Price" class="swal2-input" placeholder="Price"><br/>
-        <label htmlFor="StartDate">StartDate:</label>
-        <input type="date" id="StartDate" class="swal2-input" placeholder="StartDate">
-        <label htmlFor="EndDate">EndDate:</label>
-        <input type="date" id="EndDate" class="swal2-input" placeholder="EndDate">
-      `,
-      // confirmButtonText: "Sign in",
-      // focusConfirm: false,
-      preConfirm: () => {
-        const Destination = Swal.getPopup().querySelector("#Destination").value;
-        const Description = Swal.getPopup().querySelector("#Description").value;
-        const Price = Swal.getPopup().querySelector("#Price").value;
-        const StartDate = Swal.getPopup().querySelector("#StartDate").value;
-        const EndDate = Swal.getPopup().querySelector("#EndDate").value;
-        if (!Destination || !Description || !Price || !StartDate || !EndDate) {
-          Swal.showValidationMessage(`Please enter all fields`);
-        }
-        return { Destination: Destination, Description: Description, Price: Price, StartDate: StartDate, EndDate: EndDate };
-      },
-    });
-
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        Swal.fire({
-          title: "Your uploaded picture",
-          imageUrl: e.target.result,
-          imageAlt: "The uploaded picture",
-        });
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  fileChangeEvent = (file) => {
-    console.log("fileChangeEvent :  ", file);
-    this.globalObj.fileToUpload = file;
-    this.uploadIMG();
-  };
-
-  uploadIMG = async () => {
-    if (this.globalObj.fileToUpload !== undefined) {
-      const formData = new FormData();
-      const files = this.globalObj.fileToUpload;
-
-      for (let i = 0; i < files.length; i++) {
-        formData.append("uploads[]", files[i], files[i]["name"]);
-      }
-      console.log("UPLOAD! ", formData);
-
-      let res = await Api.postRequest("/upload", formData);
-      console.log("react is IMG? ", res);
-    } else {
-      alert("Click to upload image please");
-    }
-  };
-
-  uploadIMGToServer = async (file) => {
-    console.log("$#$#$# file : ", file);
-    if (file !== undefined) {
-      const formData = new FormData();
-      const files = file;
-      console.log("files : files:  ", files);
-
-      for (let i = 0; i < files.length; i++) {
-        formData.append("uploads[]", files[i], files[i]["name"]);
-      }
-      console.log("formData : formData:  ", formData);
-      console.log("UPLOAD! ", formData);
-
-      let res = await Api.postRequest("/upload", formData);
-      console.log("react is IMG? ", res);
-    } else {
-      alert("Click to upload image please");
     }
   };
 
