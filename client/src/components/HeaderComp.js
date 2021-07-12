@@ -17,7 +17,6 @@ class Header extends Component {
     imageName: "",
     imageNameForServer: "",
   };
-  // addNewVacBtn = () => (!this.props.newVac ? this.props.updateAddNewVac(true) : this.props.updateAddNewVac(false));
 
   addVacationClicked = () => {
     // witch button
@@ -41,6 +40,12 @@ class Header extends Component {
       <input type="password" id="password" class="swal2-input" placeholder="Password">`,
       confirmButtonText: "Sign in",
       focusConfirm: false,
+      showClass: {
+        popup: "animate__animated animate__fadeInDown",
+      },
+      hideClass: {
+        popup: "animate__animated animate__fadeOutUp",
+      },
       preConfirm: () => {
         const email = Swal.getPopup().querySelector("#email").value;
         const password = Swal.getPopup().querySelector("#password").value;
@@ -64,6 +69,12 @@ class Header extends Component {
       <input type="password" id="password" class="swal2-input" placeholder="Password">`,
       confirmButtonText: "Sign in",
       focusConfirm: false,
+      showClass: {
+        popup: "animate__animated animate__fadeInDown",
+      },
+      hideClass: {
+        popup: "animate__animated animate__fadeOutUp",
+      },
       preConfirm: () => {
         const email = Swal.getPopup().querySelector("#email").value;
         const password = Swal.getPopup().querySelector("#password").value;
@@ -147,6 +158,12 @@ class Header extends Component {
       // `Destination`, `Description`, `Price`, `ImageName`, `StartDate`, `EndDate`
       confirmButtonText: "Add Vacation",
       focusConfirm: false,
+      showClass: {
+        popup: "animate__animated animate__fadeInDown",
+      },
+      hideClass: {
+        popup: "animate__animated animate__fadeOutUp",
+      },
       preConfirm: () => {
         const Destination = Swal.getPopup().querySelector("#Destination").value;
         const Description = Swal.getPopup().querySelector("#Description").value;

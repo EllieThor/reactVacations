@@ -3,7 +3,7 @@ import "../css/style.css";
 import { connect } from "react-redux";
 import * as Api from "../Api/apiCalls";
 import { Redirect } from "react-router-dom";
-
+import Swal from "sweetalert2";
 import Header from "../components/HeaderComp";
 import SingleVacationCard from "../components/SingleVacCardCopm";
 import Footer from "../components/FooterComp";
@@ -15,10 +15,12 @@ class Vacations extends Component {
   componentDidMount() {
     this.getVacationsFromDB();
   }
-  state = {};
+
   // patterns OBJ
   inputsObj = {
     imageName: "",
+    fileToUpload: "",
+    imageNameForServer: "",
   };
 
   onChangeFN = (e) => {
@@ -117,15 +119,15 @@ class Vacations extends Component {
       title: title === 0 ? "Add new Vacation" : "Edit Vacation",
       html: `
         <label htmlFor="Destination">Destination:</label>
-        <input type="text" id="Destination" class="swal2-input" placeholder="Destination">
+        <input type="text" id="Destination" class="swal2-input" placeholder="Destination" value="${vacationObj == undefined ? "" : vacationObj.Destination}">
         <label htmlFor="Description">Description:</label>
-        <input type="text" id="Description" class="swal2-input" placeholder="Description">
+        <input type="text" id="Description" class="swal2-input" placeholder="Description" value="${vacationObj == undefined ? "" : vacationObj.Description}">
         <label htmlFor="Price">Price:</label>
-        <input type="number" id="Price" class="swal2-input" placeholder="Price"><br/>
+        <input type="number" id="Price" class="swal2-input" placeholder="Price" value="${vacationObj == undefined ? "" : vacationObj.Price}"><br/>
         <label htmlFor="StartDate">StartDate:</label>
-        <input type="date" id="StartDate" class="swal2-input" placeholder="StartDate"><br/>
+        <input type="date" id="StartDate" class="swal2-input" placeholder="StartDate" value="${vacationObj == undefined ? "" : vacationObj.StartDate}"><br/>
         <label htmlFor="EndDate">EndDate:</label>
-        <input type="date" id="EndDate" class="swal2-input" placeholder="EndDate">
+        <input type="date" id="EndDate" class="swal2-input" placeholder="EndDate" value="${vacationObj == undefined ? "" : vacationObj.EndDate}">
         <input type="file" id="fileToUpload" class="swal2-input" name="Image">
         
       `,
@@ -152,6 +154,7 @@ class Vacations extends Component {
       }
     });
   };
+
   uploadIMGToServer = async (file) => {
     if (file !== undefined) {
       const formData = new FormData();
@@ -185,8 +188,7 @@ class Vacations extends Component {
     try {
       let vacation = await Api.postRequest("/vacations/updateVacationDetailsInDb", currentObj);
       this.getVacationsFromDB();
-      this.globalObj = {
-        welcomeTime: "",
+      this.inputsObj = {
         fileToUpload: "",
         imageName: "",
         imageNameForServer: "",
@@ -228,14 +230,6 @@ class Vacations extends Component {
     }
   };
 
-  // TODO: להעיף להאדר
-  addVacationClicked = () => {
-    // witch button
-    this.props.updateVacationButtonsForm(0);
-    //update modal content
-    this.props.updateContent(3);
-  };
-
   deleteVacationFromDB = async (vacationID) => {
     let currentObj = {
       ID: vacationID,
@@ -252,33 +246,13 @@ class Vacations extends Component {
     }
   };
 
-  teyMe = () => {
-    document.getElementById("removeMe").remove();
-  };
-
-  returnMe = () => {
-    document.getElementById("removeMe").hide();
-  };
-
-  // end img
   render() {
     if (this.props.user[0] === undefined) {
       return <Redirect from="/Vacations" to="/" />;
     } else {
       return (
         <div>
-          {/* <div>
-            <div>
-              but not me!
-              <div id="removeMe">hi destroy me!</div>
-            </div>
-            <button className="btn btn-info" onClick={() => this.teyMe()}>
-              try me
-            </button>
-            <hr />
-          </div> */}
           <div>{this.props.user[0] === undefined ? "" : <Header />}</div>
-          <div>{this.props.user[0] === undefined ? "" : <VacationComp />}</div>
           <div className="container">
             <div className="row mt-3">{this.props.user[0] === undefined ? "" : <SingleVacationCard user={this.props.user[0]} vacations={this.props.vacations} insertStarToDB={this.insertStarToDB} deleteStarFromDB={this.deleteStarFromDB} deleteVacationFromDB={this.deleteVacationFromDB} editVacationClicked={this.editVacationClicked} />}</div>
           </div>
