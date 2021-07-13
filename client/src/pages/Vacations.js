@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import Header from "../components/HeaderComp";
 import SingleVacationCard from "../components/SingleVacCardCopm";
 import Footer from "../components/FooterComp";
+import Modal from "../components/ModalComp";
 
 import VacationComp from "../components/FormVacationComp";
 import SweetAlert from "../components/SweetAlertComp";
@@ -110,9 +111,24 @@ class Vacations extends Component {
 
     //update modal content
     this.props.updateContent(3);
-
-    this.SweetAlertVacation(1, vacationObj);
   };
+  // FIXME: sweetAlert
+  // editVacationClicked = (vacationObj) => {
+  //   console.log("editVacationClicked vacationObj : ", vacationObj);
+  //   this.props.updateVacationToForm({});
+  //   console.log("AFTER DELETE vacationToEdit : ", this.props.vacationToEdit);
+  //   // witch button
+  //   this.props.updateVacationButtonsForm(1);
+  //   //witch vacation edit
+
+  //   this.props.updateVacationToForm(vacationObj);
+  //   console.log("AFTER UPDATE vacationToEdit : ", this.props.vacationToEdit);
+
+  //   //update modal content
+  //   this.props.updateContent(3);
+
+  //   this.SweetAlertVacation(1, vacationObj);
+  // };
 
   SweetAlertVacation = (title, vacationObj) => {
     Swal.fire({
@@ -257,6 +273,9 @@ class Vacations extends Component {
             <div className="row mt-3">{this.props.user[0] === undefined ? "" : <SingleVacationCard user={this.props.user[0]} vacations={this.props.vacations} insertStarToDB={this.insertStarToDB} deleteStarFromDB={this.deleteStarFromDB} deleteVacationFromDB={this.deleteVacationFromDB} editVacationClicked={this.editVacationClicked} />}</div>
           </div>
           <div className="footer">{this.props.user[0] === undefined ? "" : <Footer />}</div>
+          <div className="row">
+            <Modal content={this.props.content} />
+          </div>
         </div>
       );
     }

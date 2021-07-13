@@ -168,7 +168,8 @@ class VacationsFormComp extends Component {
         <h5>destination: {this.props.vacationFormButtonsStatus === 0 ? "new vacation 0" : this.props.vacationToEdit.Destination}</h5>
         {/* FIXME: input stay like the last one end not updated after change  */}
         <label htmlFor="Destination">Destination:</label>
-        <input type="text" id="Destination" className="form-control m-2" placeholder={this.props.vacationFormButtonsStatus === 0 ? "ffff" : this.props.vacationToEdit.Destination} onChange={(e) => this.onChangeFN(e)} />
+        <input type="text" id="Destination" className="form-control m-2" defaultValue={this.props.vacationFormButtonsStatus === 0 ? "" : this.props.vacationToEdit.Destination} placeholder="Destination" onChange={(e) => this.onChangeFN(e)} />
+        {/* <input type="text" id="Destination" className="form-control m-2" value={this.props.vacationFormButtonsStatus === 0 ? "" : this.props.vacationToEdit.Destination} placeholder="Destination" onChange={(e) => this.onChangeFN(e)} /> */}
         <label htmlFor="Description">Description:</label>
         <input type="text" id="Description" className="form-control  m-2" defaultValue={this.props.vacationFormButtonsStatus === 0 ? "" : this.props.vacationToEdit.Description} placeholder="Description" onChange={(e) => this.onChangeFN(e)} />
         <label htmlFor="Price">Price:</label>

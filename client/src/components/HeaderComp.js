@@ -321,8 +321,8 @@ class Header extends Component {
                   <div className="col-4">
                     {this.props.user[0] === undefined ? (
                       <abbr title="Log In">
-                        {/* <i className="fas fa-user-circle fa-2x iconsColor" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => this.updateContent(1)}></i> */}
-                        <i className="fas fa-user-circle fa-2x iconsColor" onClick={() => this.SweetAlertLogIn(0)}></i>
+                        <i className="fas fa-user-circle fa-2x iconsColor" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => this.updateContent(1)}></i>
+                        {/* <i className="fas fa-user-circle fa-2x iconsColor" onClick={() => this.SweetAlertLogIn(0)}></i> */}
                       </abbr>
                     ) : this.props.user[0].Role === 1 && window.location.pathname === "/Vacations" ? (
                       <Link to="/Reports">
@@ -343,8 +343,8 @@ class Header extends Component {
                   <div className="col-4">
                     {(this.props.user[0] === undefined ? "" : this.props.user[0].Role) === 1 && window.location.pathname === "/Vacations" ? (
                       <abbr title="Add New Vacation">
-                        {/* <i className="fas fa-plus fa-2x iconsColor" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => this.addVacationClicked()}></i> */}
-                        <i className="fas fa-plus fa-2x iconsColor" onClick={() => this.SweetAlertVacation(0)}></i>
+                        <i className="fas fa-plus fa-2x iconsColor" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => this.addVacationClicked()}></i>
+                        {/* <i className="fas fa-plus fa-2x iconsColor" onClick={() => this.SweetAlertVacation(0)}></i> */}
                         {/* <i className="fas fa-plus fa-2x iconsColor" onClick={() => this.SweetAlertVacationTest()}></i> */}
                       </abbr>
                     ) : (
@@ -354,8 +354,8 @@ class Header extends Component {
                   <div className="col-4">
                     {this.props.user[0] === undefined ? (
                       <abbr title="Register">
-                        {/* <i className="fas fa-user-plus fa-2x iconsColor" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => this.updateContent(2)}></i> */}
-                        <i className="fas fa-user-plus fa-2x iconsColor" onClick={() => this.SweetAlertRegister(0)}></i>
+                        <i className="fas fa-user-plus fa-2x iconsColor" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => this.updateContent(2)}></i>
+                        {/* <i className="fas fa-user-plus fa-2x iconsColor" onClick={() => this.SweetAlertRegister(0)}></i> */}
                       </abbr>
                     ) : (
                       <Link to="/">
