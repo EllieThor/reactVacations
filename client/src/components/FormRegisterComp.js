@@ -14,7 +14,6 @@ class RegistrationComp extends Component {
     this.inputsObj[e.target.id] = e.target.value;
     console.log("new Input To inputsObj :", e.target.id, "value: ", e.target.value);
   };
-
   insertUserToDB = async () => {
     let currentObj = {
       FirstName: this.inputsObj.FirstName,
@@ -24,30 +23,8 @@ class RegistrationComp extends Component {
       Role: 0,
     };
 
-    // TODO: unique email -הוספתי בדאטה בייס יוניק אבל בגלל שהוא לא מקבל מייל שקיים הוא זורק שגיאה- אם השגיאה היא כזו אז לכתוב מייל קיים
     if (currentObj.FirstName === undefined || currentObj.LastName === undefined || currentObj.Email === undefined || currentObj.Password === undefined) {
       alert("All fields must be filled out");
-
-      // let currentAlert = "";
-      // switch (currentObj) {
-      //   case currentObj.FirstName === undefined:
-      //     // currentAlert = "A First Name must be filled out";
-      //     alert("The First Name must be filled out");
-      //     break;
-      //   case currentObj.LastName === undefined:
-      //     // currentAlert = "A Last Name must be filled out";
-      //     alert("The Last Name must be filled out");
-      //     break;
-      //   case currentObj.Email == undefined:
-      //     // currentAlert = "An email address must be filled out";
-      //     alert("The Email Address must be filled out");
-      //     break;
-      //   case currentObj.Password === undefined:
-      //     // currentAlert = "A Password must be filled out";
-      //     alert("The Password must be filled out");
-      //     break;
-      // }
-      // alert(currentAlert);
     } else {
       try {
         let user = await Api.postRequest("/users/insertUserToDb", currentObj);
@@ -56,9 +33,17 @@ class RegistrationComp extends Component {
             alert("user is already exists, Please try another email");
           } else {
             console.log("insert user answer: ", user.data);
-            this.inputsObj.userEmail = user.data.Email;
-            this.inputsObj.userPassword = user.data.Password;
-            this.getUserFromDB();
+            let OBJ = {
+              Email: user.data.Email,
+              Password: user.data.Password,
+            };
+            try {
+              let user = await Api.postRequest(`/users/getUserFromDb`, OBJ);
+              this.props.updateUser(user.data);
+            } catch (err) {
+              console.log("Error ", err);
+              alert("Something went wrong, please try again");
+            }
           }
         } else {
           alert("something went wrong, please try again");
@@ -67,20 +52,6 @@ class RegistrationComp extends Component {
         console.log("Error ", err);
         alert("Something went wrong, please try again");
       }
-    }
-  };
-
-  getUserFromDB = async () => {
-    let OBJ = {
-      Email: this.inputsObj.userEmail,
-      Password: this.inputsObj.userPassword,
-    };
-    try {
-      let user = await Api.postRequest(`/users/getUserFromDb`, OBJ);
-      this.props.updateUser(user.data);
-    } catch (err) {
-      console.log("Error ", err);
-      alert("Something went wrong, please try again");
     }
   };
 

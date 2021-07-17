@@ -16,14 +16,8 @@ class Home extends Component {
   }
   // patterns OBJ
   inputsObj = {
-    imageName: "",
     nearestVacIndex: 0,
     threeVacations: [],
-  };
-
-  onChangeFN = (e) => {
-    this.inputsObj[e.target.id] = e.target.value;
-    console.log("new Input To inputsObj :", e.target.id, "value: ", e.target.value);
   };
 
   updateContent = (value) => {
@@ -34,7 +28,6 @@ class Home extends Component {
     try {
       let vacations = await Api.postRequest(`/vacations/getVacationsFromDb`);
       let allVacations = vacations.data;
-      console.log("allVacations: ", allVacations);
 
       // next vacation
       const dateToCheckFor = moment();
@@ -54,12 +47,10 @@ class Home extends Component {
           }
         }
       });
-      console.log("nearestDate: ", nearestDate, " AND nearestVacation: ", this.nearestVacIndex);
-      console.log("nearest Vacation: ", allVacations[this.nearestVacIndex]);
       // 3 popular
       let vacTest = [...allVacations];
       this.threeVacations = vacTest.sort((a, b) => b.follows.length - a.follows.length).slice(0, 3);
-      console.log("this.threeVacations!!!!: ", this.threeVacations);
+      console.log("this.threeVacations: ", this.threeVacations);
 
       // vacations array
       this.props.updateVacations(allVacations);

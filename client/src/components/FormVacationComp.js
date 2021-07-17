@@ -15,8 +15,6 @@ class VacationsFormComp extends Component {
   onChangeFN = (e) => {
     this.inputsObj[e.target.id] = e.target.value;
     console.log("new Input To inputsObj :", e.target.id, "value: ", e.target.value);
-    console.log("yael inputsObj :", this.inputsObj);
-    console.log("yael vacationFormButtonsStatus addVsEdit :", this.props.vacationFormButtonsStatus);
   };
 
   // onChangeFN = (e) => {
@@ -134,14 +132,12 @@ class VacationsFormComp extends Component {
       allVacations.map((item, i) => {
         let followsArr = item.follows;
         let usersIDs = [];
-        // משפיע גם בקומפוננטה של אייקון פולו
         // map on followsArr array in order to convert followsArr from array of objects to arr of usersId's numbers
         followsArr.map((id, i) => {
           let testing = Object.values(followsArr[i]);
           usersIDs.push(...testing);
         });
         item.follows = usersIDs;
-        // console.log("usersIDs : ", usersIDs);
 
         // sorting
         let isUserExist = item.follows.includes(this.props.user[0].ID);
@@ -149,7 +145,6 @@ class VacationsFormComp extends Component {
           allVacations.splice(i, 1);
           allVacations.unshift(item);
         }
-        // console.log("this.props.user[0].ID: ", this.props.user[0].ID, "usersIDs: ", usersIDs, " test sorting: ", isUserExist);
       });
 
       // vacations array
@@ -164,8 +159,9 @@ class VacationsFormComp extends Component {
   render() {
     return (
       <div>
-        <h5>{this.props.vacationFormButtonsStatus === 0 ? "Add New Vacation 0" : "Edit vacation 1"}</h5>
-        <h5>destination: {this.props.vacationFormButtonsStatus === 0 ? "new vacation 0" : this.props.vacationToEdit.Destination}</h5>
+        {/* <form> */}
+        <h5>{this.props.vacationFormButtonsStatus === 0 ? "Add New Vacation" : "Edit vacation"}</h5>
+        <h5>destination: {this.props.vacationFormButtonsStatus === 0 ? "new vacation" : this.props.vacationToEdit.Destination}</h5>
         {/* FIXME: input stay like the last one end not updated after change  */}
         <label htmlFor="Destination">Destination:</label>
         <input type="text" id="Destination" className="form-control m-2" defaultValue={this.props.vacationFormButtonsStatus === 0 ? "" : this.props.vacationToEdit.Destination} placeholder="Destination" onChange={(e) => this.onChangeFN(e)} />
@@ -183,6 +179,7 @@ class VacationsFormComp extends Component {
           <i className="fas fa-file-upload"></i>&nbsp;Upload
         </button>
         {this.props.vacationFormButtonsStatus === 0 ? this.addVacationButton() : this.saveEditedVacationButton()}
+        {/* </form> */}
       </div>
     );
   }

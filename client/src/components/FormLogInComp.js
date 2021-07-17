@@ -43,10 +43,6 @@ class LogInComp extends Component {
           <button className="w-100 btn btn-lg m-2 btn-dark" data-bs-dismiss="modal" onClick={() => this.getUserFromDB()}>
             Log in
           </button>
-          {/* TODO: modal inside modal */}
-          {/* <button className="w-100 btn btn-lg m-2 btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => this.updateContent(1)}>
-            Registration
-          </button> */}
         </div>
       </div>
     );
