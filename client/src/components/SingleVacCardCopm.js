@@ -18,7 +18,7 @@ const SingleVacationCard = (props) => {
               </div>
               {/* TODO: fix style number of start */}
               <div className="col-2">
-                <div>{vacation.follows.length}</div>
+                <div>{vacation.follows === undefined ? "" : vacation.follows.length}</div>
               </div>
               <div className="col-3">{props.user.Role === 1 ? <EditIcons vacationToEdit={vacation} deleteVacationFromDB={props.deleteVacationFromDB} openModalEdit={props.openModalEdit} /> : <StarsIcons vacation={vacation} userID={props.user.ID} insertStarToDB={props.insertStarToDB} deleteStarFromDB={props.deleteStarFromDB} />}</div>
             </div>

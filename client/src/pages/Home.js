@@ -14,11 +14,12 @@ class Home extends Component {
   componentDidMount() {
     this.getVacationsFromDB();
   }
+  // TODO: האם יש צורך באובייקט גלובלי בכלל
   // patterns OBJ
-  inputsObj = {
-    nearestVacIndex: 0,
-    threeVacations: [],
-  };
+  // inputsObj = {
+  //   nearestVacIndex: 0,
+  //   threeVacations: [],
+  // };
 
   updateContent = (value) => {
     this.props.updateContent(value);

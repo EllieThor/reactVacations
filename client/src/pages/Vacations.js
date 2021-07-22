@@ -7,7 +7,6 @@ import { Redirect } from "react-router-dom";
 import Nav from "../components/NavComp";
 import SingleVacationCard from "../components/SingleVacCardCopm";
 import Footer from "../components/FooterComp";
-import Modal from "../components/ModalComp";
 
 class Vacations extends Component {
   componentDidMount() {
@@ -218,7 +217,9 @@ class Vacations extends Component {
           <div className="container">
             <div className="row mt-3">{this.props.user[0] === undefined ? "" : <SingleVacationCard user={this.props.user[0]} vacations={this.props.vacations} insertStarToDB={this.insertStarToDB} deleteStarFromDB={this.deleteStarFromDB} deleteVacationFromDB={this.deleteVacationFromDB} openModalEdit={this.openModalEdit} />}</div>
           </div>
+
           <div className="footer">{this.props.user[0] === undefined ? "" : <Footer />}</div>
+
           {/* VACATION MODAL */}
           <div className="row">
             <div className="modal fade" id="vacationModal" tabIndex="-1" aria-labelledby="logOrRegisterModalLabel" aria-hidden="true">
