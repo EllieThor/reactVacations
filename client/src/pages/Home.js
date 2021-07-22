@@ -5,7 +5,7 @@ import * as Api from "../Api/apiCalls";
 import { Redirect } from "react-router-dom";
 import moment from "moment";
 
-import Header from "../components/HeaderComp";
+import Nav from "../components/NavComp";
 import NextVacationComp from "../components/NextVacationComp";
 // import Next from "../components/Next";
 import MostPopularComp from "../components/MostPopularComp";
@@ -67,9 +67,8 @@ class Home extends Component {
     } else {
       return (
         <div className="container-fluid">
-          <div className="row">
-            <Header />
-          </div>
+          <div className="row">{<Nav user={this.props.user[0]} updateContent={this.updateContent} content={this.props.content} />}</div>
+
           {/* text image */}
           <div className="row">row 1</div>
           <h2 className="text-center py-5 homeTitle">Our next vacation</h2>

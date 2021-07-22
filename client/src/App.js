@@ -8,8 +8,6 @@ import Home from "./pages/Home";
 import Vacations from "./pages/Vacations";
 import Reports from "./pages/Reports";
 
-import ModalTRY from "./components/ModalTry";
-
 const store = createStore(reducers);
 
 function App() {
@@ -20,7 +18,6 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/Vacations" exact component={Vacations} />
           <Route path="/Reports" exact component={Reports} />
-          {/* <ModalTRY /> */}
         </Switch>
       </Router>
     </Provider>

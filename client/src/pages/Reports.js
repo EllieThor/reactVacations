@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { Bar } from "react-chartjs-2";
 
+import Nav from "../components/NavComp";
 import Footer from "../components/FooterComp";
-import Header from "../components/HeaderComp";
 
 class Reports extends Component {
   componentDidMount() {}
@@ -50,7 +50,8 @@ class Reports extends Component {
     } else {
       return (
         <div>
-          <div>{this.props.user[0] === undefined ? "" : <Header />}</div>
+          <div>{this.props.user[0] === undefined ? "" : <Nav user={this.props.user[0]} updateContent={this.updateContent} />}</div>
+
           <div className="mt-3 py-4 graph">{this.props.user[0] === undefined ? "" : <Bar data={this.data} options={this.options} className="graph my-4" />}</div>
           <div>{this.props.user[0] === undefined ? "" : <Footer />}</div>
         </div>
