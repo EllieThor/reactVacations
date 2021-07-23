@@ -13,7 +13,7 @@ const SingleVacationCard = (props) => {
         <div className="card single-card">
           <img className="card-img-top productImg" src={img} alt={vacation.Destination} />
           <div class="card-header text-center">
-            <h5 className="card-title">{vacation.Destination}</h5>
+            <h5 className="card-title vacationDestination">{vacation.Destination}</h5>
           </div>
           <div className="card-body productCard d-grid gap-2">
             <div className="row">
