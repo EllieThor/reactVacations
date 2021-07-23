@@ -28,6 +28,10 @@ font-family: 'Open Sans', sans-serif; */
   color: rgba(0, 0, 0, 0.699);
 }
 
+.numOfStars {
+  font-family: "Merienda", cursive;
+}
+
 .headerS {
   /* background-color: rgba(3, 149, 165, 0.7); */
   /* background: linear-gradient(-70deg, #024873 30%, rgba(0, 0, 0, 0) 30%), #f28963; */
