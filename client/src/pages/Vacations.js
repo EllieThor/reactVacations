@@ -80,7 +80,7 @@ class Vacations extends Component {
   openModalEdit = (vacationObj) => {
     // witch button for form add-0 edit-1
     this.props.updateVacationButtonsForm(1);
-    this.imgInput = "";
+    this.imgInput = null;
     this.vacationToEditID = vacationObj.ID;
     this.vacationDestination.value = vacationObj.Destination;
     this.vacationDescription.value = vacationObj.Description;
@@ -91,16 +91,16 @@ class Vacations extends Component {
   };
 
   addVacationClicked = () => {
+    // witch button for form add-0 edit-1
+    this.props.updateVacationButtonsForm(0);
+    this.imgInput = null;
     this.vacationToEditID = -1;
-    this.imgInput = "";
     this.vacationDestination.value = "";
     this.vacationDescription.value = "";
     this.vacationPrice.value = "";
     this.vacationStartDate.value = "";
     this.vacationEndDate.value = "";
     this.imageNameForServer = "";
-    // witch button
-    this.props.updateVacationButtonsForm(0);
   };
 
   // TODO: ask before delete
@@ -197,13 +197,13 @@ class Vacations extends Component {
       console.log("Error ", err);
       alert("Something went wrong, please try again");
     }
-    this.imgInput = "";
+    this.imgInput = null;
+    this.imageNameForServer = "";
     this.vacationDestination.value = "";
     this.vacationDescription.value = "";
     this.vacationPrice.value = "";
     this.vacationStartDate.value = "";
     this.vacationEndDate.value = "";
-    this.imageNameForServer = "";
   };
 
   render() {
@@ -218,7 +218,7 @@ class Vacations extends Component {
             <div className="row mt-3">{this.props.user[0] === undefined ? "" : <SingleVacationCard user={this.props.user[0]} vacations={this.props.vacations} insertStarToDB={this.insertStarToDB} deleteStarFromDB={this.deleteStarFromDB} deleteVacationFromDB={this.deleteVacationFromDB} openModalEdit={this.openModalEdit} />}</div>
           </div>
 
-          <div className="footer">{this.props.user[0] === undefined ? "" : <Footer />}</div>
+          <div className="footer mt-3">{this.props.user[0] === undefined ? "" : <Footer />}</div>
 
           {/* VACATION MODAL */}
           <div className="row">

@@ -1,46 +1,48 @@
 import React from "react";
 import "../css/style.css";
+
 import StarsIcons from "./IconsStarsComp";
 import EditIcons from "./IconsEditComp";
 
 const SingleVacationCard = (props) => {
   let vacationCard = props.vacations.map((vacation, i) => {
     let img = "http://localhost:5004/" + vacation.ImageName;
-    let starImg = "http://localhost:5004/star4.png";
 
     return (
       <div key={i} className="col-sm-12 col-md-6 col-xl-3 p-3">
         <div className="card single-card">
-          <img className="card-img-top productImg" src={img} alt={vacation.Destination} />
-          <div class="card-header text-center">
-            <h5 className="card-title vacationDestination">{vacation.Destination}</h5>
+          <img className="card-img-top vacationImg" src={img} alt={vacation.Destination} />
+          <div class="card-header text-center pt-3">
+            <h4 className="card-title cinzelDecorativeFont">{vacation.Destination}</h4>
           </div>
-          <div className="card-body productCard d-grid gap-2">
-            <div className="row">
-              <p className="card-text cardDescription">{vacation.Description}</p>
+          <div className="card-body d-grid gap-2">
+            <div className="row ">
+              <p className="card-text cardDescription" id="scrollbar">
+                {vacation.Description}
+              </p>
             </div>
             <div className="row">
-              <div className="col-3">Dates</div>
+              <div className="col-3 meriendaFont">Dates</div>
               <div className="col-9">
-                <div className="card-text">
-                  {vacation.StartDate.slice(0, 10).replaceAll("-", "/").split("/").reverse().join("/")}-{vacation.EndDate === null ? "" : vacation.StartDate.slice(0, 10).replaceAll("-", "/").split("/").reverse().join("/")}
+                <div className="card-text dates">
+                  {vacation.StartDate === null ? "" : vacation.StartDate.slice(0, 10).replaceAll("-", "/").split("/").reverse().join("/")}-{vacation.EndDate === null ? "" : vacation.EndDate.slice(0, 10).replaceAll("-", "/").split("/").reverse().join("/")}
                 </div>
               </div>
             </div>
           </div>
-          <div class="card-footer text-muted">
+          <div class="card-footer">
             <div className="row">
               <div className="col-6">
                 <div className="row">
-                  <div className="col-5">Price</div>
-                  <div className="col-7">{vacation.Price} &#36;</div>
+                  <div className="col-6 meriendaFont">Price</div>
+                  <div className="col-6">{vacation.Price} &#36;</div>
                 </div>
               </div>
               <div className="col-6">
                 <div className="row">
                   <div className="col-6">
-                    <div className="numOfStars">
-                      <abbr title={vacation.follows.length <= 0 ? "There are no stars for this vacation" : `There are ${vacation.follows.length} stars to this vacation`}>
+                    <div className="meriendaFont">
+                      <abbr title={vacation.follows.length <= 0 ? "There are no stars for this vacation" : `This vacation have ${vacation.follows.length} ${vacation.follows.length === 1 ? "star" : "stars"}!`}>
                         <i className="far fa-star" />
                       </abbr>
                       &nbsp;&nbsp;

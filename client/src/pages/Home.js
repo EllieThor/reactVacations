@@ -7,7 +7,6 @@ import moment from "moment";
 
 import Nav from "../components/NavComp";
 import NextVacationComp from "../components/NextVacationComp";
-// import Next from "../components/Next";
 import MostPopularComp from "../components/MostPopularComp";
 import Footer from "../components/FooterComp";
 class Home extends Component {
@@ -72,10 +71,9 @@ class Home extends Component {
 
           {/* text image */}
           <div className="row">row 1</div>
-          <h2 className="text-center py-5 homeTitle">Our next vacation</h2>
+          <h2 className="text-center py-5 meriendaFont">Our next vacation</h2>
           <div className="row">{this.props.vacations[this.nearestVacIndex] === undefined ? "" : <NextVacationComp vacation={this.props.vacations[this.nearestVacIndex]} />}</div>
-          {/* <div className="row">{this.props.vacations[this.nearestVacIndex] === undefined ? "" : <Next vacation={this.props.vacations[this.nearestVacIndex]} />}</div> */}
-          <h2 className="text-center py-5 homeTitle">The three most popular vacations</h2>
+          <h2 className="text-center py-5 meriendaFont">The three most popular vacations</h2>
           <div className="row mb-5">{this.props.vacations === undefined ? "" : <MostPopularComp vacations={this.threeVacations} />}</div>
           <div className="row mt-2">
             <Footer />

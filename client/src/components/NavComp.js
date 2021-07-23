@@ -45,18 +45,18 @@ const Nav = (props) => {
       globalObj.welcomeTime = "Hello, ";
   }
   return (
-    <div className="headerS p-4 pb-2">
+    <div className="NavHeader p-4 pb-2">
       <nav className="navbar navbar-expand-lg navbar-light">
         <div className="container-fluid">
           <div className="navbar-brand">
-            <h2 className="logo">Vacation Stars</h2>
+            <h2 className="cinzelDecorativeFont">Vacation Stars</h2>
           </div>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav ms-auto pe-5 me-5">
-              <h5 className="welcome me-2 pe-4"> {props.user === undefined ? "" : globalObj.welcomeTime + props.user.FirstName + " " + props.user.LastName}</h5>
+              <h5 className="meriendaFont me-2 pe-4"> {props.user === undefined ? "" : globalObj.welcomeTime + props.user.FirstName + " " + props.user.LastName}</h5>
               <div className="row">
                 <div className="col-4">
                   {props.user === undefined ? (

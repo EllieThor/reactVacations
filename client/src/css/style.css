@@ -1,21 +1,9 @@
-/* font-family: 'Cinzel Decorative', cursive;
-font-family: 'Merienda', cursive;
-font-family: 'Noto Sans KR', sans-serif;
-font-family: 'Open Sans', sans-serif; */
-
-.logo {
-  font-family: "Cinzel Decorative", cursive;
-  /* color: white; */
+.NavHeader {
+  background: linear-gradient(-70deg, #024873 20%, rgba(0, 0, 0, 0) 80%), #f28963;
 }
 
-.welcome {
-  font-family: "Merienda", cursive;
-  /* display: inline-block; */
-  /* margin-right: 600px; */
-}
-
-.isStar {
-  color: gold;
+.iconsColor {
+  color: rgba(0, 0, 0, 0.699);
 }
 
 .graph {
@@ -24,21 +12,21 @@ font-family: 'Open Sans', sans-serif; */
   margin: 0 auto;
 }
 
-.iconsColor {
-  color: rgba(0, 0, 0, 0.699);
-}
-
-.numOfStars {
+/* google fonts */
+.meriendaFont {
   font-family: "Merienda", cursive;
 }
-.vacationDestination {
-  font-family: "Cinzel Decorative", cursive;
+
+.notoSansKRFont {
+  font-family: "Noto Sans KR", sans-serif;
 }
 
-.headerS {
-  /* background-color: rgba(3, 149, 165, 0.7); */
-  /* background: linear-gradient(-70deg, #024873 30%, rgba(0, 0, 0, 0) 30%), #f28963; */
-  background: linear-gradient(-70deg, #024873 20%, rgba(0, 0, 0, 0) 80%), #f28963;
+.openSansFont {
+  font-family: "Open Sans", sans-serif;
+}
+
+.cinzelDecorativeFont {
+  font-family: "Cinzel Decorative", cursive;
 }
 
 /* @media (max-width: 1028px) {
@@ -52,10 +40,44 @@ font-family: 'Open Sans', sans-serif; */
 } */
 
 /* FIXME: הגובה לא שווה  */
-/* .single-card {
-  height: 400px;
-} */
+/* single card */
 
+.single-card {
+  height: 500px;
+  width: 19rem;
+}
+
+.isStar {
+  color: gold;
+}
+
+.cardDescription {
+  height: 100px;
+  overflow-y: auto;
+}
+
+#scrollbar::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
+  border-radius: 10px;
+}
+
+#scrollbar::-webkit-scrollbar {
+  width: 10px;
+  background-color: #f5f5f5;
+}
+
+#scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.44, rgb(122, 153, 217)), color-stop(0.72, rgb(73, 125, 189)), color-stop(0.86, rgb(28, 58, 148)));
+}
+.dates {
+  letter-spacing: 1px;
+}
+/* TODO: גודל שווה לתמונות */
+/* .vacationImg {
+  width: 350px;
+} */
 /* Next vacation */
 /* @media (max-width: 1028px) { */
 /* #title {
@@ -68,13 +90,11 @@ font-family: 'Open Sans', sans-serif; */
 
 /* } */
 
-.homeTitle {
-  font-family: "Merienda", cursive;
-}
 /* .nextVacationCard { */
 /* width: 850px; */
 /* margin-left: 15rem; */
 /* } */
+
 .nextVacationImg {
   width: 200px;
   border-radius: 8px;
@@ -157,7 +177,7 @@ font-family: 'Open Sans', sans-serif; */
 }
 .b {
   background-color: #0396a6;
-  border-color: rgba(3, 149, 165, 1);
+  /* border-color: rgba(3, 149, 165, 1); */
 }
 .c {
   background-color: #04bfad;
