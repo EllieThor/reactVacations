@@ -49,7 +49,7 @@ const Nav = (props) => {
       <nav className="navbar navbar-expand-lg navbar-light">
         <div className="container-fluid">
           <div className="navbar-brand">
-            <h2 className="cinzelDecorativeFont">Vacation Stars</h2>
+            <h2 className="cinzelDecorativeFont">Vacations Stars</h2>
           </div>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
