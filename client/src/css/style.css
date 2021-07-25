@@ -1,6 +1,7 @@
 .NavHeader {
   /* background: linear-gradient(-70deg, #024873 20%, rgba(0, 0, 0, 0) 80%), #f28963; */
-  background: rgb(121, 121, 121);
+  /* background: rgb(121, 121, 121); */
+  background: #adb5bd;
 }
 
 .iconsColor {
@@ -94,15 +95,15 @@
 
 .cardNext {
   /* font-family: -apple-system, BlinkMacSystemFont, "Open Sans", sans-serif; */
-  font-size: 3em;
-  font-weight: 800;
+  /* font-size: 3em; */
+  /* font-weight: 800; */
   height: 4em;
   width: 64em;
   padding: 0.5em 1em;
   border-radius: 0.25em;
   display: table-cell;
   vertical-align: middle;
-  letter-spacing: -2px;
+  /* letter-spacing: -2px; */
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
@@ -186,7 +187,7 @@
 /* Footer */
 .footer {
   /* background-color: #f25e5e; */
-  background-color: rgb(179, 179, 179);
+  background-color: #adb5bd;
   height: 80px;
 }
 
