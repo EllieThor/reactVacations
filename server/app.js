@@ -6,6 +6,11 @@ var multer = require("multer");
 var path = require("path");
 var port = 5004;
 
+const http = require("http");
+const socketIO = require("socket.io");
+const server = http.createServer(app);
+const io = socketIO(server);
+
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
@@ -94,3 +99,34 @@ sequelize
     console.log("Error connected DB !!", err);
     // logger.log("error", "ERRR " + JSON.stringify(err))
   });
+
+// This creates our socket using the instance of the server
+io.on("connection", (socket) => {
+  console.log("New client connected");
+
+  socket.on("edited vacation", (followsArr) => {
+    console.log(" followsArr in server : ", followsArr);
+    io.sockets.emit("after_edit_vacation", followsArr);
+  });
+
+  // socket.on("edited vacation", () => {
+  //   io.sockets.emit("after_edit_vacation");
+  // });
+
+  socket.on("delete vacation", (vacationsARR) => {
+    // console.log(" vacationsARR: ", vacationsARR);
+    io.sockets.emit("after_delete_vacation", vacationsARR);
+  });
+  // FIXME: with id not work
+  // socket.on("delete with id", (vacationID) => {
+  //   // console.log(" vacationsARR: ", vacationsARR);
+  //   io.sockets.emit("id to delete", vacationID);
+  // });
+
+  // disconnect is fired when a client leaves the server
+  socket.on("disconnect", () => {
+    console.log("user disconnected");
+  });
+});
+
+server.listen(5003);

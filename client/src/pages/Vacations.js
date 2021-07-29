@@ -8,9 +8,33 @@ import Nav from "../components/NavComp";
 import SingleVacationCard from "../components/SingleVacCardCopm";
 import Footer from "../components/FooterComp";
 
+import socketIOClient from "socket.io-client";
 class Vacations extends Component {
+  socket;
+  state = {
+    endpoint: "localhost:5003",
+    vacationsARR: [],
+  };
   componentDidMount() {
     this.getVacationsFromDB();
+    this.socket = socketIOClient(this.state.endpoint, { transports: ["websocket", "polling", "flashsocket"] });
+
+    this.socket.on("after_delete_vacation", (newVacationsARR) => {
+      console.log("newVacationsARR : ", newVacationsARR);
+      this.props.updateVacations(newVacationsARR);
+      console.log("this.props.vacations: ", this.props.vacations);
+    });
+
+    this.socket.on("after_edit_vacation", (followsArr) => {
+      console.log("followsArr on client get: ", followsArr);
+      if (this.props.user[0] === undefined) {
+        console.log("user id is undefined");
+      } else {
+        console.log("on client get this.props.user[0].ID: ", this.props.user[0].ID);
+        let vacationUsersStars = followsArr.includes(this.props.user[0].ID);
+        if (this.props.user[0].Role === 1 || vacationUsersStars) this.getVacationsFromDB();
+      }
+    });
   }
 
   getVacationsFromDB = async () => {
@@ -88,6 +112,7 @@ class Vacations extends Component {
     this.vacationStartDate.value = vacationObj.StartDate;
     this.vacationEndDate.value = vacationObj.EndDate;
     this.imageNameForServer = vacationObj.ImageName;
+    this.vacationStars = vacationObj.follows;
   };
 
   addVacationClicked = () => {
@@ -112,7 +137,10 @@ class Vacations extends Component {
 
     try {
       let vacation = await Api.postRequest("/vacations/deleteVacationFromDb", currentObj);
-      this.getVacationsFromDB();
+      let index = this.props.vacations.findIndex((vacation) => vacation.ID === vacationID);
+      this.props.vacations.splice(index, 1);
+      this.socket.emit("delete vacation", this.props.vacations);
+      // this.getVacationsFromDB();
       console.log("all vacations: ", this.props.vacations);
     } catch (err) {
       console.log("Error ", err);
@@ -191,7 +219,9 @@ class Vacations extends Component {
 
     try {
       let vacation = await Api.postRequest("/vacations/updateVacationDetailsInDb", currentObj);
-      this.getVacationsFromDB();
+      // this.getVacationsFromDB();
+      this.socket.emit("edited vacation", this.vacationStars);
+      console.log("all stars on client send: ", this.vacationStars);
       console.log("all vacations: ", this.props.vacations);
     } catch (err) {
       console.log("Error ", err);
