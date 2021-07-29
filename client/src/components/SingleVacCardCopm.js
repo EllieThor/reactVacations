@@ -41,12 +41,11 @@ const SingleVacationCard = (props) => {
               <div className="col-6">
                 <div className="row">
                   <div className="col-6">
-                    <div className="meriendaFont">
+                    <div className="meriendaFont float-end">
                       <abbr title={vacation.follows.length <= 0 ? "There are no stars for this vacation" : `This vacation have ${vacation.follows.length} ${vacation.follows.length === 1 ? "star" : "stars"}!`}>
-                        <i className="far fa-star" />
+                        &nbsp;&nbsp;
+                        {vacation.follows === undefined ? "" : vacation.follows.length}
                       </abbr>
-                      &nbsp;&nbsp;
-                      {vacation.follows === undefined ? "" : vacation.follows.length}
                     </div>
                   </div>
                   <div className="col-6">{props.user.Role === 1 ? <EditIcons vacationToEdit={vacation} deleteVacationFromDB={props.deleteVacationFromDB} openModalEdit={props.openModalEdit} /> : <StarsIcons vacation={vacation} userID={props.user.ID} insertStarToDB={props.insertStarToDB} deleteStarFromDB={props.deleteStarFromDB} />}</div>

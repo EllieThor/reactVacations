@@ -248,7 +248,7 @@ class Vacations extends Component {
             <div className="row mt-3">{this.props.user[0] === undefined ? "" : <SingleVacationCard user={this.props.user[0]} vacations={this.props.vacations} insertStarToDB={this.insertStarToDB} deleteStarFromDB={this.deleteStarFromDB} deleteVacationFromDB={this.deleteVacationFromDB} openModalEdit={this.openModalEdit} />}</div>
           </div>
 
-          <div className="footer mt-3">{this.props.user[0] === undefined ? "" : <Footer />}</div>
+          <div className="footer mt-3 py-2">{this.props.user[0] === undefined ? "" : <Footer />}</div>
 
           {/* VACATION MODAL */}
           <div className="row">

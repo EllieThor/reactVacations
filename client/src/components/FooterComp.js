@@ -5,7 +5,7 @@ const Footer = () => {
   //TODO: fix mail
   return (
     <div className="footer text-center p-3">
-      <h6> Copyright &copy; 2021 | Designed by Ellie Thor</h6>
+      <h6 className="py-2"> Copyright &copy; 2021 | Designed by Ellie Thor</h6>
       <a href="https://www.facebook.com/Ellie.kurts/" target="_blank" rel="noreferrer" className="footerIcon">
         <i className="fab fa-facebook px-2 fa-lg"></i>
       </a>

@@ -68,20 +68,20 @@ class Home extends Component {
       return (
         <div className="container-fluid">
           <div className="row">{<Nav user={this.props.user[0]} updateContent={this.updateContent} content={this.props.content} />}</div>
-
           {/* text image */}
 
           <h2 className="text-center py-5 meriendaFont">Our next vacation</h2>
-          <div className="row">{this.props.vacations[this.nearestVacIndex] === undefined ? "" : <NextVacationComp vacation={this.props.vacations[this.nearestVacIndex]} />}</div>
-          <div className="row mt-5">
-            <h2 className="text-center pt-5 meriendaFont">The three most popular vacations</h2>
-            <h4 className="text-center p-5 notoSansKRFont mostPopularText">
+          <div className="row mb-4">{this.props.vacations[this.nearestVacIndex] === undefined ? "" : <NextVacationComp vacation={this.props.vacations[this.nearestVacIndex]} />}</div>
+          <div className="styledDots" />
+          <div className="row mt-2 mostPopularText">
+            <h2 className="text-center pt-5 meriendaFont ">The three most popular vacations</h2>
+            <h4 className="text-center p-5 notoSansKRFont ">
               On this site you can watch vacations, and if you like them you can vote and make an impact! <br />
               Give your favorite vacations a star, and maybe your favorite vacation will be one of the top three.
             </h4>
           </div>
           <div className="row my-5">{this.props.vacations === undefined ? "" : <MostPopularComp vacations={this.threeVacations} />}</div>
-          <div className="row mt-2">
+          <div className="footer mt-3 py-2">
             <Footer />
           </div>
         </div>

@@ -13,7 +13,6 @@ class Reports extends Component {
     labels: this.props.vacations.filter((vac) => vac.follows.length > 0).map((vacation) => vacation.Destination),
     datasets: [
       {
-        // TODO: מה זה הלייבל
         label: "# of Votes",
         data: this.props.vacations.filter((vac) => vac.follows.length > 0).map((vacation) => vacation.follows.length),
         backgroundColor: ["rgba(255, 99, 132, 0.2)", "rgba(54, 162, 235, 0.2)", "rgba(255, 206, 86, 0.2)", "rgba(75, 192, 192, 0.2)", "rgba(153, 102, 255, 0.2)", "rgba(255, 159, 64, 0.2)"],
@@ -51,9 +50,8 @@ class Reports extends Component {
       return (
         <div>
           <div>{this.props.user[0] === undefined ? "" : <Nav user={this.props.user[0]} updateContent={this.updateContent} />}</div>
-
           <div className="mt-3 py-4 graph">{this.props.user[0] === undefined ? "" : <Bar data={this.data} options={this.options} className="graph my-4" />}</div>
-          <div>{this.props.user[0] === undefined ? "" : <Footer />}</div>
+          <div className="footer mt-3 py-2">{this.props.user[0] === undefined ? "" : <Footer />}</div>
         </div>
       );
     }
