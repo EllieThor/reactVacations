@@ -7,6 +7,7 @@ import moment from "moment";
 
 import Nav from "../components/NavComp";
 import NextVacationComp from "../components/NextVacationComp";
+import Next from "../components/Next";
 import MostPopularComp from "../components/MostPopularComp";
 import Footer from "../components/FooterComp";
 class Home extends Component {
@@ -68,11 +69,9 @@ class Home extends Component {
       return (
         <div className="container-fluid">
           <div className="row">{<Nav user={this.props.user[0]} updateContent={this.updateContent} content={this.props.content} />}</div>
-          {/* text image */}
-
-          <h2 className="text-center py-5 meriendaFont">Our next vacation</h2>
+          <div className="row">{/* <Next /> */}</div>
+          <h2 className="text-center py-5 meriendaFont ourNextVacation">Our next vacation</h2>
           <div className="row mb-4">{this.props.vacations[this.nearestVacIndex] === undefined ? "" : <NextVacationComp vacation={this.props.vacations[this.nearestVacIndex]} />}</div>
-          <div className="styledDots" />
           <div className="row mt-2 mostPopularText">
             <h2 className="text-center pt-5 meriendaFont ">The three most popular vacations</h2>
             <h4 className="text-center p-5 notoSansKRFont ">

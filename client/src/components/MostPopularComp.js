@@ -17,10 +17,12 @@ const MostPopularComp = (props) => {
                   </div>
                 </div>
                 <div className="text-container">
-                  <h2 className="card-text">{i === 0 ? "First Place" : i === 1 ? "Second Place" : i === 2 ? "Third Place" : ""}</h2>
-                  <h3>{vacation.Destination}</h3>
-                  <div>{vacation.Description}</div>
-                  <h4>{vacation.Price}&#36;</h4>
+                  <h4 className="card-text">{i === 0 ? "First Place" : i === 1 ? "Second Place" : i === 2 ? "Third Place" : ""}</h4>
+                  <h3 className="cinzelDecorativeFont  fw-bold">{vacation.Destination}</h3>
+                  <div id="scrollbar" className="cardDescription">
+                    {vacation.Description}
+                  </div>
+                  <h4 className="meriendaFont pt-3">{vacation.Price}&#36;</h4>
                 </div>
               </div>
             </div>

@@ -12,7 +12,7 @@ const SingleVacationCard = (props) => {
       <div key={i} className="col-sm-12 col-md-6 col-xl-3 p-3">
         <div className="card single-card">
           <img className="card-img-top vacationImg" src={img} alt={vacation.Destination} />
-          <div class="card-header text-center pt-3">
+          <div className="card-header text-center pt-3">
             <h4 className="card-title cinzelDecorativeFont">{vacation.Destination}</h4>
           </div>
           <div className="card-body d-grid gap-2">
@@ -30,7 +30,7 @@ const SingleVacationCard = (props) => {
               </div>
             </div>
           </div>
-          <div class="card-footer">
+          <div className="card-footer">
             <div className="row">
               <div className="col-6">
                 <div className="row">

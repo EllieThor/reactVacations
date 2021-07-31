@@ -5,12 +5,12 @@ const EditIcons = (props) => {
     <div className="row">
       <div className="col-6">
         <abbr title="Edit Vacation">
-          <i className="fas fa-pen fa-lg" data-bs-toggle="modal" data-bs-target="#vacationModal" onClick={() => props.openModalEdit(props.vacationToEdit)}></i>
+          <i className="fas fa-pen fa-lg iconsColor" data-bs-toggle="modal" data-bs-target="#vacationModal" onClick={() => props.openModalEdit(props.vacationToEdit)}></i>
         </abbr>
       </div>
       <div className="col-6">
         <abbr title="Delete Vacation">
-          <i className="fas fa-trash fa-lg" onClick={() => props.deleteVacationFromDB(props.vacationToEdit.ID)}></i>
+          <i className="fas fa-trash fa-lg iconsColor" onClick={() => props.deleteVacationFromDB(props.vacationToEdit.ID)}></i>
         </abbr>
       </div>
     </div>

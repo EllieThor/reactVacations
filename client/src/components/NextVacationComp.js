@@ -19,7 +19,7 @@ const NextVacationComp = (props) => {
             <h4 className="meriendaFont">
               Dates: {props.vacation.StartDate.slice(0, 10).replaceAll("-", "/").split("/").reverse().join("/")}-{props.vacation.EndDate === null ? "" : props.vacation.StartDate.slice(0, 10).replaceAll("-", "/").split("/").reverse().join("/")}
             </h4>
-            <h2 className="cinzelDecorativeFont fw-bold py-2">{props.vacation.Destination}</h2>
+            <h2 className="cinzelDecorativeFont fw-bold pb-2">{props.vacation.Destination}</h2>
             <h4 className="meriendaFont">Price: {props.vacation.Price}&#36;</h4>
           </div>
         </div>

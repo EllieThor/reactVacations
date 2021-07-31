@@ -1,12 +1,20 @@
 .NavHeader {
-  /* background: linear-gradient(-70deg, #024873 20%, rgba(0, 0, 0, 0) 80%), #f28963; */
-  /* background: rgb(121, 121, 121); */
   background-image: linear-gradient(to bottom, rgba(173, 181, 189, 1), rgba(255, 255, 255, 0));
-  /* background-color: #adb5bd; */
 }
+
+/* .NavHeader {
+  background-image: linear-gradient(to bottom, rgba(173, 181, 189, 1), rgba(255, 255, 255, 0));
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+} */
 
 .iconsColor {
   color: rgba(0, 0, 0, 0.699);
+  cursor: pointer;
 }
 
 abbr[title] {
@@ -98,15 +106,6 @@ abbr[title] {
 
 /* Home */
 
-.styledDots {
-  margin: 7px auto;
-  border-style: dotted none none none;
-  border-width: 7px;
-  color: #8c8f8f;
-  height: 0;
-  width: 5%;
-}
-
 /* next vacation card */
 .card-holder {
   margin: 2em auto;
@@ -129,6 +128,7 @@ abbr[title] {
 }
 
 /* next vacation  */
+
 .nextCard {
   width: 750px;
 }
@@ -241,58 +241,3 @@ abbr[title] {
   background-color: #f25e5e;
   border-color: rgba(242, 94, 94, 1);
 }
-/* 
-.a-box {
-  display: inline-block;
-  width: 240px;
-  text-align: center;
-     border:5px solid red
-} */
-/* 
-.img-container-green {
-  height: 230px;
-  width: 230px;
-  overflow: hidden;
-  border-radius: 0px 20px 20px 0px;
-  display: inline-block;
-     border:2px solid green;
-} */
-
-/* .img-container-green img {
-  transform: skew(13deg, 0deg);
-  height: 250px;
-  margin: -35px 0px 0px -30px;
-     border:5px solid pink;
-} */
-
-/* .inner-skew-purple {
-  display: inline-block;
-  border-radius: 20px;
-  overflow: hidden;
-  padding: 0px;
-  transform: skew(-13deg, 0deg);
-  font-size: 0px;
-  margin: 20px 0px 0px 35px;
-  background: #c8c2c2;
-  height: 210px;
-  width: 300px;
-  border: 5px solid purple;
-} */
-
-/* .text-container-orange {
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-  padding: 120px 0px 20px 20px;
-  border-radius: 20px;
-  background: #fff;
-  margin: -120px -10px 0px 0px;
-  line-height: 19px;
-  font-size: 14px;
-  border: 5px solid orange;
-} */
-
-/* .text-container-orange h3 {
-  margin: 20px 0px 10px 0px;
-  color: #04bcff;
-  font-size: 18px;
-       border:5px solid brown;
-} */
