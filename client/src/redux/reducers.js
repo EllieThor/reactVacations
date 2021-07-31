@@ -2,11 +2,10 @@ const initialState = {
   vacations: [],
   user: [],
 
-  // vacation form
-  vacationFormButtonsStatus: 0,
-  vacationToEdit: {},
+  // vacation form button add-0 edit-1
+  addVsEditButtons: 0,
 
-  // modal content
+  // modal content login-1 register-2
   content: 1,
 };
 
@@ -17,21 +16,16 @@ function rootReducer(state = initialState, action) {
     case "updateVacations":
       state = { ...state, vacations: action.payload };
       break;
+
     case "updateUser":
       state = { ...state, user: action.payload };
       break;
 
     // vacation form
-    case "updateVacationButtonsForm":
-      state = { ...state, vacationFormButtonsStatus: action.payload };
-      break;
-    case "updateVacationToForm":
-      state = { ...state, vacationToEdit: action.payload };
+    case "updateAddVsEditButtons":
+      state = { ...state, addVsEditButtons: action.payload };
       break;
 
-    case "updateNumberOfStars":
-      state = { ...state, numberOfStars: action.payload };
-      break;
     // modal
     case "updateContent":
       state = { ...state, content: action.payload };

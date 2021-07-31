@@ -29,10 +29,6 @@ class LogInComp extends Component {
     }
   };
 
-  updateContent = (value) => {
-    this.props.updateContent(value);
-  };
-
   render() {
     return (
       <div className="container p-3 mt-3">
@@ -50,50 +46,15 @@ class LogInComp extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    vacations: state.vacations,
     user: state.user,
-
-    // vacationForm
-    vacationFormButtonsStatus: state.vacationFormButtonsStatus,
-    vacationToEdit: state.vacationToEdit,
-
-    //modal
-    content: state.content,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateVacations(value) {
-      dispatch({
-        type: "updateVacations",
-        payload: value,
-      });
-    },
     updateUser(value) {
       dispatch({
         type: "updateUser",
-        payload: value,
-      });
-    },
-
-    updateVacationButtonsForm(value) {
-      dispatch({
-        type: "updateVacationButtonsForm",
-        payload: value,
-      });
-    },
-    updateVacationToForm(value) {
-      dispatch({
-        type: "updateVacationToForm",
-        payload: value,
-      });
-    },
-
-    //modal
-    updateContent(value) {
-      dispatch({
-        type: "updateContent",
         payload: value,
       });
     },

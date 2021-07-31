@@ -7,19 +7,13 @@ import moment from "moment";
 
 import Nav from "../components/NavComp";
 import NextVacationComp from "../components/NextVacationComp";
-import Next from "../components/Next";
+import CarouselComp from "../components/CarouselComp";
 import MostPopularComp from "../components/MostPopularComp";
 import Footer from "../components/FooterComp";
 class Home extends Component {
   componentDidMount() {
     this.getVacationsFromDB();
   }
-  // TODO: האם יש צורך באובייקט גלובלי בכלל
-  // patterns OBJ
-  // inputsObj = {
-  //   nearestVacIndex: 0,
-  //   threeVacations: [],
-  // };
 
   updateContent = (value) => {
     this.props.updateContent(value);
@@ -30,6 +24,14 @@ class Home extends Component {
       let vacations = await Api.postRequest(`/vacations/getVacationsFromDb`);
       let allVacations = vacations.data;
 
+      // carousel
+      // Shuffle array
+      let forRandom = [...allVacations];
+      const shuffled = forRandom.sort(() => 0.5 - Math.random());
+      // Get sub-array of first n elements after shuffled
+      let randomVacations = shuffled.slice(0, 3);
+      this.randoms = randomVacations;
+      console.log("rrrr: ", this.randoms);
       // next vacation
       const dateToCheckFor = moment();
       let nearestDate;
@@ -51,13 +53,11 @@ class Home extends Component {
       // 3 popular
       let vacTest = [...allVacations];
       this.threeVacations = vacTest.sort((a, b) => b.follows.length - a.follows.length).slice(0, 3);
-      console.log("this.threeVacations: ", this.threeVacations);
 
       // vacations array
       this.props.updateVacations(allVacations);
-      console.log("all vacations after map: ", this.props.vacations);
     } catch (err) {
-      console.log("Error ", err);
+      // console.log("Error ", err);
       alert("Something went wrong, please try again: ", err);
     }
   };
@@ -69,7 +69,10 @@ class Home extends Component {
       return (
         <div className="container-fluid">
           <div className="row">{<Nav user={this.props.user[0]} updateContent={this.updateContent} content={this.props.content} />}</div>
-          <div className="row">{/* <Next /> */}</div>
+          <h2 className="text-center py-5 meriendaFont ourNextVacation">Our Vacations</h2>
+          <div className="row py-2">
+            <CarouselComp vacations={this.randoms} />
+          </div>
           <h2 className="text-center py-5 meriendaFont ourNextVacation">Our next vacation</h2>
           <div className="row mb-4">{this.props.vacations[this.nearestVacIndex] === undefined ? "" : <NextVacationComp vacation={this.props.vacations[this.nearestVacIndex]} />}</div>
           <div className="row mt-2 mostPopularText">
@@ -93,11 +96,6 @@ const mapStateToProps = (state) => {
     vacations: state.vacations,
     user: state.user,
 
-    // vacationForm
-    // TODO: addVsEdit
-    vacationFormButtonsStatus: state.vacationFormButtonsStatus,
-    vacationToEdit: state.vacationToEdit,
-
     //modal
     content: state.content,
   };
@@ -108,25 +106,6 @@ const mapDispatchToProps = (dispatch) => {
     updateVacations(value) {
       dispatch({
         type: "updateVacations",
-        payload: value,
-      });
-    },
-    updateUser(value) {
-      dispatch({
-        type: "updateUser",
-        payload: value,
-      });
-    },
-
-    updateVacationButtonsForm(value) {
-      dispatch({
-        type: "updateVacationButtonsForm",
-        payload: value,
-      });
-    },
-    updateVacationToForm(value) {
-      dispatch({
-        type: "updateVacationToForm",
         payload: value,
       });
     },

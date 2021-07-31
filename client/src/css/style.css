@@ -2,16 +2,6 @@
   background-image: linear-gradient(to bottom, rgba(173, 181, 189, 1), rgba(255, 255, 255, 0));
 }
 
-/* .NavHeader {
-  background-image: linear-gradient(to bottom, rgba(173, 181, 189, 1), rgba(255, 255, 255, 0));
-  position: fixed;
-  z-index: 2;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 60px;
-} */
-
 .iconsColor {
   color: rgba(0, 0, 0, 0.699);
   cursor: pointer;
@@ -46,17 +36,6 @@ abbr[title] {
   font-family: "Cinzel Decorative", cursive;
 }
 
-/* @media (max-width: 1028px) {
-  #title {
-    text-align: center;
-  }
-  .title-img {
-    position: static;
-    transform: rotate(0);
-  }
-} */
-
-/* FIXME: הגובה לא שווה  */
 /* single card */
 
 .single-card {
@@ -105,6 +84,14 @@ abbr[title] {
 }
 
 /* Home */
+/* carousel */
+
+.randomsText {
+  color: black;
+}
+.carouselTextArea {
+  background-color: white;
+}
 
 /* next vacation card */
 .card-holder {

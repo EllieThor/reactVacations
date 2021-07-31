@@ -82,7 +82,7 @@ const Nav = (props) => {
                 <div className="col-4">
                   {(props.user === undefined ? "" : props.user.Role) === 1 && window.location.pathname === "/Vacations" ? (
                     <abbr title="Add New Vacation">
-                      <i className="fas fa-plus fa-2x iconsColor" data-bs-toggle="modal" data-bs-target="#vacationModal" onClick={() => props.addVacationClicked()}></i>
+                      <i className="fas fa-plus fa-2x iconsColor" data-bs-toggle="modal" data-bs-target="#vacationModal" onClick={() => props.openModalAdd()}></i>
                     </abbr>
                   ) : (
                     ""

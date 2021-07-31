@@ -19,24 +19,19 @@ class Vacations extends Component {
     this.getVacationsFromDB();
     this.socket = socketIOClient(this.state.endpoint, { transports: ["websocket", "polling", "flashsocket"] });
 
-    this.socket.on("after_delete_vacation", (newVacationsARR) => {
-      console.log("newVacationsARR : ", newVacationsARR);
-      this.props.updateVacations(newVacationsARR);
-      console.log("this.props.vacations: ", this.props.vacations);
+    this.socket.on("after_delete_vacation", () => {
+      this.getVacationsFromDB();
     });
 
     this.socket.on("after_edit_vacation", (followsArr) => {
-      console.log("followsArr on client get: ", followsArr);
-      if (this.props.user[0] === undefined) {
-        console.log("user id is undefined");
-      } else {
-        console.log("on client get this.props.user[0].ID: ", this.props.user[0].ID);
+      if (this.props.user[0] !== undefined) {
         let vacationUsersStars = followsArr.includes(this.props.user[0].ID);
         if (this.props.user[0].Role === 1 || vacationUsersStars) this.getVacationsFromDB();
       }
     });
   }
 
+  // READ vacations
   getVacationsFromDB = async () => {
     try {
       let vacations = await Api.postRequest(`/vacations/getVacationsFromDb`);
@@ -63,47 +58,47 @@ class Vacations extends Component {
 
       // vacations array
       this.props.updateVacations(allVacations);
-      console.log("all vacations: ", allVacations);
     } catch (err) {
-      console.log("Error ", err);
+      // console.log("Error ", err);
       alert("Something went wrong, please try again: ", err);
     }
   };
 
-  insertStarToDB = async (vacationID) => {
-    let currentObj = {
-      vacationID: vacationID,
-      userID: this.props.user[0].ID,
-    };
+  // update modal content logInVsRegister
+  updateContent = (value) => {
+    this.props.updateContent(value);
+  };
 
-    try {
-      let userFallow = await Api.postRequest("/users/insertStar", currentObj);
-      console.log("if user star: ", userFallow);
-      this.getVacationsFromDB();
-    } catch (err) {
-      console.log("Error ", err);
-      alert("Something went wrong, please try again");
+  // logOut
+  logOutIconClicked = () => {
+    this.props.updateUser([]);
+  };
+
+  // file change event
+  fileChangeEvent = (e) => {
+    console.log("e.target.files: ", e.target.files);
+    this.imgInput = e.target.files;
+  };
+
+  // upload image
+  uploadIMG = async () => {
+    if (this.imgInput !== undefined) {
+      const formData = new FormData();
+      const files = this.imgInput;
+      for (let i = 0; i < files.length; i++) {
+        formData.append("uploads[]", files[i], files[i]["name"]);
+      }
+      this.imageNameForServer = files[0].name;
+      let res = await Api.postRequest("/upload", formData);
+    } else {
+      alert("Click to upload image please");
     }
   };
 
-  deleteStarFromDB = async (vacationID) => {
-    let currentObj = {
-      vacationID: vacationID,
-      userID: this.props.user[0].ID,
-    };
-    try {
-      let vacation = await Api.postRequest("/users/deleteStar", currentObj);
-      this.getVacationsFromDB();
-      console.log("all vacations: ", this.props.vacations);
-    } catch (err) {
-      console.log("Error ", err);
-      alert("Something went wrong, please try again");
-    }
-  };
-
+  // edit vacation click handler
   openModalEdit = (vacationObj) => {
     // witch button for form add-0 edit-1
-    this.props.updateVacationButtonsForm(1);
+    this.props.updateAddVsEditButtons(1);
     this.imgInput = null;
     this.vacationToEditID = vacationObj.ID;
     this.vacationDestination.value = vacationObj.Destination;
@@ -115,9 +110,10 @@ class Vacations extends Component {
     this.vacationStars = vacationObj.follows;
   };
 
-  addVacationClicked = () => {
+  // add vacation click handler
+  openModalAdd = () => {
     // witch button for form add-0 edit-1
-    this.props.updateVacationButtonsForm(0);
+    this.props.updateAddVsEditButtons(0);
     this.imgInput = null;
     this.vacationToEditID = -1;
     this.vacationDestination.value = "";
@@ -126,57 +122,6 @@ class Vacations extends Component {
     this.vacationStartDate.value = "";
     this.vacationEndDate.value = "";
     this.imageNameForServer = "";
-  };
-
-  // TODO: ask before delete
-  deleteVacationFromDB = async (vacationID) => {
-    let currentObj = {
-      ID: vacationID,
-    };
-    console.log("currentObj: ", currentObj);
-
-    try {
-      let vacation = await Api.postRequest("/vacations/deleteVacationFromDb", currentObj);
-      let index = this.props.vacations.findIndex((vacation) => vacation.ID === vacationID);
-      this.props.vacations.splice(index, 1);
-      this.socket.emit("delete vacation", this.props.vacations);
-      // this.getVacationsFromDB();
-      console.log("all vacations: ", this.props.vacations);
-    } catch (err) {
-      console.log("Error ", err);
-      alert("Something went wrong, please try again");
-    }
-  };
-
-  updateContent = (value) => {
-    this.props.updateContent(value);
-  };
-  // logOut
-  logOutIconClicked = () => {
-    this.props.updateUser([]);
-  };
-
-  // file change event
-  fileChangeEvent = (e) => {
-    console.log("e.target.files: ", e.target.files);
-    this.imgInput = e.target.files;
-  };
-  // upload image
-  uploadIMG = async () => {
-    if (this.imgInput !== undefined) {
-      const formData = new FormData();
-      const files = this.imgInput;
-
-      for (let i = 0; i < files.length; i++) {
-        formData.append("uploads[]", files[i], files[i]["name"]);
-      }
-
-      this.imageNameForServer = files[0].name;
-      let res = await Api.postRequest("/upload", formData);
-      console.log("react is IMG? ", res);
-    } else {
-      alert("Click to upload image please");
-    }
   };
 
   // CREATE vacation
@@ -190,23 +135,22 @@ class Vacations extends Component {
       StartDate: this.vacationStartDate.value,
       EndDate: this.vacationEndDate.value,
     };
-    console.log("currentObj: ", currentObj);
     if (currentObj.Destination === "" || currentObj.Description === "" || currentObj.Price <= 0 || currentObj.Price === undefined || currentObj.ImageName === undefined || currentObj.StartDate === undefined || currentObj.EndDate === undefined) {
       alert("All fields must be filled out");
     } else {
       try {
         let vacation = await Api.postRequest("/vacations/insertVacationToDb", currentObj);
         this.getVacationsFromDB();
-
-        console.log("new vacations: ", this.props.vacations);
       } catch (err) {
-        console.log("Error ", err);
+        // console.log("Error ", err);
         alert("Something went wrong, please try again");
       }
     }
   };
+
   // UPDATE vacation
   updateVacationDetailsInDB = async () => {
+    // `vacations`-`ID`, `Destination`, `Description`, `Price`, `ImageName`, `StartDate`, `EndDate`, `createdAt`, `updatedAt`
     let currentObj = {
       ID: this.vacationToEditID,
       Destination: this.vacationDestination.value,
@@ -219,10 +163,7 @@ class Vacations extends Component {
 
     try {
       let vacation = await Api.postRequest("/vacations/updateVacationDetailsInDb", currentObj);
-      // this.getVacationsFromDB();
       this.socket.emit("edited vacation", this.vacationStars);
-      console.log("all stars on client send: ", this.vacationStars);
-      console.log("all vacations: ", this.props.vacations);
     } catch (err) {
       console.log("Error ", err);
       alert("Something went wrong, please try again");
@@ -236,13 +177,61 @@ class Vacations extends Component {
     this.vacationEndDate.value = "";
   };
 
+  // DELETE vacation
+  deleteVacationFromDB = async (vacationID) => {
+    let currentObj = {
+      ID: vacationID,
+    };
+
+    try {
+      let vacation = await Api.postRequest("/vacations/deleteVacationFromDb", currentObj);
+      let index = this.props.vacations.findIndex((vacation) => vacation.ID === vacationID);
+      this.props.vacations.splice(index, 1);
+      this.socket.emit("delete vacation", this.props.vacations);
+    } catch (err) {
+      // console.log("Error ", err);
+      alert("Something went wrong, please try again");
+    }
+  };
+
+  // CREATE star
+  insertStarToDB = async (vacationID) => {
+    let currentObj = {
+      vacationID: vacationID,
+      userID: this.props.user[0].ID,
+    };
+
+    try {
+      let userFallow = await Api.postRequest("/users/insertStar", currentObj);
+      this.getVacationsFromDB();
+    } catch (err) {
+      // console.log("Error ", err);
+      alert("Something went wrong, please try again");
+    }
+  };
+
+  // DELETE star
+  deleteStarFromDB = async (vacationID) => {
+    let currentObj = {
+      vacationID: vacationID,
+      userID: this.props.user[0].ID,
+    };
+    try {
+      let vacation = await Api.postRequest("/users/deleteStar", currentObj);
+      this.getVacationsFromDB();
+    } catch (err) {
+      // console.log("Error ", err);
+      alert("Something went wrong, please try again");
+    }
+  };
+
   render() {
     if (this.props.user[0] === undefined) {
       return <Redirect from="/Vacations" to="/" />;
     } else {
       return (
         <div>
-          <div>{this.props.user[0] === undefined ? "" : <Nav user={this.props.user[0]} addVacationClicked={this.addVacationClicked} logOutIconClicked={this.logOutIconClicked} updateContent={this.updateContent} />}</div>
+          <div>{this.props.user[0] === undefined ? "" : <Nav user={this.props.user[0]} openModalAdd={this.openModalAdd} logOutIconClicked={this.logOutIconClicked} updateContent={this.updateContent} />}</div>
 
           <div className="container">
             <div className="row mt-3">{this.props.user[0] === undefined ? "" : <SingleVacationCard user={this.props.user[0]} vacations={this.props.vacations} insertStarToDB={this.insertStarToDB} deleteStarFromDB={this.deleteStarFromDB} deleteVacationFromDB={this.deleteVacationFromDB} openModalEdit={this.openModalEdit} />}</div>
@@ -263,7 +252,7 @@ class Vacations extends Component {
                   </div>
                   <div className="modal-body">
                     <div className="vacationForm">
-                      <h5>{this.props.vacationFormButtonsStatus === 0 ? "Add New Vacation" : "Edit vacation"}</h5>
+                      <h5>{this.props.addVsEditButtons === 0 ? "Add New Vacation" : "Edit vacation"}</h5>
                       <label htmlFor="Destination">Destination:</label>
                       <input type="text" id="Destination" className="form-control m-2" ref={(ref) => (this.vacationDestination = ref)} placeholder="Destination" />
                       <label htmlFor="Description">Description:</label>
@@ -278,7 +267,7 @@ class Vacations extends Component {
                       <button type="button" className="btn btn-dark btn-s" onClick={() => this.uploadIMG()}>
                         <i className="fas fa-file-upload"></i>&nbsp;Upload
                       </button>
-                      {this.props.vacationFormButtonsStatus === 0 ? (
+                      {this.props.addVsEditButtons === 0 ? (
                         <button type="submit" className="btn btn-dark mt-3" data-bs-dismiss="modal" onClick={() => this.insertVacationToDB()}>
                           Add vacation
                         </button>
@@ -309,8 +298,7 @@ const mapStateToProps = (state) => {
     user: state.user,
 
     // vacationForm
-    vacationFormButtonsStatus: state.vacationFormButtonsStatus,
-    vacationToEdit: state.vacationToEdit,
+    addVsEditButtons: state.addVsEditButtons,
 
     //modal
     content: state.content,
@@ -332,19 +320,13 @@ const mapDispatchToProps = (dispatch) => {
       });
     },
 
-    updateVacationButtonsForm(value) {
+    updateAddVsEditButtons(value) {
       dispatch({
-        type: "updateVacationButtonsForm",
+        type: "updateAddVsEditButtons",
         payload: value,
       });
     },
-    // FIXME: delete
-    updateVacationToForm(value) {
-      dispatch({
-        type: "updateVacationToForm",
-        payload: value,
-      });
-    },
+
     //modal
     updateContent(value) {
       dispatch({

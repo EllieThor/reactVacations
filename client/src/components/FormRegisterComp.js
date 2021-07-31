@@ -85,55 +85,15 @@ class RegistrationComp extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    vacations: state.vacations,
     user: state.user,
-
-    // vacationForm
-    vacationFormButtonsStatus: state.vacationFormButtonsStatus,
-    vacationToEdit: state.vacationToEdit,
-    // graph
-    vacationsNames: state.vacationsNames,
-    numberOfStars: state.numberOfStars,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateVacations(value) {
-      dispatch({
-        type: "updateVacations",
-        payload: value,
-      });
-    },
     updateUser(value) {
       dispatch({
         type: "updateUser",
-        payload: value,
-      });
-    },
-
-    updateVacationButtonsForm(value) {
-      dispatch({
-        type: "updateVacationButtonsForm",
-        payload: value,
-      });
-    },
-    updateVacationToForm(value) {
-      dispatch({
-        type: "updateVacationToForm",
-        payload: value,
-      });
-    },
-    // graph
-    updateVacationsNames(value) {
-      dispatch({
-        type: "updateVacationsNames",
-        payload: value,
-      });
-    },
-    updateNumberOfStars(value) {
-      dispatch({
-        type: "updateNumberOfStars",
         payload: value,
       });
     },

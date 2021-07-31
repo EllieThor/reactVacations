@@ -1,11 +1,11 @@
 const express = require("express");
 const app = express();
 
-// upload images plugin
+// upload images plugins
 var multer = require("multer");
 var path = require("path");
-var port = 5004;
 
+// socket.io plugins
 const http = require("http");
 const socketIO = require("socket.io");
 const server = http.createServer(app);
@@ -44,14 +44,9 @@ app.use("/users", UsersRoute);
 const VacationsRoute = require("./routs/vacationRoute");
 app.use("/vacations", VacationsRoute);
 
-//FIXME: אם זה פועל זה משבית
-// app.use((req, res) => {
-//   res.send("Page NotFound");
-// });
-
+// IMAGE UPLOADING
 // specify the folder
 app.use(express.static(path.join(__dirname, "uploads")));
-// headers and content type
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -59,18 +54,12 @@ app.use(function (req, res, next) {
 });
 
 var storage = multer.diskStorage({
-  // destination
   destination: function (req, file, cb) {
     cb(null, "./uploads/");
   },
   filename: function (req, file, cb) {
     let imgEnd = file.originalname.split(".");
     imgEnd = imgEnd[imgEnd.length - 1];
-    console.log("imgEnd$$: ", imgEnd);
-
-    let now = Date.now();
-    console.log("hi check: ", file.originalname);
-    // cb(null, file.originalname[0] + now + "." + imgEnd);
     cb(null, file.originalname);
   },
 });
@@ -78,17 +67,10 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 app.post("/upload", upload.array("uploads[]", 12), function (req, res) {
-  console.log("upload : ", upload);
   imgEnd = "";
-  console.log("files", req.files);
   res.send(req.files);
-  console.log("upload or not", req.files);
 });
 
-// var server = app.listen(port, function () {
-//   console.log("Listening on port %s...", port);
-// });
-// FIXME: with sequelize dont work
 sequelize
   .sync()
   .then((result) => {
@@ -97,36 +79,16 @@ sequelize
   })
   .catch((err) => {
     console.log("Error connected DB !!", err);
-    // logger.log("error", "ERRR " + JSON.stringify(err))
   });
 
 // This creates our socket using the instance of the server
 io.on("connection", (socket) => {
-  console.log("New client connected");
-
   socket.on("edited vacation", (followsArr) => {
-    console.log(" followsArr in server : ", followsArr);
     io.sockets.emit("after_edit_vacation", followsArr);
   });
 
-  // socket.on("edited vacation", () => {
-  //   io.sockets.emit("after_edit_vacation");
-  // });
-
-  socket.on("delete vacation", (vacationsARR) => {
-    // console.log(" vacationsARR: ", vacationsARR);
-    io.sockets.emit("after_delete_vacation", vacationsARR);
-  });
-  // FIXME: with id not work
-  // socket.on("delete with id", (vacationID) => {
-  //   // console.log(" vacationsARR: ", vacationsARR);
-  //   io.sockets.emit("id to delete", vacationID);
-  // });
-
-  // disconnect is fired when a client leaves the server
-  socket.on("disconnect", () => {
-    console.log("user disconnected");
+  socket.on("delete vacation", () => {
+    io.sockets.emit("after_delete_vacation");
   });
 });
-
 server.listen(5003);
