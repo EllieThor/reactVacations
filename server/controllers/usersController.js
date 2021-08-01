@@ -18,7 +18,6 @@ exports.insertUserToDb = async (req, res, next) => {
   await Users.create(newUserOBJ)
     .then((result) => {
       res.send(result);
-      console.log("Jane's auto-generated ID:", result.id);
     })
     .catch((err) => {
       res.send(err);
@@ -29,7 +28,6 @@ exports.insertUserToDb = async (req, res, next) => {
 exports.getUserFromDb = async (req, res, next) => {
   await Users.findAll({ where: { Email: req.body.Email, Password: req.body.Password } })
     .then((result) => {
-      console.log("result test 23:09: ", result);
       res.send(result);
     })
     .catch((err) => {
@@ -42,10 +40,8 @@ exports.insertStar = async (req, res) => {
   await FollowsModel.create(req.body)
     .then((result) => {
       res.send({ result });
-      console.log("insertStar result: ", result);
     })
     .catch((err) => {
-      console.log(err);
       res.send(err);
     });
 };
@@ -55,10 +51,8 @@ exports.deleteStar = async (req, res) => {
   await FollowsModel.destroy({ where: { userID: req.body.userID, vacationID: req.body.vacationID } })
     .then((result) => {
       res.send({ result });
-      console.log("deleteStar result: ", result);
     })
     .catch((err) => {
-      console.log(err);
       res.send(err);
     });
 };

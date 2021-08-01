@@ -10,7 +10,7 @@ const initialState = {
 };
 
 function rootReducer(state = initialState, action) {
-  console.log("root:", action.type, ", ", action.payload);
+  // console.log("root:", action.type, ", ", action.payload);
 
   switch (action.type) {
     case "updateVacations":

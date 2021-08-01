@@ -12,7 +12,6 @@ class LogInComp extends Component {
 
   onChangeFN = (e) => {
     this.inputsObj[e.target.id] = e.target.value;
-    console.log("new Input To inputsObj :", e.target.id, "value: ", e.target.value);
   };
 
   getUserFromDB = async () => {
@@ -24,7 +23,7 @@ class LogInComp extends Component {
       let user = await Api.postRequest(`/users/getUserFromDb`, OBJ);
       this.props.updateUser(user.data);
     } catch (err) {
-      console.log("Error ", err);
+      // console.log("Error ", err);
       alert("Something went wrong, please try again");
     }
   };

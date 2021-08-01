@@ -3,12 +3,11 @@ import "../css/style.css";
 import { connect } from "react-redux";
 import * as Api from "../Api/apiCalls";
 import { Redirect } from "react-router-dom";
+import socketIOClient from "socket.io-client";
 
 import Nav from "../components/NavComp";
 import SingleVacationCard from "../components/SingleVacCardCopm";
 import Footer from "../components/FooterComp";
-
-import socketIOClient from "socket.io-client";
 class Vacations extends Component {
   socket;
   state = {
@@ -18,6 +17,10 @@ class Vacations extends Component {
   componentDidMount() {
     this.getVacationsFromDB();
     this.socket = socketIOClient(this.state.endpoint, { transports: ["websocket", "polling", "flashsocket"] });
+
+    this.socket.on("after_add_vacation", () => {
+      this.getVacationsFromDB();
+    });
 
     this.socket.on("after_delete_vacation", () => {
       this.getVacationsFromDB();
@@ -76,7 +79,6 @@ class Vacations extends Component {
 
   // file change event
   fileChangeEvent = (e) => {
-    console.log("e.target.files: ", e.target.files);
     this.imgInput = e.target.files;
   };
 
@@ -85,11 +87,13 @@ class Vacations extends Component {
     if (this.imgInput !== undefined) {
       const formData = new FormData();
       const files = this.imgInput;
-      for (let i = 0; i < files.length; i++) {
-        formData.append("uploads[]", files[i], files[i]["name"]);
+      if (files.length) {
+        for (let i = 0; i < files.length; i++) {
+          formData.append("uploads[]", files[i], files[i]["name"]);
+        }
+        this.imageNameForServer = files[0].name;
+        let res = await Api.postRequest("/upload", formData);
       }
-      this.imageNameForServer = files[0].name;
-      let res = await Api.postRequest("/upload", formData);
     } else {
       alert("Click to upload image please");
     }
@@ -121,7 +125,7 @@ class Vacations extends Component {
     this.vacationPrice.value = "";
     this.vacationStartDate.value = "";
     this.vacationEndDate.value = "";
-    this.imageNameForServer = "";
+    this.imageNameForServer = null;
   };
 
   // CREATE vacation
@@ -140,7 +144,8 @@ class Vacations extends Component {
     } else {
       try {
         let vacation = await Api.postRequest("/vacations/insertVacationToDb", currentObj);
-        this.getVacationsFromDB();
+        this.socket.emit("add vacation");
+        // this.getVacationsFromDB();
       } catch (err) {
         // console.log("Error ", err);
         alert("Something went wrong, please try again");
@@ -165,7 +170,7 @@ class Vacations extends Component {
       let vacation = await Api.postRequest("/vacations/updateVacationDetailsInDb", currentObj);
       this.socket.emit("edited vacation", this.vacationStars);
     } catch (err) {
-      console.log("Error ", err);
+      // console.log("Error ", err);
       alert("Something went wrong, please try again");
     }
     this.imgInput = null;
@@ -187,7 +192,7 @@ class Vacations extends Component {
       let vacation = await Api.postRequest("/vacations/deleteVacationFromDb", currentObj);
       let index = this.props.vacations.findIndex((vacation) => vacation.ID === vacationID);
       this.props.vacations.splice(index, 1);
-      this.socket.emit("delete vacation", this.props.vacations);
+      this.socket.emit("delete vacation");
     } catch (err) {
       // console.log("Error ", err);
       alert("Something went wrong, please try again");

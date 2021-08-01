@@ -19,7 +19,6 @@ exports.insertVacationToDb = async (req, res, next) => {
 exports.getVacationsFromDb = async (req, res, next) => {
   await VacationsModel.findAll({ include: [{ model: FollowsModel, attributes: ["userID"] }] })
     .then((result) => {
-      console.log("VacationsModel result: ", result);
       res.send(result);
     })
     .catch((err) => {
@@ -34,7 +33,6 @@ exports.updateVacationDetailsInDb = async (req, res) => {
       res.send({ result });
     })
     .catch((err) => {
-      console.log(err);
       res.send(err);
     });
 };
@@ -46,7 +44,6 @@ exports.deleteVacationFromDb = async (req, res) => {
       res.send({ result });
     })
     .catch((err) => {
-      console.log(err);
       res.send(err);
     });
 };

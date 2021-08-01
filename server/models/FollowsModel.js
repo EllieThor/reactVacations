@@ -8,13 +8,5 @@ const FollowsModel = sequelize.define("follows", {
     allowNull: false,
     primaryKey: true,
   },
-  // userID: {
-  //   type: Sequelize.INTEGER(11),
-  //   allowNull: false,
-  // },
-  // vacationId: {
-  //   type: Sequelize.INTEGER(11),
-  //   allowNull: false,
-  // },
 });
 module.exports = FollowsModel;

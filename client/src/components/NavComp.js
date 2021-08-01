@@ -71,7 +71,7 @@ const Nav = (props) => {
                     </Link>
                   ) : props.user.Role === 1 && window.location.pathname === "/Reports" ? (
                     <Link to="/Vacations">
-                      <abbr title="Back to Vacation">
+                      <abbr title="Back to Vacations">
                         <i className="fas fa-map-marked-alt fa-2x  iconsColor"></i>
                       </abbr>
                     </Link>

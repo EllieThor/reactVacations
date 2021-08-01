@@ -2,7 +2,6 @@ import React from "react";
 import "../css/style.css";
 
 const Footer = () => {
-  //TODO: fix mail
   return (
     <div className="footer text-center p-3">
       <h6 className="py-2"> Copyright &copy; 2021 | Designed by Ellie Thor</h6>
