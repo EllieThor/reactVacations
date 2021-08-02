@@ -7,7 +7,7 @@ const MostPopularComp = (props) => {
       : props.vacations.map((vacation, i) => {
           let img = "http://localhost:5004/" + vacation.ImageName;
           return (
-            <div key={i} className="col-sm-12 col-md-6 col-xl-4 py-2 text-center">
+            <div key={i} className="col-sm-12 col-md-6 col-xl-4 py-2 text-center mx-auto">
               <div className="a-box">
                 <div className="img-container">
                   <div className="img-inner">

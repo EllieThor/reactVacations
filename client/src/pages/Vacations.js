@@ -103,7 +103,7 @@ class Vacations extends Component {
   openModalEdit = (vacationObj) => {
     // witch button for form add-0 edit-1
     this.props.updateAddVsEditButtons(1);
-    this.imgInput = null;
+    this.imgInput.value = "";
     this.vacationToEditID = vacationObj.ID;
     this.vacationDestination.value = vacationObj.Destination;
     this.vacationDescription.value = vacationObj.Description;
@@ -118,7 +118,7 @@ class Vacations extends Component {
   openModalAdd = () => {
     // witch button for form add-0 edit-1
     this.props.updateAddVsEditButtons(0);
-    this.imgInput = null;
+    this.imgInput.value = "";
     this.vacationToEditID = -1;
     this.vacationDestination.value = "";
     this.vacationDescription.value = "";
