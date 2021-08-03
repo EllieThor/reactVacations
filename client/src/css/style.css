@@ -89,7 +89,7 @@ abbr[title] {
 
 /*Most Popular */
 
-.mostPopularText {
+.HBackground {
   line-height: 1.8;
   background-image: linear-gradient(white, rgba(135, 198, 221, 0.5), white);
 }

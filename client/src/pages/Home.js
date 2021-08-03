@@ -72,20 +72,23 @@ class Home extends Component {
       return (
         <div className="container-fluid">
           <div className="row">{<Nav user={this.props.user[0]} updateContent={this.updateContent} content={this.props.content} />}</div>
-          <h2 className="text-center py-5 my-3 meriendaFont ourNextVacation">Our Vacations</h2>
-          <div className="row py-2">
-            <CarouselComp vacations={this.randoms} />
-          </div>
-          <h2 className="text-center py-5 meriendaFont ourNextVacation">Our next vacation</h2>
-          <div className="row mb-4">{this.props.vacations[this.nearestVacIndex] === undefined ? "" : <NextVacationComp vacation={this.props.vacations[this.nearestVacIndex]} />}</div>
-          <div className="row mt-2 mostPopularText">
-            <h2 className="text-center pt-5 meriendaFont ">The three most popular vacations</h2>
-            <h4 className="text-center p-5 notoSansKRFont ">
+          {/* most popular */}
+          <div className="row my-2">
+            <h4 className="text-center py-5 notoSansKRFont">
               On this site you can watch vacations, and if you like them you can vote and make an impact! <br />
               Give your favorite vacations a star, and maybe your favorite vacation will be one of the top three.
             </h4>
+            <h2 className="text-center pt-5 meriendaFont">The three most popular vacations</h2>
           </div>
           <div className="row my-5">{this.props.vacations === undefined ? "" : <MostPopularComp vacations={this.threeVacations} />}</div>
+          {/* next vacation */}
+          <h2 className="text-center py-5 meriendaFont ourNextVacation HBackground">Our next vacation</h2>
+          <div className="row mb-4 py-4">{this.props.vacations[this.nearestVacIndex] === undefined ? "" : <NextVacationComp vacation={this.props.vacations[this.nearestVacIndex]} />}</div>
+          {/* carousel */}
+          <h2 className="text-center py-5 my-3 meriendaFont ourNextVacation HBackground">From Our Vacations</h2>
+          <div className="row py-5">
+            <CarouselComp vacations={this.randoms} />
+          </div>
           <div className="footer mt-3 py-2">
             <Footer />
           </div>
