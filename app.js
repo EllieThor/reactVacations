@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-
+require("dotenv").config();
 // upload images plugins
 var multer = require("multer");
 var path = require("path");
@@ -74,7 +74,7 @@ app.post("/upload", upload.array("uploads[]", 12), function (req, res) {
 sequelize
   .sync()
   .then((result) => {
-    app.listen(Process.env.PORT || 5004);
+    app.listen(process.env.PORT || 5004);
     console.log("Connected DB !!");
   })
   .catch((err) => {
