@@ -96,4 +96,4 @@ io.on("connection", (socket) => {
     io.sockets.emit("after_edit_vacation", followsArr);
   });
 });
-server.listen(5003);
+server.listen(process.env.PORT || 5003);
