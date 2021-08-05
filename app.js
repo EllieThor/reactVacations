@@ -20,7 +20,10 @@ const sequelize = require("./utils/database");
 
 const VacationsModel = require("./models/VacationsModel");
 const UsersModel = require("./models/UsersModel");
-const FollowsModel = require("./models/FollowsModel");
+// const FollowsModel = require("./models/FollowsModel");
+
+VacationsModel.hasMany(UsersModel);
+UsersModel.hasMany(VacationsModel);
 
 VacationsModel.hasMany(FollowsModel);
 UsersModel.hasMany(FollowsModel);
