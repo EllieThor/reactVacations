@@ -20,10 +20,7 @@ const sequelize = require("./utils/database");
 
 const VacationsModel = require("./models/VacationsModel");
 const UsersModel = require("./models/UsersModel");
-// const FollowsModel = require("./models/FollowsModel");
-
-VacationsModel.hasMany(UsersModel);
-UsersModel.hasMany(VacationsModel);
+const FollowsModel = require("./models/FollowsModel");
 
 VacationsModel.hasMany(FollowsModel);
 UsersModel.hasMany(FollowsModel);
@@ -99,5 +96,4 @@ io.on("connection", (socket) => {
     io.sockets.emit("after_edit_vacation", followsArr);
   });
 });
-// server.listen(5003);
-server.listen(5008);
+server.listen(5003);
