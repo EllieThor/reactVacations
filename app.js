@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
-require("dotenv").config();
-var PORT = require("port");
+// require("dotenv").config();
+
 // upload images plugins
 var multer = require("multer");
 var path = require("path");
@@ -15,7 +15,6 @@ const io = socketIO(server, {
     origin: "*",
     methods: ["GET", "POST"],
   },
-  transports: ["websocket", "polling", "flashsocket"],
 });
 
 const cors = require("cors");
