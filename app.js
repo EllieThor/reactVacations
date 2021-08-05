@@ -15,6 +15,8 @@ const io = socketIO(server, {
     origin: "*",
     methods: ["GET", "POST"],
   },
+  transports: ["websocket"],
+  upgrade: false,
 });
 
 const cors = require("cors");
