@@ -12,10 +12,10 @@ const socketIO = require("socket.io");
 const server = http.createServer(app);
 const io = socketIO(server, {
   cors: {
-    origin: "https://suspicious-goodall-e9b657.netlify.app/",
+    origin: "*",
     methods: ["GET", "POST"],
   },
-  credentials: true,
+  transports: ["websocket", "polling", "flashsocket"],
 });
 
 const cors = require("cors");
@@ -39,7 +39,7 @@ app.use(
 app.use(bodyParser.json());
 
 var corsOptions = {
-  origin: "https://suspicious-goodall-e9b657.netlify.app/",
+  origin: "*",
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
@@ -55,7 +55,7 @@ app.use("/vacations", VacationsRoute);
 // specify the folder
 app.use(express.static(path.join(__dirname, "uploads")));
 app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "https://suspicious-goodall-e9b657.netlify.app/");
+  res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
