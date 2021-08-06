@@ -78,7 +78,7 @@ class Home extends Component {
           </div>
           <h2 className="text-center py-5 meriendaFont ourNextVacation">Our next vacation</h2>
           <div className="row mb-4">{this.props.vacations[this.nearestVacIndex] === undefined ? "" : <NextVacationComp vacation={this.props.vacations[this.nearestVacIndex]} />}</div>
-          <div className="row mt-2 mostPopularText">
+          <div className="row mt-2 HBackground">
             <h2 className="text-center pt-5 meriendaFont ">The three most popular vacations</h2>
             <h4 className="text-center p-5 notoSansKRFont ">
               On this site you can watch vacations, and if you like them you can vote and make an impact! <br />

@@ -22,6 +22,7 @@ exports.getVacationsFromDb = async (req, res, next) => {
       res.send(result);
     })
     .catch((err) => {
+      console.error("err: ", err);
       res.send(err);
     });
 };
