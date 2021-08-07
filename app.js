@@ -8,11 +8,12 @@ const socketIO = require("socket.io");
 const server = http.createServer(app);
 const io = socketIO(server, {
   cors: {
-    origin: "*",
+    origin: "https://vacations-stars.herokuapp.com",
     methods: ["GET", "POST"],
   },
   transports: ["websocket"],
   upgrade: false,
+  credentials: true,
 });
 
 const cors = require("cors");
@@ -72,4 +73,4 @@ io.on("connection", (socket) => {
     io.sockets.emit("after_edit_vacation", followsArr);
   });
 });
-server.listen(process.env.PORT + 1 || 5003);
+// server.listen(process.env.PORT || 5003);
