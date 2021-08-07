@@ -13,7 +13,6 @@ const io = socketIO(server, {
   },
   transports: ["websocket"],
   upgrade: false,
-  credentials: true,
 });
 
 const cors = require("cors");
@@ -73,4 +72,4 @@ io.on("connection", (socket) => {
     io.sockets.emit("after_edit_vacation", followsArr);
   });
 });
-server.listen(process.env.PORT);
+// server.listen(process.env.PORT || 5003);
