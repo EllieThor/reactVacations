@@ -19,7 +19,7 @@ const server = http.createServer(app);
 // });
 const io = socketIO(server, {
   cors: {
-    origin: "https://vacations-stars.netlify.app",
+    origin: "*",
     methods: ["GET", "POST"],
   },
   transports: ["websocket"],
