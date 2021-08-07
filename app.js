@@ -20,11 +20,11 @@ const server = http.createServer(app);
 
 const io = socketIO(server, {
   cors: {
-    origin: ["https://vacations-stars.herokuapp.com/socket.io/?EIO=4&transport=polling&t=NiX89xx"],
+    origin: ["https://vacations-stars.netlify.app"],
 
     handlePreflightRequest: (req, res) => {
       res.writeHead(200, {
-        "Access-Control-Allow-Origin": "https://vacations-stars.herokuapp.com/socket.io/?EIO=4&transport=polling&t=NiX89xx",
+        "Access-Control-Allow-Origin": "https://vacations-stars.netlify.app",
         "Access-Control-Allow-Methods": "GET,POST",
         "Access-Control-Allow-Headers": "my-custom-header",
         "Access-Control-Allow-Credentials": true,
