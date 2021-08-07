@@ -5,6 +5,20 @@ require("dotenv").config();
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+app.use(bodyParser.json());
+
+var corsOptions = {
+  origin: "*",
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+
+app.use(cors(corsOptions));
+
 // socket.io plugins
 const http = require("http");
 const socketIO = require("socket.io");
@@ -54,20 +68,6 @@ const FollowsModel = require("./models/FollowsModel");
 
 VacationsModel.hasMany(FollowsModel);
 UsersModel.hasMany(FollowsModel);
-
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
-  })
-);
-app.use(bodyParser.json());
-
-var corsOptions = {
-  origin: "*",
-  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
-};
-
-app.use(cors(corsOptions));
 
 const UsersRoute = require("./routs/usersRoute");
 app.use("/users", UsersRoute);
