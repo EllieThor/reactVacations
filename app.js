@@ -8,7 +8,7 @@ const socketIO = require("socket.io");
 const server = http.createServer(app);
 const io = socketIO(server, {
   cors: {
-    origin: "'wss://vacations-stars.herokuapp.com/socket.io/?EIO=4&transport=websocket",
+    origin: "wss://vacations-stars.herokuapp.com/socket.io/?EIO=4&transport=websocket",
     // origin: "https://vacations-stars.herokuapp.com",
     methods: ["GET", "POST"],
   },
