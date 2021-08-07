@@ -2,23 +2,39 @@ const express = require("express");
 const app = express();
 require("dotenv").config();
 
+const cors = require("cors");
+const bodyParser = require("body-parser");
+
 // socket.io plugins
 const http = require("http");
 const socketIO = require("socket.io");
 const server = http.createServer(app);
+// const io = socketIO(server, {
+//   cors: {
+//     origin: "*",
+//     methods: ["GET", "POST"],
+//   },
+//   transports: ["websocket"],
+//   upgrade: false,
+// });
+
 const io = socketIO(server, {
   cors: {
-    origin: "wss://vacations-stars.herokuapp.com/socket.io/?EIO=4&transport=websocket",
-    // origin: "https://vacations-stars.herokuapp.com",
-    methods: ["GET", "POST"],
+    origin: ["https://vacations-stars.herokuapp.com"],
+
+    handlePreflightRequest: (req, res) => {
+      res.writeHead(200, {
+        "Access-Control-Allow-Origin": "https://vacations-stars.herokuapp.com",
+        "Access-Control-Allow-Methods": "GET,POST",
+        "Access-Control-Allow-Headers": "my-custom-header",
+        "Access-Control-Allow-Credentials": true,
+      });
+      res.end();
+    },
   },
   transports: ["websocket"],
   upgrade: false,
-  credentials: true,
 });
-
-const cors = require("cors");
-const bodyParser = require("body-parser");
 
 const Sequelize = require("sequelize");
 const sequelize = require("./utils/database");
