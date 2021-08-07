@@ -17,24 +17,33 @@ const server = http.createServer(app);
 //   transports: ["websocket"],
 //   upgrade: false,
 // });
-
 const io = socketIO(server, {
   cors: {
-    origin: ["https://vacations-stars.netlify.app"],
-
-    handlePreflightRequest: (req, res) => {
-      res.writeHead(200, {
-        "Access-Control-Allow-Origin": "https://vacations-stars.netlify.app",
-        "Access-Control-Allow-Methods": "GET,POST",
-        "Access-Control-Allow-Headers": "my-custom-header",
-        "Access-Control-Allow-Credentials": true,
-      });
-      res.end();
-    },
+    origin: "https://vacations-stars.netlify.app",
+    methods: ["GET", "POST"],
   },
   transports: ["websocket"],
   upgrade: false,
+  credentials: false,
 });
+
+// const io = socketIO(server, {
+//   cors: {
+//     origin: ["https://vacations-stars.netlify.app"],
+
+//     handlePreflightRequest: (req, res) => {
+//       res.writeHead(200, {
+//         "Access-Control-Allow-Origin": "https://vacations-stars.netlify.app",
+//         "Access-Control-Allow-Methods": "GET,POST",
+//         "Access-Control-Allow-Headers": "my-custom-header",
+//         "Access-Control-Allow-Credentials": true,
+//       });
+//       res.end();
+//     },
+//   },
+//   transports: ["websocket"],
+//   upgrade: false,
+// });
 
 const Sequelize = require("sequelize");
 const sequelize = require("./utils/database");
