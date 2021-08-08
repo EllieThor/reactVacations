@@ -16,7 +16,7 @@ var corsOptions = {
   origin: "*",
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
-// s
+app.use(cors(corsOptions));
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -110,4 +110,4 @@ io.on("connection", (socket) => {
   });
 });
 // server.listen(process.env.PORT || 5003);
-io.listen(process.env.PORT);
+// io.listen(process.env.PORT || 5003);
