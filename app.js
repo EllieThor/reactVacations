@@ -26,6 +26,13 @@ const http = require("http").createServer(app);
 const socketIO = require("socket.io")(http, {
   cors: {
     origin: "*",
+    handlePreflightRequest: (req, res) => {
+      res.writeHead(200, {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,POST",
+      });
+      res.end();
+    },
   },
 });
 
