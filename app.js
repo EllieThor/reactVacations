@@ -13,8 +13,9 @@ app.use(
 app.use(bodyParser.json());
 
 var corsOptions = {
-  origin: "*",
+  origin: "https://vacations-stars.netlify.app/",
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  credentials: true,
 };
 
 app.use(cors(corsOptions));
@@ -24,14 +25,14 @@ const http = require("http");
 const socketIO = require("socket.io");
 const server = http.createServer(app);
 
-// const io = socketIO(server, {
-//   cors: {
-//     origin: "*",
-//     methods: ["GET", "POST"],
-//   },
-//   transports: ["websocket"],
-//   upgrade: false,
-// });
+const io = socketIO(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+  },
+  // transports: ["websocket"],
+  credentials: true,
+});
 
 // const io = socketIO(server, {
 //   cors: {
@@ -43,21 +44,21 @@ const server = http.createServer(app);
 //   credentials: false,
 // });
 
-const io = socketIO(server, {
-  cors: {
-    origin: ["*"],
+// const io = socketIO(server, {
+//   cors: {
+//     origin: ["*"],
 
-    handlePreflightRequest: (req, res) => {
-      res.writeHead(200, {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,POST",
-        "Access-Control-Allow-Headers": "my-custom-header",
-        "Access-Control-Allow-Credentials": true,
-      });
-      res.end();
-    },
-  },
-});
+//     handlePreflightRequest: (req, res) => {
+//       res.writeHead(200, {
+//         "Access-Control-Allow-Origin": "*",
+//         "Access-Control-Allow-Methods": "GET,POST",
+//         "Access-Control-Allow-Headers": "my-custom-header",
+//         "Access-Control-Allow-Credentials": true,
+//       });
+//       res.end();
+//     },
+//   },
+// });
 
 const Sequelize = require("sequelize");
 const sequelize = require("./utils/database");
