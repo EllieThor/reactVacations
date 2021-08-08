@@ -35,7 +35,7 @@ const server = http.createServer(app);
 
 const io = require("socket.io")(server, {
   cors: {
-    origin: "https://vacations-stars.netlify.app",
+    origin: "https://vacations-stars.netlify.app/",
     methods: ["GET", "POST"],
     allowedHeaders: ["my-custom-header"],
     credentials: true,
