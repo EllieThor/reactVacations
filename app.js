@@ -29,21 +29,6 @@ const socketIO = require("socket.io")(http, {
   },
 });
 
-http.listen(process.env.PORT || 5003, function () {
-  socketIO.on("connection", (socket) => {
-    socket.on("add vacation", () => {
-      io.sockets.emit("after_add_vacation");
-    });
-
-    socket.on("delete vacation", () => {
-      io.sockets.emit("after_delete_vacation");
-    });
-
-    socket.on("edited vacation", (followsArr) => {
-      io.sockets.emit("after_edit_vacation", followsArr);
-    });
-  });
-});
 // const io = socketIO(server, {
 //   cors: {
 //     origin: "*",
@@ -123,3 +108,18 @@ sequelize
 // });
 // server.listen(process.env.PORT || 5003);
 // io.listen(process.env.PORT || 5003);
+http.listen(process.env.PORT || 5003, function () {
+  socketIO.on("connection", (socket) => {
+    socket.on("add vacation", () => {
+      io.sockets.emit("after_add_vacation");
+    });
+
+    socket.on("delete vacation", () => {
+      io.sockets.emit("after_delete_vacation");
+    });
+
+    socket.on("edited vacation", (followsArr) => {
+      io.sockets.emit("after_edit_vacation", followsArr);
+    });
+  });
+});
