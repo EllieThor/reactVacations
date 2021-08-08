@@ -22,15 +22,15 @@ app.use(cors(corsOptions));
 const http = require("http");
 const socketIO = require("socket.io");
 const server = http.createServer(app);
-const io = socketIO(server);
+// const io = socketIO(server);
 
-// const io = socketIO(server, {
-//   cors: {
-//     origin: "*",
-//     methods: ["GET", "POST"],
-//   },
-//   transports: ["websocket"],
-// });
+const io = socketIO(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+  },
+  transports: ["websocket"],
+});
 
 // const io = socketIO(server, {
 //   cors: {
