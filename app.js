@@ -24,23 +24,23 @@ const socketIO = require("socket.io");
 const server = http.createServer(app);
 // const io = socketIO(server);
 
-const io = socketIO(server, {
-  cors: {
-    origin: "*",
-    methods: ["GET", "POST"],
-  },
-  transports: ["websocket"],
-});
-
 // const io = socketIO(server, {
 //   cors: {
 //     origin: "*",
+//     // origin: "https://vacations-stars.netlify.app",
 //     methods: ["GET", "POST"],
 //   },
 //   transports: ["websocket"],
-//   upgrade: false,
-//   credentials: false,
 // });
+
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+    allowedHeaders: ["my-custom-header"],
+    credentials: true,
+  },
+});
 
 // const io = socketIO(server, {
 //   cors: {
