@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 require("dotenv").config();
-const { env } = require("process");
 
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -25,22 +24,16 @@ app.use(function (req, res, next) {
   next();
 });
 // socket.io plugins
-const http = require("http").createServer(app);
-// const server = http.createServer(app);
-const socketIO = require("socket.io")(http, {
+const http = require("http");
+const server = http.createServer(app);
+const socketIO = require("socket.io")(server);
+
+const io = socketIO(server, {
   cors: {
     origin: "*",
+    methods: ["GET", "POST"],
   },
 });
-
-// const io = socketIO(server, {
-//   cors: {
-//     origin: "*",
-//     methods: ["GET", "POST"],
-//   },
-//   // transports: ["websocket"],
-//   credentials: true,
-// });
 
 // const io = socketIO(server, {
 //   cors: {
@@ -75,11 +68,9 @@ const VacationsModel = require("./models/VacationsModel");
 const UsersModel = require("./models/UsersModel");
 const FollowsModel = require("./models/FollowsModel");
 
-// CONNECTIONS
 VacationsModel.hasMany(FollowsModel);
 UsersModel.hasMany(FollowsModel);
 
-// ROUTING
 const UsersRoute = require("./routs/usersRoute");
 app.use("/users", UsersRoute);
 
@@ -97,33 +88,18 @@ sequelize
   });
 
 // This creates our socket using the instance of the server
-// io.on("connection", (socket) => {
-//   socket.on("add vacation", () => {
-//     io.sockets.emit("after_add_vacation");
-//   });
+io.on("connection", (socket) => {
+  socket.on("add vacation", () => {
+    io.sockets.emit("after_add_vacation");
+  });
 
-//   socket.on("delete vacation", () => {
-//     io.sockets.emit("after_delete_vacation");
-//   });
+  socket.on("delete vacation", () => {
+    io.sockets.emit("after_delete_vacation");
+  });
 
-//   socket.on("edited vacation", (followsArr) => {
-//     io.sockets.emit("after_edit_vacation", followsArr);
-//   });
-// });
-// server.listen(process.env.PORT || 5003);
-// io.listen(process.env.PORT || 5003);
-http.listen(process.env.PORT || 5003, function () {
-  socketIO.on("connection", (socket) => {
-    socket.on("add vacation", () => {
-      io.sockets.emit("after_add_vacation");
-    });
-
-    socket.on("delete vacation", () => {
-      io.sockets.emit("after_delete_vacation");
-    });
-
-    socket.on("edited vacation", (followsArr) => {
-      io.sockets.emit("after_edit_vacation", followsArr);
-    });
+  socket.on("edited vacation", (followsArr) => {
+    io.sockets.emit("after_edit_vacation", followsArr);
   });
 });
+// server.listen(process.env.PORT || 5003);
+// io.listen(process.env.PORT || 5003);
