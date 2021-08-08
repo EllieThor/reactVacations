@@ -52,7 +52,7 @@ const io = socketIO(server, {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET,POST",
         "Access-Control-Allow-Headers": "my-custom-header",
-        "Access-Control-Allow-Credentials": true,
+        "Access-Control-Allow-Credentials": false,
       });
       res.end();
     },
