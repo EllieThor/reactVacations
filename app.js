@@ -20,16 +20,17 @@ app.use(cors(corsOptions));
 
 // socket.io plugins
 const http = require("http");
+const socketIO = require("socket.io");
 const server = http.createServer(app);
-const socketIO = require("socket.io")(server);
+const io = socketIO(server);
 
-const io = socketIO(server, {
-  cors: {
-    origin: "*",
-    methods: ["GET", "POST"],
-  },
-  transports: ["websocket"],
-});
+// const io = socketIO(server, {
+//   cors: {
+//     origin: "*",
+//     methods: ["GET", "POST"],
+//   },
+//   transports: ["websocket"],
+// });
 
 // const io = socketIO(server, {
 //   cors: {
