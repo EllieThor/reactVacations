@@ -33,8 +33,8 @@ const server = http.createServer(app);
 
 const io = socketIO(server, {
   cors: {
-    origin: "*",
-    // origin: "https://vacations-stars.netlify.app",
+    // origin: "*",
+    origin: "https://vacations-stars.netlify.app",
     methods: ["GET", "POST"],
   },
   transports: ["websocket"],
