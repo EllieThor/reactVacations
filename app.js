@@ -22,7 +22,12 @@ app.use(cors(corsOptions));
 const http = require("http");
 const socketIO = require("socket.io");
 const server = http.createServer(app);
-// const io = socketIO(server);
+const io = socketIO(server);
+
+app.use(express.static(__dirname + "/node_modules"));
+app.get("/", function (req, res, next) {
+  res.sendFile(__dirname + "/index.html");
+});
 
 // const io = socketIO(server, {
 //   cors: {
@@ -33,14 +38,14 @@ const server = http.createServer(app);
 //   transports: ["websocket"],
 // });
 
-const io = require("socket.io")(server, {
-  cors: {
-    origin: "https://vacations-stars.netlify.app/",
-    methods: ["GET", "POST"],
-    allowedHeaders: ["my-custom-header"],
-    credentials: true,
-  },
-});
+// const io = require("socket.io")(server, {
+//   cors: {
+//     origin: "https://vacations-stars.netlify.app/",
+//     methods: ["GET", "POST"],
+//     allowedHeaders: ["my-custom-header"],
+//     credentials: true,
+//   },
+// });
 
 // const io = socketIO(server, {
 //   cors: {
@@ -99,4 +104,4 @@ io.on("connection", (socket) => {
   });
 });
 // server.listen(process.env.PORT || 5003);
-// io.listen(process.env.PORT || 5003);
+io.listen(process.env.PORT || 5003);
