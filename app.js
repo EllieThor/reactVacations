@@ -29,7 +29,7 @@ var io = require("socket.io")(server, {
     origin: "https://vacations-stars.netlify.app",
     methods: ["GET", "POST"],
   },
-  transports: ["websocket", "polling", "flashsocket"],
+  // transports: ["websocket", "polling", "flashsocket"],
 });
 
 // server.listen(process.env.PORT || 5003, () => {
