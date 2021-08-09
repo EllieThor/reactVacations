@@ -107,6 +107,6 @@ io.on("connection", (socket) => {
   });
 });
 // server.listen(process.env.PORT || 5003);
-http.listen(PORT, () => {
-  console.log(`hi port now is: ${PORT}`);
-});
+// http.listen(PORT, () => {
+//   console.log(`hi port now is: ${PORT}`);
+// });
