@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-require("dotenv").config();
+// require("dotenv").config();
 
 var expressWs = require("express-ws")(app);
 
@@ -112,7 +112,7 @@ sequelize
   .sync()
   .then((result) => {
     app.listen(process.env.PORT || 5004);
-    console.log("Connected DB !!");
+    console.log("Connected DB !!!!!!!!!!", process.env.PORT);
   })
   .catch((err) => {
     console.log("Error connected DB !!", err);
@@ -120,20 +120,16 @@ sequelize
 
 // This creates our socket using the instance of the server
 io.on("connection", (socket) => {
-  console.log("Connect#####");
   socket.on("add vacation", () => {
     io.sockets.emit("after_add_vacation");
-    console.log("add server");
   });
 
   socket.on("delete vacation", () => {
     io.sockets.emit("after_delete_vacation");
-    console.log("delete server");
   });
 
   socket.on("edited vacation", (followsArr) => {
     io.sockets.emit("after_edit_vacation", followsArr);
-    console.log("edit server#####");
   });
 });
 // server.listen();
