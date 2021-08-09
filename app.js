@@ -26,7 +26,7 @@ const server = http.createServer();
 
 const io = socketIO(server)(httpServer, {
   cors: {
-    origin: ["https://vacations-stars.netlify.app"],
+    " Access-Control-Allow-Origin": "*",
     allowedHeaders: ["my-custom-header"],
     credentials: true,
   },
