@@ -26,7 +26,7 @@ const server = http.createServer();
 
 const io = socketIO(server)(httpServer, {
   cors: {
-    " Access-Control-Allow-Origin": "*",
+    origin: ["*"],
     allowedHeaders: ["my-custom-header"],
     credentials: true,
   },
