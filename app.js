@@ -15,8 +15,7 @@ app.use(
 app.use(bodyParser.json());
 
 var corsOptions = {
-  // origin: "https://vacations-stars.netlify.app",
-  origin: "*",
+  origin: "https://vacations-stars.netlify.app",
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 app.use(cors(corsOptions));
@@ -133,8 +132,8 @@ io.on("connection", (socket) => {
   });
 });
 // server.listen();
-server.set("port", process.env.PORT || 5000);
+app.set("port", process.env.PORT || 5000);
 
-server.listen(server.get("port"), function () {
-  console.log("Node app is running on port", server.get("port"));
+app.listen(app.get("port"), function () {
+  console.log("Node app is running on port", app.get("port"));
 });
