@@ -20,21 +20,21 @@ app.use(cors(corsOptions));
 
 // socket.io plugins
 const http = require("http");
-// const socketIO = require("socket.io");
+const socketIO = require("socket.io");
 const server = http.createServer(app);
-// const io = socketIO(server);
+const io = socketIO(server);
 
-var io = require("socket.io")(server, {
-  cors: {
-    origin: "https://vacations-stars.netlify.app",
-    methods: ["GET", "POST"],
-  },
-  transports: ["websocket", "polling", "flashsocket"],
-});
+// var io = require("socket.io")(server, {
+//   cors: {
+//     origin: "https://vacations-stars.netlify.app",
+//     methods: ["GET", "POST"],
+//   },
+//   transports: ["websocket", "polling", "flashsocket"],
+// });
 
-server.listen(process.env.PORT || 5003, () => {
-  console.log(`port is: ${process.env.PORT}`);
-});
+// server.listen(process.env.PORT || 5003, () => {
+//   console.log(`port is: ${process.env.PORT}`);
+// });
 
 io.on("connection", (socket) => {
   socket.on("add vacation", () => {
