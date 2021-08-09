@@ -83,7 +83,7 @@ sequelize
   .sync()
   .then((result) => {
     app.listen(process.env.PORT || 5004);
-    console.log("Connected DB !!");
+    console.log("Connected DB !!!!!!!!!!", process.env.PORT);
   })
   .catch((err) => {
     console.log("Error connected DB !!", err);
