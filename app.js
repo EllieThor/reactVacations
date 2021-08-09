@@ -19,10 +19,12 @@ var corsOptions = {
 app.use(cors(corsOptions));
 
 // socket.io plugins
-const http = require("http");
-const socketIO = require("socket.io");
-const server = http.createServer();
-const io = socketIO(server);
+// const http = require("http");
+// const socketIO = require("socket.io");
+// const server = http.createServer(app);
+// const io = socketIO(server);
+const server = require("http").createServer();
+const io = require("socket.io")(server);
 
 app.use(express.static(__dirname + "/node_modules"));
 app.get("/", function (req, res, next) {
