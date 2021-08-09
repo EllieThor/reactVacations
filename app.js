@@ -22,15 +22,7 @@ app.use(cors(corsOptions));
 const http = require("http");
 const socketIO = require("socket.io");
 const server = http.createServer();
-// const io = socketIO(server);
-
-const io = socketIO(server)(httpServer, {
-  cors: {
-    origin: ["*"],
-    allowedHeaders: ["my-custom-header"],
-    credentials: true,
-  },
-});
+const io = socketIO(server);
 
 // app.use(express.static(__dirname + "/node_modules"));
 // app.get("/", function (req, res, next) {
