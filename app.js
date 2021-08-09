@@ -133,8 +133,8 @@ io.on("connection", (socket) => {
   });
 });
 // server.listen();
-server.set("port", process.env.PORT || 5000);
+app.set("port", process.env.PORT || 5000);
 
-server.listen(server.get("port"), function () {
-  console.log("Node app is running on port", server.get("port"));
+app.listen(app.get("port"), function () {
+  console.log("Node app is running on port", app.get("port"));
 });
