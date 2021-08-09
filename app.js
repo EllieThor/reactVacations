@@ -28,6 +28,15 @@ var io = require("socket.io")(server, {
   cors: {
     origin: "https://vacations-stars.netlify.app",
     methods: ["GET", "POST"],
+    handlePreflightRequest: (req, res) => {
+      res.writeHead(200, {
+        "Access-Control-Allow-Origin": "*",
+        // "Access-Control-Allow-Methods": "GET,POST",
+        // "Access-Control-Allow-Headers": "my-custom-header",
+        // "Access-Control-Allow-Credentials": true,
+      });
+      res.end();
+    },
   },
   transports: ["websocket", "polling", "flashsocket"],
 });
