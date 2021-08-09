@@ -22,7 +22,7 @@ app.use(cors(corsOptions));
 const http = require("http");
 const socketIO = require("socket.io");
 const server = http.createServer(app);
-const io = socketIO(server);
+// const io = socketIO(server);
 
 // const server = require("http").createServer();
 // const io = require("socket.io")(server);
@@ -31,14 +31,14 @@ const io = socketIO(server);
 //   res.sendFile(__dirname + "/index.html");
 // });
 
-// const io = socketIO(server, {
-//   cors: {
-//     origin: "*",
-//     // origin: "https://vacations-stars.netlify.app",
-//     methods: ["GET", "POST"],
-//   },
-//   transports: ["websocket"],
-// });
+const io = socketIO(server, {
+  cors: {
+    origin: "*",
+    // origin: "https://vacations-stars.netlify.app",
+    methods: ["GET", "POST"],
+  },
+  transports: ["websocket"],
+});
 
 // const io = require("socket.io")(server, {
 //   cors: {
