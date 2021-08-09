@@ -22,7 +22,7 @@ app.use(cors(corsOptions));
 // const http = require("http");
 // const socketIO = require("socket.io");
 const PORT = process.env.PORT || 5003;
-const http = require("http").Server(app);
+const http = require("http").createServer(app);
 const io = require("socket.io")(http);
 http.listen(PORT, () => {
   console.log(`hi port now is: ${PORT}`);
