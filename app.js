@@ -131,9 +131,9 @@ io.on("connection", (socket) => {
     io.sockets.emit("after_edit_vacation", followsArr);
   });
 });
-// server.listen();
-app.set("port", process.env.PORT || 5000);
+app.listen(process.env.PORT || 5000);
+// app.set("port", process.env.PORT || 5000);
 
-app.listen(app.get("port"), function () {
-  console.log("Node app is running on port", app.get("port"));
-});
+// app.listen(app.get("port"), function () {
+//   console.log("Node app is running on port", app.get("port"));
+// });
