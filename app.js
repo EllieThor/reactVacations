@@ -13,7 +13,7 @@ app.use(
 app.use(bodyParser.json());
 
 var corsOptions = {
-  origin: "*",
+  origin: "https://vacations-stars.netlify.app",
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 app.use(cors(corsOptions));
@@ -21,7 +21,7 @@ app.use(cors(corsOptions));
 // socket.io plugins
 const http = require("http");
 const socketIO = require("socket.io");
-const server = http.createServer();
+const server = http.createServer(app);
 const io = socketIO(server);
 
 // app.use(express.static(__dirname + "/node_modules"));
