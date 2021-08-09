@@ -18,6 +18,24 @@ var corsOptions = {
 };
 app.use(cors(corsOptions));
 
+app.use(function (req, res, next) {
+  // Website you wish to allow to connect
+  res.setHeader("Access-Control-Allow-Origin", "https://vacations-stars.netlify.app");
+
+  // Request methods you wish to allow
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, PATCH, DELETE");
+
+  // Request headers you wish to allow
+  res.setHeader("Access-Control-Allow-Headers", "X-Requested-With,content-type");
+
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  // res.setHeader("Access-Control-Allow-Credentials", true);
+
+  // Pass to next layer of middleware
+  next();
+});
+
 // socket.io plugins
 const http = require("http");
 // const socketIO = require("socket.io");
@@ -28,15 +46,6 @@ var io = require("socket.io")(server, {
   cors: {
     origin: "https://vacations-stars.netlify.app",
     methods: ["GET", "POST"],
-    handlePreflightRequest: (req, res) => {
-      res.writeHead(200, {
-        "Access-Control-Allow-Origin": "*",
-        // "Access-Control-Allow-Methods": "GET,POST",
-        // "Access-Control-Allow-Headers": "my-custom-header",
-        // "Access-Control-Allow-Credentials": true,
-      });
-      res.end();
-    },
   },
   transports: ["websocket", "polling", "flashsocket"],
 });
