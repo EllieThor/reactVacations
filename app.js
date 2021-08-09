@@ -21,11 +21,9 @@ app.use(cors(corsOptions));
 // socket.io plugins
 const http = require("http");
 const socketIO = require("socket.io");
-const server = http.createServer(app);
+const server = http.createServer();
 const io = socketIO(server);
 
-// const server = require("http").createServer();
-// const io = require("socket.io")(server);
 // app.use(express.static(__dirname + "/node_modules"));
 // app.get("/", function (req, res, next) {
 //   res.sendFile(__dirname + "/index.html");
@@ -105,4 +103,5 @@ io.on("connection", (socket) => {
     io.sockets.emit("after_edit_vacation", followsArr);
   });
 });
-server.listen(process.env.PORT || 5003);
+// server.listen(process.env.PORT || 5003);
+// server.listen(process.env.PORT || 5003);
