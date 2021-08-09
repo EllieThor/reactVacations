@@ -19,11 +19,10 @@ var corsOptions = {
 app.use(cors(corsOptions));
 
 // socket.io plugins
-// const http = require("http");
-// const socketIO = require("socket.io");
-const PORT = process.env.PORT || 5003;
-const http = require("http").createServer(app);
-const io = require("socket.io")(http);
+const http = require("http");
+const socketIO = require("socket.io");
+const server = http.createServer(app);
+const io = socketIO(server);
 
 // const server = require("http").createServer();
 // const io = require("socket.io")(server);
@@ -34,8 +33,8 @@ const io = require("socket.io")(http);
 
 // const io = socketIO(server, {
 //   cors: {
-//     // origin: "*",
-//     origin: "https://vacations-stars.netlify.app",
+//     origin: "*",
+//     // origin: "https://vacations-stars.netlify.app",
 //     methods: ["GET", "POST"],
 //   },
 //   transports: ["websocket"],
@@ -106,7 +105,4 @@ io.on("connection", (socket) => {
     io.sockets.emit("after_edit_vacation", followsArr);
   });
 });
-// server.listen(process.env.PORT || 5003);
-// http.listen(PORT, () => {
-//   console.log(`hi port now is: ${PORT}`);
-// });
+server.listen(process.env.PORT || 5003);
