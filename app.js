@@ -1,7 +1,11 @@
 const express = require("express");
 const app = express();
-// require("dotenv").config();
+const http = require("http");
+const server = http.createServer(app);
+const socketIO = require("socket.io");
+const io = socketIO(server);
 
+// require("dotenv").config();
 var expressWs = require("express-ws")(app);
 
 const cors = require("cors");
@@ -21,10 +25,10 @@ var corsOptions = {
 app.use(cors(corsOptions));
 
 // socket.io plugins
-const http = require("http");
-const socketIO = require("socket.io");
-const server = http.createServer(app);
-const io = socketIO(server);
+// const http = require("http");
+// const socketIO = require("socket.io");
+// const server = http.createServer(app);
+// const io = socketIO(server);
 
 // var io = require("socket.io")(server, {
 //   cors: {
@@ -132,8 +136,13 @@ io.on("connection", (socket) => {
   });
 });
 // io.listen(process.env.PORT || 5000);
-server.set("port", process.env.PORT || 5000);
 
-server.listen(server.get("port"), function () {
-  console.log("Node app is running on port", server.get("port"));
-});
+// server.set("port", process.env.PORT || 5000);
+// server.listen(server.get("port"), function () {
+//   console.log("Node app is running on port", server.get("port"));
+// });
+
+// const PORT = process.env.PORT || 5003;
+// server.listen(PORT, () => console.log("Node app is running on port:  ", process.env.PORT));
+
+server.listen(process.env.PORT || 5003, () => console.log("Node app is running on port:  ", process.env.PORT));
