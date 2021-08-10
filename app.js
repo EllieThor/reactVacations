@@ -24,15 +24,15 @@ app.use(cors(corsOptions));
 const http = require("http");
 const socketIO = require("socket.io");
 const server = http.createServer(app);
-// const io = socketIO(server);
+const io = socketIO(server);
 
-var io = require("socket.io")(server, {
-  cors: {
-    origin: "https://vacations-stars.netlify.app",
-    methods: ["GET", "POST"],
-  },
-  // transports: ["websocket", "polling", "flashsocket"],
-});
+// var io = require("socket.io")(server, {
+//   cors: {
+//     origin: "https://vacations-stars.netlify.app",
+//     methods: ["GET", "POST"],
+//   },
+//   // transports: ["websocket", "polling", "flashsocket"],
+// });
 
 // server.listen(process.env.PORT || 5003, () => {
 //   console.log(`port is: ${process.env.PORT}`);
@@ -131,9 +131,9 @@ io.on("connection", (socket) => {
     io.sockets.emit("after_edit_vacation", followsArr);
   });
 });
-io.listen(process.env.PORT || 5000);
-// app.set("port", process.env.PORT || 5000);
+// io.listen(process.env.PORT || 5000);
+app.set("port", process.env.PORT || 5000);
 
-// app.listen(app.get("port"), function () {
-//   console.log("Node app is running on port", app.get("port"));
-// });
+app.listen(app.get("port"), function () {
+  console.log("Node app is running on port", app.get("port"));
+});
