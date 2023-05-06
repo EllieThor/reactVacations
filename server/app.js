@@ -74,7 +74,7 @@ app.post("/upload", upload.array("uploads[]", 12), function (req, res) {
 sequelize
   .sync()
   .then((result) => {
-    app.listen(5004);
+    app.listen(process.env.PORT || 5004);
     console.log("Connected DB !!");
   })
   .catch((err) => {
@@ -95,4 +95,4 @@ io.on("connection", (socket) => {
     io.sockets.emit("after_edit_vacation", followsArr);
   });
 });
-server.listen(5003);
+//server.listen(5003);
