@@ -32,8 +32,7 @@ app.use(
 app.use(bodyParser.json());
 
 var corsOptions = {
- // origin: "https://vacations-stars.netlify.app",
-    origin: "*",
+ origin: "https://vacations-stars.netlify.app",
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
 
