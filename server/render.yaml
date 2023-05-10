@@ -1,5 +1,0 @@
-routes:
-  - path: "/*"
-    headers:
-      - key: Access-Control-Allow-Origin
-        value: "https://vacations-stars.netlify.app"
