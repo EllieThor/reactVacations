@@ -38,6 +38,7 @@ class Vacations extends Component {
   getVacationsFromDB = async () => {
     try {
       let vacations = await Api.postRequest(`/vacations/getVacationsFromDb`);
+console.log("try vacations: ",vacations)
       let allVacations = vacations.data;
 
       // map on vacations array in order to edit follows array In each of the items
