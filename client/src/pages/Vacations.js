@@ -62,7 +62,7 @@ class Vacations extends Component {
       // vacations array
       this.props.updateVacations(allVacations);
     } catch (err) {
-      console.log("Error! ", err);
+      //console.log("Error! ", err);
       alert("Something went wrong, please try again: ", err);
     }
   };
