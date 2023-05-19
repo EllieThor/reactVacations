@@ -76,6 +76,7 @@ app.use("/vacations", VacationsRoute);
 sequelize
   .sync()
   .then((result) => {
+  console.log("rererererreeeee!!!!!!!:",result) 
     app.listen(process.env.PORT || 5004);
     console.log("Connected DB !!");
   })
